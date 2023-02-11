@@ -1,6 +1,8 @@
 package controladores;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Chaucherita;
+import modelo.Cuenta;
 
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {
@@ -63,14 +66,22 @@ public class GestionarCuentasController extends HttpServlet {
 		}
 	}
 	
-	private void listar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		//
+	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1.- Obtengo datos de la solicitud
+		// Ninguno
+
+		// 2.- Llamo al modelo
+		List<Cuenta> cuentas = chaucherita.getCuentas();
+		
+		// 3.- Llamo a la vista
+		request.setAttribute("cuentas", cuentas);
+		//ELIMINAR comentario después de verificar el nombre del jsp. --> "listarCuenta.jsp"
+		request.getRequestDispatcher("jsp/listar.jsp").forward(request, response);
 	}
 	
-	private void crear(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+	private void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//ELIMINAR comentario después de verificar el nombre del jsp
+		request.getRequestDispatcher("jsp/crear.jsp").forward(request, response);
 	}
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
