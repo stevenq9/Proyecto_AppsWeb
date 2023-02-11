@@ -17,6 +17,11 @@ public class CuentaDeGastos extends Cuenta implements Serializable{
 	
 	@Override
 	public double obtenerValorTotal(List<Transaccion> transacciones) {
-		return 0;
+		double valorTotal = 0;
+		for(Transaccion transaccion: transacciones) {
+			if(transaccion.getCuentaDestino() == this)
+				valorTotal -= transaccion.getCantidad();
+		}
+		return valorTotal;
 	}
 }

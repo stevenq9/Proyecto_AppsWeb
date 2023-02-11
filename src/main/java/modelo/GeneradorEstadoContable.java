@@ -56,7 +56,9 @@ public class GeneradorEstadoContable implements Serializable{
 		EstadoContable estadoContable = new EstadoContable();		
 		
 		for(Cuenta cuenta: cuentas) {
-			EstadoDeCuenta estadoDeCuenta = new EstadoDeCuenta(cuenta, ColeccionDeTransacciones.getTransacciones(fechaInicio, fechaFin, cuenta.getId()));
+			List<Transaccion> transaccionesDeCuentaPorFecha = ColeccionDeTransacciones.getTransacciones(fechaInicio, fechaFin, cuenta.getId());
+			EstadoDeCuenta estadoDeCuenta = new EstadoDeCuenta(cuenta, transaccionesDeCuentaPorFecha);
+			estadoDeCuenta.setValorTotal(cuenta.obtenerValorTotal(transaccionesDeCuentaPorFecha));
 			estadoContable.agregar(estadoDeCuenta);
 		}
 		
