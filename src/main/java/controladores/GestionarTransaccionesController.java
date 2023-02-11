@@ -70,7 +70,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtención de datos del modelo
-		List<Cuenta> c = coleccionDeTransacciones.getChaucherita().getCuentas(CuentaDeIngresos.class);
+		List<Cuenta> c = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresos();
 
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasDestino", c);
@@ -93,9 +93,13 @@ public class GestionarTransaccionesController extends HttpServlet {
 		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
 		
 		GeneradorEstadoContable gec = new GeneradorEstadoContable(fechaInicio, fechaFin);
-		EstadoContable estadoContable = gec.crearEstadoContable(coleccionDeTransacciones);
+		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
+		EstadoContable estadoContableIngresosYGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
+		EstadoContable estadoContableGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
 		
-		request.setAttribute("estadoContable", estadoContable);
+		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
+		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
+		request.setAttribute("estadoContableGastos", estadoContableGastos);
 		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp");
 	}
 

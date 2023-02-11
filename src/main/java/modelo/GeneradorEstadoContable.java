@@ -34,16 +34,26 @@ public class GeneradorEstadoContable implements Serializable{
 		this.fechaFin = fechaFin;
 	}
 	
-	public EstadoContable crearEstadoContable(ColeccionDeTransacciones cdt) {
+	public EstadoContable crearEstadoContableDeIngresos(ColeccionDeTransacciones cdt) {
+		return crearEstadoContable(cdt, cdt.getChaucherita().getCuentasDeIngresos());
+	}
+	
+	public EstadoContable crearEstadoContableDeIngresosYGastos(ColeccionDeTransacciones cdt) {
+		return crearEstadoContable(cdt, cdt.getChaucherita().getCuentasDeIngresosYGastos());
+	}
+	
+	public EstadoContable crearEstadoContableDeGastos(ColeccionDeTransacciones cdt) {
+		return crearEstadoContable(cdt, cdt.getChaucherita().getCuentasDeGastos());
+	}
+	
+	private EstadoContable crearEstadoContable(ColeccionDeTransacciones cdt, List<Cuenta> cuentas) {
 		if(fechaInicio == null || fechaFin == null)
 			return null;
 		
 		if(fechaInicio.isAfter(fechaFin))
 			return null;
 		
-		EstadoContable estadoContable = new EstadoContable();
-		List<Cuenta> cuentas = cdt.getChaucherita().getCuentas();
-		
+		EstadoContable estadoContable = new EstadoContable();		
 		
 		for(Cuenta cuenta: cuentas) {
 			EstadoDeCuenta estadoDeCuenta = new EstadoDeCuenta(cuenta, ColeccionDeTransacciones.getTransacciones(fechaInicio, fechaFin, cuenta.getId()));

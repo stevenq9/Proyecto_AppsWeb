@@ -13,7 +13,7 @@ public class ColeccionDeTransacciones implements Serializable{
 	private static Chaucherita chaucherita;
 	
 	private ColeccionDeTransacciones() {
-		this.chaucherita = Chaucherita.getInstancia();
+		chaucherita = Chaucherita.getInstancia();
 		
 		transacciones = new ArrayList<Transaccion>();
 		
@@ -38,7 +38,7 @@ public class ColeccionDeTransacciones implements Serializable{
 	}
 
 	public void setChaucherita(Chaucherita chaucherita) {
-		this.chaucherita = chaucherita;
+		ColeccionDeTransacciones.chaucherita = chaucherita;
 	}
 
 	public static List<Transaccion> getTransaccionesByID(int idCuenta){
