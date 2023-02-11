@@ -38,7 +38,13 @@ public class Chaucherita implements Serializable{
 	}
 	
 	public List<Cuenta> getCuentas(Class tipo){
-		return null;
+		List<Cuenta> cuentasPorTipo = new ArrayList<Cuenta>();
+		for(Cuenta c: getCuentas()) {
+			if(c.getClass() == tipo) {
+				cuentasPorTipo.add(c);
+			}
+		}
+		return cuentasPorTipo;
 	}
 	
 	public List<Cuenta> getCuentasConRetiro(){
@@ -58,10 +64,23 @@ public class Chaucherita implements Serializable{
 	}
 	
 	public Cuenta obtenerCuentaPorId(int id) {
-		return null;
+		Cuenta cuentaPorID = null;
+		for(Cuenta c: getCuentas()) {
+			if(c.getId() == id) {
+				cuentaPorID = c;
+			}
+		}
+		return cuentaPorID;
 	}
 	
 	public void agregar(Cuenta cuenta) {
+		int max=0;
+		for(Cuenta c: getCuentas()) {
+			if(max<c.getId()) {
+				max=c.getId();
+			}
+		}
+		cuenta.setId(max+1);
 		cuentas.add(cuenta);
 	}
 }
