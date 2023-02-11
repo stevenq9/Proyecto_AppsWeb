@@ -1,13 +1,19 @@
 package controladores;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
+import modelo.Cuenta;
+import modelo.CuentaDeIngresos;
+import modelo.Transaccion;
 
 @WebServlet("/GestionarTransaccionesController")
 public class GestionarTransaccionesController extends HttpServlet {
@@ -28,7 +34,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		procesar(request, response);
 	}
-	
+
 	private void procesar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String ruta = "regresar";
@@ -59,29 +65,56 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		// Obtención de datos del modelo
+		List<Cuenta> c = coleccionDeTransacciones.getChaucherita().getCuentas(CuentaDeIngresos.class);
+
+		// Envio de datos hacia la vista
+		request.setAttribute("cuentasDestino", c);
+		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp");
 	}
-	
+
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
-	
+
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
-	
+
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
-	
-	private void confirmar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+
+	private void confirmar(HttpServletRequest request, HttpServletResponse response) {
+		/********* Obtención de datos ******/
+		if(request.getParameter("selCuentaOrigen") == null) {
+			//INGRESO
+			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
+			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+			
+			//Obtención cuenta
+			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
+			
+			//Crear transaccion 
+			Transaccion t = new Transaccion(0, null, null, cuentaDestino, "INGRESO", cantidad);
+			
+			//Realizar deposito
+			cuentaDestino.depositar(t);
+			
+			//Agregar transaccion 
+			coleccionDeTransacciones.agregar(t);
+			
+			//Confirmar ingreso
+			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp");
+		}else {
+			//TRANSACCION
+
+		}
 	}
-	
+
 	private void regresar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController");

@@ -57,7 +57,7 @@ public class Chaucherita implements Serializable{
 		return this.getCuentas(CuentaDeGastos.class);
 	}
 	
-	public Cuenta obtenerCuentaPorId() {
+	public Cuenta obtenerCuentaPorId(int id) {
 		return null;
 	}
 	
