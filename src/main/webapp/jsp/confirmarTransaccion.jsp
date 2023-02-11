@@ -15,7 +15,7 @@
 	<!--DEFINIR SE REQUIERE EL PARÁMETRO PARA COPARARÁ PARA  QUE JAVASCRIPT MUESTRE EL ESTADO DE LA TRANSACCIÓN-->
 	<p id="estadoTransaccion">${huboError}</p>
 	<input type="submit" value="Volver">
-
+	
 	<script>
         function estadoTransaccion() {
             let estado = document.getElementById("estadoTransaccion").value;

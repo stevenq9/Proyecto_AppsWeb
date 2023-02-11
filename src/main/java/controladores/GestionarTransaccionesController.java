@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
+import modelo.CuentaConRetiro;
 import modelo.CuentaDeIngresos;
 import modelo.EstadoContable;
 import modelo.EstadoDeCuenta;
@@ -91,46 +92,47 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
 		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
-		
+
 		GeneradorEstadoContable gec = new GeneradorEstadoContable(fechaInicio, fechaFin);
 		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
 		EstadoContable estadoContableIngresosYGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
 		EstadoContable estadoContableGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
-		
+
 		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
 		request.setAttribute("estadoContableGastos", estadoContableGastos);
 		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
 	}
 
-	private void confirmar(HttpServletRequest request, HttpServletResponse response) 
+	private void confirmar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/********* Obtención de datos ******/
-		if(request.getParameter("selCuentaOrigen") == null) {
-			//INGRESO
+
+		if (Boolean.parseBoolean(request.getParameter("selCuentaOrigen")) == false) {
+			// INGRESO
 			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
 			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
-			
-			//Obtención cuenta
+
+			// Obtención cuenta
 			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
-			
-			//Crear transaccion 
+
+			// Crear transaccion
 			Transaccion t = new Transaccion(0, null, null, cuentaDestino, "INGRESO", cantidad);
-			
-			//Realizar deposito
-			try{
+
+			// Realizar deposito
+			try {
 				cuentaDestino.depositar(t);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				request.setAttribute("huboError", true);
 			}
-			
-			//Agregar transaccion 
+
+			// Agregar transaccion
 			coleccionDeTransacciones.agregar(t);
-			
-			//Confirmar ingreso
+
+			// Confirmar ingreso
 			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
-		}else {
-			//TRANSACCION
+		} else {
+			// TRANSACCION
 
 		}
 	}
