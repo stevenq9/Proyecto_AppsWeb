@@ -56,11 +56,9 @@
 	<div>
 		<h2>Obtener estado contable</h2>
 		<fieldset>
-			 <label>Fecha inicial: </label><input type="date"
-					name="filtroMes"><br> <br>
-				<label>Fecha final: </label><input type="date"
-					name="fechaFinal"><br>
-				<br> 
+			<form action="" method="POST">
+			 	<label>Fecha inicial: </label><input type="date" name="fechaInicial"><br><br>
+				<label>Fecha final: </label><input type="date" name="fechaFinal"><br><br> 
 				<input type="submit" value="Filtrar movimientos">
 			</form>
 		</fieldset>
