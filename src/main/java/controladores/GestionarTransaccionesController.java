@@ -74,7 +74,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasDestino", c);
-		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp");
+		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
 	}
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)

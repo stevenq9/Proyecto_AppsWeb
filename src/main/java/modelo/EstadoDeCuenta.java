@@ -9,9 +9,11 @@ public class EstadoDeCuenta implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Cuenta cuenta;
 	private List<Transaccion> transacciones;
+	private double valorTotal;
 	
 	public EstadoDeCuenta() {
 		this.transacciones = new ArrayList<Transaccion>();
+		valorTotal = 0;
 	}
 
 	public EstadoDeCuenta(Cuenta cuenta, List<Transaccion> transacciones) {
@@ -29,6 +31,14 @@ public class EstadoDeCuenta implements Serializable{
 
 	public List<Transaccion> getTransacciones() {
 		return transacciones;
+	}
+	
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	public void setTransacciones(List<Transaccion> transacciones) {
