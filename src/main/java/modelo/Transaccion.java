@@ -1,14 +1,14 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transaccion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private Date fecha;
-	private CuentaConRetiro cuentaOrigen;
+	private LocalDate fecha;
+	private Cuenta cuentaOrigen;
 	private Cuenta cuentaDestino;
 	private String descripcion;
 	private double cantidad;
@@ -16,7 +16,7 @@ public class Transaccion implements Serializable {
 	public Transaccion() {
 	}
 
-	public Transaccion(int id, Date fecha, CuentaConRetiro cuentaOrigen, Cuenta cuentaDestino, String descripcion,
+	public Transaccion(int id, LocalDate fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, String descripcion,
 			double cantidad) {
 		super();
 		this.id = id;
@@ -35,19 +35,19 @@ public class Transaccion implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
-	public CuentaConRetiro getCuentaOrigen() {
+	public Cuenta getCuentaOrigen() {
 		return cuentaOrigen;
 	}
 
-	public void setCuentaOrigen(CuentaConRetiro cuentaOrigen) {
+	public void setCuentaOrigen(Cuenta cuentaOrigen) {
 		this.cuentaOrigen = cuentaOrigen;
 	}
 

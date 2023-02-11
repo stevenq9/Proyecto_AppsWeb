@@ -12,6 +12,19 @@ public class Chaucherita implements Serializable{
 	
 	private Chaucherita() {
 		cuentas = new ArrayList<Cuenta>();
+		
+		this.agregar(new CuentaDeIngresos(1, "Nomina"));
+		((CuentaDeIngresos)cuentas.get(0)).setSaldo(0);
+		
+		this.agregar(new CuentaDeIngresosYGastos(2, "Banco"));
+		((CuentaDeIngresosYGastos)cuentas.get(1)).setSaldo(500);
+		
+		this.agregar(new CuentaDeIngresosYGastos(3, "Efectivo"));
+		((CuentaDeIngresosYGastos)cuentas.get(2)).setSaldo(50);
+		
+		this.agregar(new CuentaDeGastos(4, "Universidad"));
+		
+		this.agregar(new CuentaDeGastos(5, "Regalos"));
 	}
 	
 	public static Chaucherita getInstancia() {

@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CuentaDeIngresosYGastos extends CuentaConRetiro implements Serializable{
 
@@ -10,13 +11,12 @@ public class CuentaDeIngresosYGastos extends CuentaConRetiro implements Serializ
 		super();
 	}
 
-	public CuentaDeIngresosYGastos(int id, String nombre, double saldo, double valorTotal) {
-		super(id, nombre, saldo, valorTotal);
+	public CuentaDeIngresosYGastos(int id, String nombre) {
+		super(id, nombre);
 	}
 	
 	@Override
-	public void actualizarValorTotal() {
-		// TODO Esbozo de método generado automáticamente
-		
+	public double obtenerValorTotal(List<Transaccion> transacciones) {
+		return 0;
 	}
 }

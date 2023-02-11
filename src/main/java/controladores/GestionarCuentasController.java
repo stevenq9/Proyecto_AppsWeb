@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.Chaucherita;
+
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Chaucherita chaucherita;
 
 	public GestionarCuentasController() {
 		super();
+		this.chaucherita = Chaucherita.getInstancia();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

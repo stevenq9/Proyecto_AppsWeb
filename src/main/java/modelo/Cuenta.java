@@ -1,24 +1,22 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class Cuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
-	private double saldo;
-	private double valorTotal;
+
 
 	public Cuenta() {
 	}
 	
-	public Cuenta(int id, String nombre, double saldo, double valorTotal) {
+	public Cuenta(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.saldo = saldo;
-		this.valorTotal = valorTotal;
 	}
 
 	public int getId() {
@@ -37,25 +35,9 @@ public abstract class Cuenta implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
-	public double getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
 	public void depositar(Transaccion transaccion) {
 		//
 	}
 
-	public abstract void actualizarValorTotal();
+	public abstract double obtenerValorTotal(List<Transaccion> transacciones);
 }

@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.ColeccionDeTransacciones;
+
 @WebServlet("/GestionarTransaccionesController")
 public class GestionarTransaccionesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public ColeccionDeTransacciones coleccionDeTransacciones;
 
 	public GestionarTransaccionesController() {
 		super();
+		this.coleccionDeTransacciones = ColeccionDeTransacciones.getInstancia();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
