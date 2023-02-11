@@ -52,17 +52,9 @@ public class GestionarCuentasController extends HttpServlet {
 		case "guardar":
 			this.guardar(request, response);
 			break;
-		case "registrarIngreso":
-			this.registrarIngreso(request, response);
-			break;
-		case "registrarTransaccion":
-			this.registrarTransaccion(request, response);
-			break;
 		case "detallarCuenta":
 			this.detallarCuenta(request, response);
 			break;
-		case "mostrarEstado":
-			this.mostrarEstado(request, response);
 		}
 	}
 	
@@ -94,27 +86,10 @@ public class GestionarCuentasController extends HttpServlet {
 
 	}
 
-	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarIngreso").forward(request,
-				response);
-	}
-
-	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarTransaccion").forward(request,
-				response);
-	}
-
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request,
 				response);
-	}
-
-	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=mostrarEstado").forward(request, response);
 	}
 }

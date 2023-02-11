@@ -55,10 +55,10 @@
 	<div>
 		<h2>Obtener estado contable</h2>
 		<fieldset>
-			<form action="" method="POST">
-				<label>Fecha inicial: </label><input type="date" name="fechaInicial"><br>
+			<form action="GestionarTransaccionesController?ruta=mostrarEstado" method="POST">
+				<label>Fecha inicial: </label><input type="date" name="fechaInicial" required><br>
 				<br> <label>Fecha final: </label><input type="date"
-					name="fechaFinal"><br> <br> <input type="submit"
+					name="fechaFinal" required><br> <br> <input type="submit"
 					value="Filtrar movimientos">
 			</form>
 		</fieldset>

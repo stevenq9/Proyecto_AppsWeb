@@ -10,7 +10,7 @@ public class ColeccionDeTransacciones implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static List<Transaccion> transacciones;
 	private static ColeccionDeTransacciones instancia;
-	private Chaucherita chaucherita;
+	private static Chaucherita chaucherita;
 	
 	private ColeccionDeTransacciones() {
 		this.chaucherita = Chaucherita.getInstancia();
@@ -53,7 +53,26 @@ public class ColeccionDeTransacciones implements Serializable{
 	}
 	
 	public static List<Transaccion> getTransacciones(LocalDate fechaInicio, LocalDate fechaFin, int idCuenta){
-		return null;
+		if(fechaInicio == null || fechaFin == null)
+			return null;
+		
+		if(fechaInicio.isAfter(fechaFin))
+			return null;
+		
+		if(chaucherita.obtenerCuentaPorId(idCuenta) == null) {
+			return null;
+		}
+		
+		List<Transaccion> transaccionesDeCuenta = getTransaccionesByID(idCuenta);
+		List<Transaccion> transaccionesDeCuentaPorFecha = new ArrayList<>();
+		
+		for(Transaccion t: transaccionesDeCuenta) {
+			if((t.getFecha().isAfter(fechaInicio) || t.getFecha().isEqual(fechaInicio)) && (t.getFecha().isBefore(fechaFin) || t.getFecha().isEqual(fechaFin))) {
+				transaccionesDeCuentaPorFecha.add(t);
+			}
+		}
+		
+		return transaccionesDeCuentaPorFecha;
 	}
 	
 	public void agregar(Transaccion transaccion) {

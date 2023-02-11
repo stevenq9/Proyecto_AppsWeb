@@ -26,4 +26,9 @@ public abstract class CuentaConRetiro extends Cuenta implements Serializable {
 	public void retirar(Transaccion transaccion) {
 		//
 	}
+
+	@Override
+	public void depositar(Transaccion transaccion) {
+		super.depositar(transaccion);
+	}
 }

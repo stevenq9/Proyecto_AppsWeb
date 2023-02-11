@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,9 @@ import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
 import modelo.CuentaDeIngresos;
+import modelo.EstadoContable;
+import modelo.EstadoDeCuenta;
+import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
 
 @WebServlet("/GestionarTransaccionesController")
@@ -85,7 +89,14 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
+		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
+		
+		GeneradorEstadoContable gec = new GeneradorEstadoContable(fechaInicio, fechaFin);
+		EstadoContable estadoContable = gec.crearEstadoContable(coleccionDeTransacciones);
+		
+		request.setAttribute("estadoContable", estadoContable);
+		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp");
 	}
 
 	private void confirmar(HttpServletRequest request, HttpServletResponse response) {
