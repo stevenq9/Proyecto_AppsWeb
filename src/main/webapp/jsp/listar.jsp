@@ -7,6 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<header>Mi chaucherita Web</header>
+	<div class="main">
+		<div class="ingresosContainer">
+			<a>Nuevo</a>
+			
+		</div>
+		<div  class="ingresosGastosContainer">
+		
+		</div>
+		<div class="gastosContainer">
+			
+		</div>
+	</div>
 </body>
 </html>
