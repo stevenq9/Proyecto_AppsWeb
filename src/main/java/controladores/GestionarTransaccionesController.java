@@ -100,10 +100,11 @@ public class GestionarTransaccionesController extends HttpServlet {
 		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
 		request.setAttribute("estadoContableGastos", estadoContableGastos);
-		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp");
+		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
 	}
 
-	private void confirmar(HttpServletRequest request, HttpServletResponse response) {
+	private void confirmar(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		/********* Obtención de datos ******/
 		if(request.getParameter("selCuentaOrigen") == null) {
 			//INGRESO
@@ -117,13 +118,17 @@ public class GestionarTransaccionesController extends HttpServlet {
 			Transaccion t = new Transaccion(0, null, null, cuentaDestino, "INGRESO", cantidad);
 			
 			//Realizar deposito
-			cuentaDestino.depositar(t);
+			try{
+				cuentaDestino.depositar(t);
+			}catch(Exception e) {
+				request.setAttribute("huboError", true);
+			}
 			
 			//Agregar transaccion 
 			coleccionDeTransacciones.agregar(t);
 			
 			//Confirmar ingreso
-			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp");
+			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 		}else {
 			//TRANSACCION
 

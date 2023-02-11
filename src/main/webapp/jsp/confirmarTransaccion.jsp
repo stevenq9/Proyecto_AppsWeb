@@ -13,7 +13,7 @@
 <body>
 	<label>Estado de la estado final de la Transacción: </label>
 	<!--DEFINIR SE REQUIERE EL PARÁMETRO PARA COPARARÁ PARA  QUE JAVASCRIPT MUESTRE EL ESTADO DE LA TRANSACCIÓN-->
-	<p id="estadoTransaccion">${definir}</p>
+	<p id="estadoTransaccion">${huboError}</p>
 	<input type="submit" value="Volver">
 
 	<script>
@@ -22,10 +22,10 @@
             let parrafo = document.querySelector('p');
 
     //DEFINIR Dependiendo del valor  que reciba se realiza la comparativa
-            if (estado === DEFINIR) {
-                parrafo.textContent = 'La transacción ha sido satisfactoria';
+            if (huboError === true) {
+            	parrafo.textContent = 'ERROR en la transacción';
             } else {
-                parrafo.textContent = 'ERROR en la transacción';
+            	parrafo.textContent = 'La transacción ha sido satisfactoria';
             }
         }
     </script>

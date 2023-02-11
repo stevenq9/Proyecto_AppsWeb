@@ -28,7 +28,8 @@ public abstract class CuentaConRetiro extends Cuenta implements Serializable {
 	}
 
 	@Override
-	public void depositar(Transaccion transaccion) {
+	public void depositar(Transaccion transaccion) throws Exception {
 		super.depositar(transaccion);
+		this.saldo += transaccion.getCantidad();
 	}
 }
