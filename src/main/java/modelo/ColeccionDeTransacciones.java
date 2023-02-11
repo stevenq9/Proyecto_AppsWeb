@@ -41,8 +41,15 @@ public class ColeccionDeTransacciones implements Serializable{
 		this.chaucherita = chaucherita;
 	}
 
-	public static List<Transaccion> getTransacciones(int idCuenta){
-		return null;
+	public static List<Transaccion> getTransaccionesByID(int idCuenta){
+		List<Transaccion> temp = new ArrayList<>();
+		for (Transaccion transaccion : getTransacciones()) {
+			if (idCuenta == transaccion.getCuentaOrigen().getId() || idCuenta == transaccion.getCuentaDestino().getId()) {
+				temp.add(transaccion);
+			}
+
+		}
+		return temp;
 	}
 	
 	public static List<Transaccion> getTransacciones(LocalDate fechaInicio, LocalDate fechaFin, int idCuenta){
