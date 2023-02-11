@@ -122,6 +122,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 				cuentaDestino.depositar(t);
 			}catch(Exception e) {
 				request.setAttribute("huboError", true);
+				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 			}
 			
 			//Agregar transaccion 
