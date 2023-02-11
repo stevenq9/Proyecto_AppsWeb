@@ -55,20 +55,26 @@ public class GestionarCuentasController extends HttpServlet {
 		case "detallarCuenta":
 			this.detallarCuenta(request, response);
 			break;
+		case "listarCuenta":
+			this.listarCuenta(request, response);
 		}
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//metodos adicionales aqui
+		
+		request.getRequestDispatcher("jsp/listar.jsp").forward(request, response);
+	}
+	
+	private void listarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1.- Obtengo datos de la solicitud
 		// Ninguno
-
 		// 2.- Llamo al modelo
-		List<Cuenta> cuentas = chaucherita.getCuentas();
-		
+		List<Cuenta> cuentas = chaucherita.getCuentas(getClass());
 		// 3.- Llamo a la vista
 		request.setAttribute("cuentas", cuentas);
-		//ELIMINAR comentario después de verificar el nombre del jsp. --> "listarCuenta.jsp"
-		request.getRequestDispatcher("jsp/listar.jsp").forward(request, response);
+
+		request.getRequestDispatcher("jsp/listarCuenta.jsp").forward(request, response);
 	}
 	
 	private void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
