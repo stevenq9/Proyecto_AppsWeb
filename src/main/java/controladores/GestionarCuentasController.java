@@ -83,33 +83,36 @@ public class GestionarCuentasController extends HttpServlet {
 		//ELIMINAR comentario después de verificar el nombre del jsp
 		request.getRequestDispatcher("jsp/crear.jsp").forward(request, response);
 	}
-	
+
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
-	
+
 	private void guardar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
-	
+
 	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarIngreso").forward(request, response);
+		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarIngreso").forward(request,
+				response);
 	}
-	
+
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarTransaccion").forward(request, response);
+		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=registrarTransaccion").forward(request,
+				response);
 	}
-	
+
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request, response);
+		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request,
+				response);
 	}
-	
+
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=mostrarEstado").forward(request, response);
