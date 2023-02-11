@@ -93,10 +93,10 @@ public class GestionarTransaccionesController extends HttpServlet {
 		LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
 		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
 
-		GeneradorEstadoContable gec = new GeneradorEstadoContable(fechaInicio, fechaFin);
-		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
-		EstadoContable estadoContableIngresosYGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
-		EstadoContable estadoContableGastos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones);
+		GeneradorEstadoContable gec = new GeneradorEstadoContable();
+		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones, fechaInicio, fechaFin);
+		EstadoContable estadoContableIngresosYGastos = gec.crearEstadoContableDeIngresosYGastos(coleccionDeTransacciones, fechaInicio, fechaFin);
+		EstadoContable estadoContableGastos = gec.crearEstadoContableDeGastos(coleccionDeTransacciones, fechaInicio, fechaFin);
 
 		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);

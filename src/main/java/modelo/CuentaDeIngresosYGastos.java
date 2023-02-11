@@ -17,14 +17,6 @@ public class CuentaDeIngresosYGastos extends CuentaConRetiro implements Serializ
 	
 	@Override
 	public double obtenerValorTotal(List<Transaccion> transacciones) {
-		double valorTotal = 0;
-		for(Transaccion transaccion: transacciones) {
-			if(transaccion.getCuentaOrigen() == this)
-				valorTotal -= transaccion.getCantidad();
-			
-			if(transaccion.getCuentaDestino() == this)
-				valorTotal += transaccion.getCantidad();
-		}
-		return valorTotal;
+		return this.getSaldo();
 	}
 }

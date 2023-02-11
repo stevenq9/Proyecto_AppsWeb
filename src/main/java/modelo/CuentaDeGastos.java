@@ -20,7 +20,7 @@ public class CuentaDeGastos extends Cuenta implements Serializable{
 		double valorTotal = 0;
 		for(Transaccion transaccion: transacciones) {
 			if(transaccion.getCuentaDestino() == this)
-				valorTotal -= transaccion.getCantidad();
+				valorTotal += transaccion.getCantidad();
 		}
 		return valorTotal;
 	}

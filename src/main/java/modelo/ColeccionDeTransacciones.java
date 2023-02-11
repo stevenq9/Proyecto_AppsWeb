@@ -17,7 +17,8 @@ public class ColeccionDeTransacciones implements Serializable{
 		
 		transacciones = new ArrayList<Transaccion>();
 		
-		transacciones.add(new Transaccion(1, LocalDate.of(2022, 12, 31), chaucherita.getCuentas().get(0), chaucherita.getCuentas().get(1), "Pago de nómina de mi trabajo", 1000.0));
+		transacciones.add(new Transaccion(0, LocalDate.of(2022, 12, 31), null, chaucherita.getCuentas().get(0), "Ingreso de nómina de mi trabajo", 1000.0));
+		transacciones.add(new Transaccion(1, LocalDate.of(2022, 12, 31), chaucherita.getCuentas().get(0), chaucherita.getCuentas().get(1), "Transferencia de nómina de mi trabajo", 1000.0));
 		transacciones.add(new Transaccion(2, LocalDate.of(2023, 1, 16), chaucherita.getCuentas().get(1), chaucherita.getCuentas().get(3), "Libro “Contabilidad básica”", 100.0));
 		transacciones.add(new Transaccion(3, LocalDate.of(2023, 1, 20), chaucherita.getCuentas().get(1), chaucherita.getCuentas().get(2), "Traspaso entre cuentas", 400.0));
 		transacciones.add(new Transaccion(4, LocalDate.of(2023, 1, 20), chaucherita.getCuentas().get(2), chaucherita.getCuentas().get(4), "Teléfono Celular para mamá", 350.0));
@@ -42,9 +43,24 @@ public class ColeccionDeTransacciones implements Serializable{
 	}
 
 	public static List<Transaccion> getTransaccionesByID(int idCuenta){
+		if(chaucherita.obtenerCuentaPorId(idCuenta) == null)
+			return null;
+		
 		List<Transaccion> temp = new ArrayList<>();
 		for (Transaccion transaccion : getTransacciones()) {
-			if (idCuenta == transaccion.getCuentaOrigen().getId() || idCuenta == transaccion.getCuentaDestino().getId()) {
+			//Detecta cuentas de destino que no existen
+			if(transaccion.getCuentaDestino() == null) {
+				continue;
+			}
+			
+			//Maneja transferencias
+			if(transaccion.getCuentaOrigen() != null && (idCuenta == transaccion.getCuentaOrigen().getId() || idCuenta == transaccion.getCuentaDestino().getId())){
+				temp.add(transaccion);
+				continue;
+			}
+			
+			//Maneja ingresos
+			if(transaccion.getCuentaOrigen() == null && idCuenta == transaccion.getCuentaDestino().getId()) {
 				temp.add(transaccion);
 			}
 
