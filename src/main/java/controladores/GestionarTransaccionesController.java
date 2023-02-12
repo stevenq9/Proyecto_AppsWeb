@@ -2,6 +2,7 @@ package controladores;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,13 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
-import modelo.CuentaConRetiro;
-import modelo.CuentaDeIngresos;
 import modelo.EstadoContable;
-import modelo.EstadoDeCuenta;
 import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
 
@@ -85,6 +82,13 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
+		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
+		request.setAttribute("transacciones", transaccionesTemp);
+		request.getRequestDispatcher("/jsp/detalleCuenta.jsp").forward(request, response);
 
 	}
 

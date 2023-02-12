@@ -10,6 +10,7 @@
 	<header>
 		<h1>Mi chaucherita web</h1>
 	</header>
+	<hr>
 	<div class="cuentasContainer">
 		<div class="ingresosContainer">
 			<h2>Ingresos</h2>
@@ -18,8 +19,8 @@
 				Nuevo ingreso</a> <br> <br> <br> 
 			<fieldset>
 				<div class="cuenta">
-					<h3>Nombre de cuenta</h3>
-					<a href="">Modificar cuenta</a> <a href="">Mostrar detalles</a>
+					<h3>Nómina</h3>
+					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=1">Mostrar detalles</a>
 				</div>
 			</fieldset>
 		</div>
@@ -31,8 +32,14 @@
 				Nuevo ingreso</a> <br> <br> <br>
 			<fieldset>
 				<div class="cuenta">
-					<h3>Nombre de cuenta</h3>
-					<a href="">Modificar cuenta</a> <a href="">Mostrar detalles</a>
+					<h3>Banco</h3>
+					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=2">Mostrar detalles</a>
+				</div>
+			</fieldset>
+			<fieldset>
+				<div class="cuenta">
+					<h3>Efectivo</h3>
+					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=3">Mostrar detalles</a>
 				</div>
 			</fieldset>
 		</div>
@@ -44,8 +51,14 @@
 				Nuevo ingreso</a> <br> <br>  <br> 
 			<fieldset>
 				<div class="cuenta">
-					<h3>Nombre de cuenta</h3>
-					<a href="">Modificar cuenta</a> <a href="">Mostrar detalles</a>
+					<h3>Universidad</h3>
+					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=4">Mostrar detalles</a>
+				</div>
+			</fieldset>
+			<fieldset>
+				<div class="cuenta">
+					<h3>Regalos</h3>
+					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=5">Mostrar detalles</a>
 				</div>
 			</fieldset>
 		</div>

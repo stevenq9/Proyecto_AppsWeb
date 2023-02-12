@@ -21,7 +21,7 @@
 		<label for="cuentasDestino">Cuenta de destino:</label><br> <select
 			id="cuentasDestino" name="selCuentaDestino" form="formIngreso">
 			<c:forEach items="${cuentasDestino}" var="cuentaD">
-				<option value="${cuentaD.id}" name="txtID">${cuentaD.nombre}</option>
+				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
 			</c:forEach>
 		</select><br>
 		<input type="hidden" value="false" name="selCuentaOrigen">
@@ -42,9 +42,9 @@
 			<option value="2">Nombre de cuenta 2</option>
 			<option value="3">Nombre de cuenta 3</option>
 			<option value="4">Nombre de cuenta 4</option>
-		</select><br> <label for="cuentasDestino">Cuenta de destino:</label><br>
-		<select id="cuentasDestino" name="selCuentaDestino" form="formIngreso"><br>
-		<br>
+		</select><br>
+		<label for="cuentasDestino">Cuenta de destino:</label><br>
+		<select id="cuentasDestino" name="selCuentaDestino" form="formIngreso">
 			<option value="1">Nombre de cuenta 1</option>
 			<option value="2">Nombre de cuenta 2</option>
 			<option value="3">Nombre de cuenta 3</option>
