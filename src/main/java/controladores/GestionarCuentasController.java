@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Chaucherita;
 import modelo.Cuenta;
+import modelo.CuentaDeGastos;
+import modelo.CuentaDeIngresos;
+import modelo.CuentaDeIngresosYGastos;
 
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {
@@ -40,11 +43,11 @@ public class GestionarCuentasController extends HttpServlet {
 			ruta = request.getParameter("ruta");
 
 		switch (ruta) {
-		case "listar":
-			this.listar(request, response);
+		case "listarCuenta":
+			this.listarCuenta(request, response);
 			break;
-		case "crear":
-			this.crear(request, response);
+		case "crearCuenta":
+			this.crearCuenta(request, response);
 			break;
 		case "modificar":
 			this.modificar(request, response);
@@ -55,31 +58,27 @@ public class GestionarCuentasController extends HttpServlet {
 		case "detallarCuenta":
 			this.detallarCuenta(request, response);
 			break;
-		case "listarCuenta":
-			this.listarCuenta(request, response);
 		}
-	}
-	
-	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//metodos adicionales aqui
-		
-		request.getRequestDispatcher("jsp/listar.jsp").forward(request, response);
 	}
 	
 	private void listarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1.- Obtengo datos de la solicitud
 		// Ninguno
 		// 2.- Llamo al modelo
-		List<Cuenta> cuentas = chaucherita.getCuentas(getClass());
+		List<Cuenta> cuentasDeGastos = chaucherita.getCuentas(CuentaDeGastos.class);
+		List<Cuenta> cuentasDeIngresos = chaucherita.getCuentas(CuentaDeIngresos.class);
+		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCuentas(CuentaDeIngresosYGastos.class);
+
 		// 3.- Llamo a la vista
-		request.setAttribute("cuentas", cuentas);
+		request.setAttribute("cuentas", cuentasDeGastos);
+		request.setAttribute("cuentas", cuentasDeIngresos);
+		request.setAttribute("cuentas", cuentaDeIngresosYGastos);
 
 		request.getRequestDispatcher("jsp/listarCuenta.jsp").forward(request, response);
 	}
 	
-	private void crear(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ELIMINAR comentario después de verificar el nombre del jsp
-		request.getRequestDispatcher("jsp/crear.jsp").forward(request, response);
+	private void crearCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("jsp/crearCuenta.jsp").forward(request, response);
 	}
 
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
