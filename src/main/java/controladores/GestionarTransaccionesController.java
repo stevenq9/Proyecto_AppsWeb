@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
-import modelo.CuentaConRetiro;
+import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
 import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
@@ -70,31 +70,35 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void registrarIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtención de datos del modelo
-		List<Cuenta> c = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresos();
+
+		List<Cuenta> cuentasOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresos();
+		List<Cuenta> cuentasDestino = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
 
 		// Envio de datos hacia la vista
-		request.setAttribute("cuentasDestino", c);
+		request.setAttribute("cuentasOrigen", cuentasOrigen);
+		request.setAttribute("cuentasDestino", cuentasDestino);
+		request.setAttribute("ruta", "ingreso");
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
-
 	}
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasConRetiro();
-		List<Cuenta> cuentaDestino = coleccionDeTransacciones.getChaucherita().getCuentas();
+		List<Cuenta> cuentasOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
+		List<Cuenta> cuentasDestino = coleccionDeTransacciones.getChaucherita().getCuentasDepositables();
 		// Envio de datos hacia la vista
-		request.setAttribute("cuentasOrigen", cuentaOrigen);
-		request.setAttribute("cuentasDestino", cuentaDestino);
+		request.setAttribute("cuentasOrigen", cuentasOrigen);
+		request.setAttribute("cuentasDestino", cuentasDestino);
+		request.setAttribute("ruta", "transaccion");
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
 	}
 
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
-		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
+		transaccionesTemp = ColeccionDeTransacciones.getTransaccionesByID(id);
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
 		request.setAttribute("transacciones", transaccionesTemp);
 		request.setAttribute("cuenta", cuentaTemporal);
@@ -108,9 +112,12 @@ public class GestionarTransaccionesController extends HttpServlet {
 		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
 
 		GeneradorEstadoContable gec = new GeneradorEstadoContable();
-		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones, fechaInicio, fechaFin);
-		EstadoContable estadoContableIngresosYGastos = gec.crearEstadoContableDeIngresosYGastos(coleccionDeTransacciones, fechaInicio, fechaFin);
-		EstadoContable estadoContableGastos = gec.crearEstadoContableDeGastos(coleccionDeTransacciones, fechaInicio, fechaFin);
+		EstadoContable estadoContableIngresos = gec.crearEstadoContableDeIngresos(coleccionDeTransacciones, fechaInicio,
+				fechaFin);
+		EstadoContable estadoContableIngresosYGastos = gec
+				.crearEstadoContableDeIngresosYGastos(coleccionDeTransacciones, fechaInicio, fechaFin);
+		EstadoContable estadoContableGastos = gec.crearEstadoContableDeGastos(coleccionDeTransacciones, fechaInicio,
+				fechaFin);
 
 		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
@@ -121,69 +128,86 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void confirmar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/********* Obtención de datos ******/
-	
-		
-		if(Boolean.parseBoolean(request.getParameter("selCuentaOrigen"))==false) {
+		double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
+		int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
+		int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+		String descripcion = request.getParameter("txtDescripcion");
+		String ruta = request.getParameter("txtRuta");
+
+		// Obtención cuenta
+		Cuenta cuentaDeOrigen = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
+		Cuenta cuentaDeDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
+
+		if (ruta.equals("ingreso")) {
 			// INGRESO/*
-			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));	
-			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
-
-			// Obtención cuenta
-			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
-
-			// Crear transaccion
-			Transaccion t = new Transaccion(0, null, null, cuentaDestino, "INGRESO", cantidad);
-
-			// Realizar deposito
+			Transaccion t = null;
 			try {
-				cuentaDestino.depositar(t);
+				// Crear transaccion
+				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
 			} catch (Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+				this.enviarPantallaDeError(e, request, response);
 			}
 
-			// Agregar transaccion
-			coleccionDeTransacciones.agregar(t);
+			try {
+				// Realizar depósito
+				((CuentaDeIngresosYGastos)cuentaDeDestino).depositar(t);
+				// Agregar transaccion
+				coleccionDeTransacciones.agregar(t);
+			} catch (Exception e) {
+				this.enviarPantallaDeError(e, request, response);
+			}
 
-			// Confirmar ingreso
-			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 		} else {
 			// TRANSACCION
-			double cantidad = Double.parseDouble(request.getParameter("nmbCantidadT"));
-			int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
-			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestinoT"));
-			
-			//Obtención de cuentas
-			CuentaConRetiro cuentaOrigen = (CuentaConRetiro) coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
-			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
-			
-			//Crear transaccion 
-			Transaccion t = new Transaccion(0, null, cuentaOrigen, cuentaDestino, "TRANSACCION", cantidad);
-			
-			//Realizar retiro y deposito
-			try{
-				cuentaOrigen.retirar(t);
-			}catch(Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
-			}
-			try{
-				cuentaDestino.depositar(t);
-			}catch(Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+			Transaccion t = null;
+			try {
+				// Crear transaccion
+				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
+			} catch (Exception e) {
+				this.enviarPantallaDeError(e, request, response);
 			}
 
-			//Agregar transaccion 
-			coleccionDeTransacciones.agregar(t);
-			
-			//Confirmar transaccion
-			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp");
+			// Realizar retiro y deposito
+			try {
+				if (!(cuentaDeOrigen instanceof CuentaDeIngresosYGastos))
+					throw new Exception("Cuenta de origen no válida");
+				((CuentaDeIngresosYGastos) cuentaDeOrigen).retirar(t);
+
+			} catch (Exception e) {
+				this.enviarPantallaDeError(e, request, response);
+			}
+
+			try {
+				if (cuentaDeDestino instanceof CuentaDeIngresosYGastos)
+					((CuentaDeIngresosYGastos) cuentaDeDestino).depositar(t);
+				// Agregar transaccion
+				coleccionDeTransacciones.agregar(t);
+			} catch (Exception e) {
+				if (cuentaDeOrigen instanceof CuentaDeIngresosYGastos) {
+					double rollback = ((CuentaDeIngresosYGastos) cuentaDeOrigen).getSaldo() + t.getCantidad();
+					((CuentaDeIngresosYGastos) cuentaDeOrigen).setSaldo(rollback);
+				}
+				this.enviarPantallaDeError(e, request, response);
+			}
 		}
+		//Ir a la pantalla de confirmación
+		this.enviarPantallaDeConfirmacion(request, response);
 	}
 
 	private void regresar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController");
+	}
+
+	private void enviarPantallaDeConfirmacion(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+	}
+	
+	private void enviarPantallaDeError(Exception e, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		request.setAttribute("huboError", true);
+		request.setAttribute("mensajeDeError", e.getMessage());
+		this.enviarPantallaDeConfirmacion(request, response);
 	}
 }

@@ -10,46 +10,39 @@
 <title>Ingreso de datos de depósito/transaccion</title>
 </head>
 <body>
+
 	<form method="POST"
-		action="GestionarTransaccionesController?ruta=confirmar"
-		id="formIngreso">
-		<h1>Ingreso</h1>
-
-		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" required/><br>
-
-		<label for="cuentasDestino">Cuenta de destino:</label><br> <select
-			id="cuentasDestino" name="selCuentaDestino" form="formIngreso">
-			<c:forEach items="${cuentasDestino}" var="cuentaD">
-				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
-			</c:forEach>
-		</select><br>
-		<input type="hidden" value="false" name="selCuentaOrigen">
+		action="GestionarTransaccionesController?ruta=confirmar" id="formTransaccion">
+		<c:if test="${ruta eq 'ingreso'}">
+			<h1>Ingreso</h1>
+		</c:if>
+		<c:if test="${ruta eq 'transaccion'}">
+			<h1>Transacción</h1>
+		</c:if>
 		
-		<br> <input type="submit" type="submit" value="Guardar">
-	</form>
-
-	<form method="POST"
-		action="GestionarTransaccionesController?ruta=confirmar">
-		<h1>Transaccion</h1>
-
+		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
+		
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidadT" /><br>
+			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" /><br>
 
 		<label for="cuentasOrigen">Cuenta de origen:</label><br> 
-		<select id="cuentasOrigen" name="selCuentaOrigen" form="formIngreso">
-			<option value="1">Cuenta 1</option>
-			<option value="2">Cuenta 2</option>
-			<option value="3">Cuenta 3</option>
+		<select id="cuentasOrigen" name="selCuentaOrigen" form="formTransaccion">
+			<c:forEach items="${cuentasOrigen}" var="cuentaO">
+				<option value="${cuentaO.id}">${cuentaO.nombre}</option>
+			</c:forEach>
 		</select><br>
 		
 		<label for="cuentasDestino">Cuenta de destino:</label><br><select
-			id="cuentasDestino" name="selCuentaDestinoT" form="formIngreso">
+			id="cuentasDestino" name="selCuentaDestino" form="formTransaccion">
 			<c:forEach items="${cuentasDestino}" var="cuentaD">
 				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
 			</c:forEach>
 		</select><br>
-		<br> <input type="submit" type="submit" value="Guardar">
+		
+		<label for="descripcion">Descripción:</label><br>	
+		<input type="text" name="txtDescripcion" placeholder="Descripción"/>
+		<br>
+		<br> <input id="descripcion" type="submit" type="submit" value="Guardar">
 	</form>
 </body>
 </html>

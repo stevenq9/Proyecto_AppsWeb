@@ -63,7 +63,7 @@
 						var="cuentasSalida">
 						<tr>
 							<td>${cuentasSalida.cuenta.nombre}:</td>
-							<td>Total: - ${cuentasSalida.valorTotal}</td>
+							<td>Total: ${cuentasSalida.valorTotal}</td>
 						</tr>
 					</c:forEach>
 				</table>

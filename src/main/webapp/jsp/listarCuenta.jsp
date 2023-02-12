@@ -13,7 +13,8 @@
         <h1>Mi chaucherita web</h1>
     </header>
     <a href="GestionarCuentasController?ruta=crearCuenta">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
-                Nuevo ingreso</a> <br> <br> <br>
+                Nuevo ingreso</a> | <a href="GestionarTransaccionesController?ruta=registrarTransaccion">
+                Transaccion</a> <br> <br> <br>
     <hr>
     <div class="cuentasContainer">
         <div class="ingresosContainer">
@@ -22,7 +23,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>
@@ -37,7 +38,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>
@@ -52,7 +53,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>

@@ -17,13 +17,23 @@ public class Transaccion implements Serializable {
 	}
 
 	public Transaccion(int id, LocalDate fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, String descripcion,
-			double cantidad) {
+			double cantidad) throws Exception{
 		super();
 		this.id = id;
 		this.fecha = fecha;
+		
+		if(cuentaOrigen == null || (!(cuentaOrigen instanceof CuentaDeIngresos) && !(cuentaOrigen instanceof CuentaDeIngresosYGastos)))
+			throw new Exception("Cuenta de origen no válida");
 		this.cuentaOrigen = cuentaOrigen;
+		
+		if(cuentaDestino == null || (!(cuentaDestino instanceof CuentaDeGastos) && !(cuentaDestino instanceof CuentaDeIngresosYGastos)))
+			throw new Exception("Cuenta de destino no válida");
 		this.cuentaDestino = cuentaDestino;
+		
 		this.descripcion = descripcion;
+		
+		if(cantidad < 0.01)
+			throw new Exception("Se ingresó un valor menor a $0.01");
 		this.cantidad = cantidad;
 	}
 

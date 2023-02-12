@@ -14,7 +14,6 @@ public class Chaucherita implements Serializable{
 		cuentas = new ArrayList<Cuenta>();
 		
 		this.agregar(new CuentaDeIngresos(1, "Nomina"));
-		((CuentaDeIngresos)cuentas.get(0)).setSaldo(0);
 		
 		this.agregar(new CuentaDeIngresosYGastos(2, "Banco"));
 		((CuentaDeIngresosYGastos)cuentas.get(1)).setSaldo(500);
@@ -47,10 +46,6 @@ public class Chaucherita implements Serializable{
 		return cuentasPorTipo;
 	}
 	
-	public List<Cuenta> getCuentasConRetiro(){
-		return this.getCuentas(CuentaConRetiro.class);
-	}
-	
 	public List<Cuenta> getCuentasDeIngresos(){
 		return this.getCuentas(CuentaDeIngresos.class);
 	}
@@ -61,6 +56,13 @@ public class Chaucherita implements Serializable{
 	
 	public List<Cuenta> getCuentasDeGastos(){
 		return this.getCuentas(CuentaDeGastos.class);
+	}
+	
+	public List<Cuenta> getCuentasDepositables(){
+		List<Cuenta> cuentasDepositables = new ArrayList<Cuenta>();
+		cuentasDepositables.addAll(this.getCuentasDeIngresosYGastos());
+		cuentasDepositables.addAll(this.getCuentasDeGastos());
+		return cuentasDepositables;
 	}
 	
 	public Cuenta obtenerCuentaPorId(int id) {
