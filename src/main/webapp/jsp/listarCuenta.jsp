@@ -19,7 +19,7 @@
 				Nuevo ingreso</a> <br> <br> <br> 
 			<fieldset>
 				<div class="cuenta">
-					<h3>Nómina</h3>
+					<h3>Nomina</h3>
 					<a href="">Modificar cuenta</a> <a href="GestionarTransaccionesController?ruta=detallarCuenta&id=1">Mostrar detalles</a>
 				</div>
 			</fieldset>
@@ -77,8 +77,6 @@
 		</fieldset>
 	</div>
 	<hr>
-
-
 
 </body>
 </html>
