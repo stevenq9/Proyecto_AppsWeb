@@ -122,8 +122,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		/********* Obtención de datos ******/
 	
-		
-		if(request.getParameter("selCuentaOrigen")==null) {
+		if(request.getParameter("selCuentaOrigen").equals("false")) {
 			// INGRESO/*
 			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));	
 			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));

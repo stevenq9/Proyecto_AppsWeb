@@ -30,6 +30,8 @@
 			<p>${transaccion.cuentaDestino.nombre}</p>
 			<label><b>Monto: </b></label>
 			<p>${transaccion.cantidad}</p>
+			<label><b>Descripción: </b></label>
+			<p>${transaccion.descripcion}</p>
 		</fieldset>
 		<br>
 	</c:forEach>
