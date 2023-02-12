@@ -115,9 +115,11 @@ public class GestionarCuentasController extends HttpServlet {
 				cuenta = new CuentaDeIngresosYGastos(0, nombre);
 				break;
 			}
+			
 			if (cuenta != null) {
 				this.chaucherita.agregar(cuenta);
 			}
+			break;
 		case "modificarC":
 			//Metodo
 			chaucherita.modificar(Integer.parseInt(id), nombre);
