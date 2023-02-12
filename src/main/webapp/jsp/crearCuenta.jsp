@@ -11,20 +11,33 @@
  
 </head>
 
+
 <body>
-     <h1>Nueva Cuenta</h1>
-    
+    <h1>Nueva Cuenta</h1>
+
     <div>
-        <!--RUTA POR DEFINIR!!!-->
         <form method="POST" action="GestionarCuentasController?ruta=guardar">
-         	<c:if test="${cuenta != null}">
-				<input type="hidden" name="txtId" value="<c:out value='${cuenta.id}'/>">
-			</c:if>
+            
+            <c:if test="${cuenta != null}">
+                <input type="hidden" name="txtId" value="<c:out value='${cuenta.id}'/>">
+                <input type="hidden" name="txtRuta" value="modificarCuenta">
+            </c:if>
+             <c:if test="${cuenta == null}">
+                <input type="hidden" name="txtRuta" value="crearCuenta">
+            </c:if>
+            
             <label>NOMBRE:</label><br>
             <div>
                 <input type="text" name="txtNombre">
             </div>
-
+            <br>
+            <label>TIPO:</label><br>
+            <select name="txtTipo">
+                <option value="modelo.CuentaDeIngresos"> Cuenta de ingreso </option>
+                <option value="modelo.CuentaDeGastos"> Cuenta de gastos </option>
+                <option value="modelo.CuentaDeIngresosYGastos"> Cuenta de ingreso y gastos </option>
+            </select>
+            <br>
             <br>
             <input type="button" value="Guardar">
         </form>

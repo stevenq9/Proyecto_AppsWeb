@@ -60,8 +60,9 @@ public class GestionarCuentasController extends HttpServlet {
 			break;
 		}
 	}
-	
-	private void listarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void listarCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// 1.- Obtengo datos de la solicitud
 		// Ninguno
 		// 2.- Llamo al modelo
@@ -76,8 +77,9 @@ public class GestionarCuentasController extends HttpServlet {
 
 		request.getRequestDispatcher("jsp/listarCuenta.jsp").forward(request, response);
 	}
-	
-	private void crearCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void crearCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("jsp/crearCuenta.jsp").forward(request, response);
 	}
 
@@ -88,7 +90,33 @@ public class GestionarCuentasController extends HttpServlet {
 
 	private void guardar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String ruta = request.getParameter("txtRuta");
+		String nombre = request.getParameter("txtNombre");
 
+		switch (ruta) {
+		case "crearCuenta":
+			String tipo = request.getParameter("txtTipo");
+			Cuenta cuenta = null;
+
+			switch (tipo) {
+			case "modelo.CuentaDeIngresos":
+				cuenta = new CuentaDeIngresos(0, nombre);
+				break;
+
+			case "modelo.CuentaDeGastos":
+				cuenta = new CuentaDeGastos(0, nombre);
+				break;
+
+			case "modelo.CuentaDeIngresosYGastos":
+				cuenta = new CuentaDeIngresosYGastos(0, nombre);
+				break;
+			}
+			if (cuenta != null) {
+				this.chaucherita.agregar(cuenta);
+			}
+		}
+		
+		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController?ruta=listarCuenta");
 	}
 
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
