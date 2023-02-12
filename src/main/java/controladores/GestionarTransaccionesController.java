@@ -2,6 +2,7 @@ package controladores;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -81,6 +82,13 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
+		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
+		request.setAttribute("transacciones", transaccionesTemp);
+		request.getRequestDispatcher("/jsp/detalleCuenta.jsp").forward(request, response);
 
 	}
 
