@@ -34,21 +34,20 @@
 		<h1>Transaccion</h1>
 
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" /><br>
+			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidadT" /><br>
 
-		<label for="cuentasOrigen">Cuenta de origen:</label><br> <select
-			id="cuentasOrigen" name="selCuentaOrigen" form="formIngreso">
-			<option value="1">Nombre de cuenta 1</option>
-			<option value="2">Nombre de cuenta 2</option>
-			<option value="3">Nombre de cuenta 3</option>
-			<option value="4">Nombre de cuenta 4</option>
+		<label for="cuentasOrigen">Cuenta de origen:</label><br> 
+		<select id="cuentasOrigen" name="selCuentaOrigen" form="formIngreso">
+			<option value="1">Cuenta 1</option>
+			<option value="2">Cuenta 2</option>
+			<option value="3">Cuenta 3</option>
 		</select><br>
-		<label for="cuentasDestino">Cuenta de destino:</label><br>
-		<select id="cuentasDestino" name="selCuentaDestino" form="formIngreso">
-			<option value="1">Nombre de cuenta 1</option>
-			<option value="2">Nombre de cuenta 2</option>
-			<option value="3">Nombre de cuenta 3</option>
-			<option value="4">Nombre de cuenta 4</option>
+		
+		<label for="cuentasDestino">Cuenta de destino:</label><br><select
+			id="cuentasDestino" name="selCuentaDestinoT" form="formIngreso">
+			<c:forEach items="${cuentasDestino}" var="cuentaD">
+				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
+			</c:forEach>
 		</select><br>
 		<br> <input type="submit" type="submit" value="Guardar">
 	</form>

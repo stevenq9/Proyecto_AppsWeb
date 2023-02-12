@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
 import modelo.CuentaConRetiro;
@@ -74,6 +75,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasDestino", c);
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
+
 	}
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
@@ -93,8 +95,10 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
 		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
+		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
 		request.setAttribute("transacciones", transaccionesTemp);
-		request.getRequestDispatcher("/jsp/detalleCuenta.jsp").forward(request, response);
+		request.setAttribute("cuenta", cuentaTemporal);
+		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
 
 	}
 
@@ -117,10 +121,11 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void confirmar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/********* Obtención de datos ******/
-
-		if (Boolean.parseBoolean(request.getParameter("selCuentaOrigen")) == false) {
-			// INGRESO
-			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
+	
+		
+		if(Boolean.parseBoolean(request.getParameter("selCuentaOrigen"))==false) {
+			// INGRESO/*
+			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));	
 			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
 
 			// Obtención cuenta
@@ -144,9 +149,9 @@ public class GestionarTransaccionesController extends HttpServlet {
 			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 		} else {
 			// TRANSACCION
-			double cantidad = Double.parseDouble(request.getParameter("nmbCantidadTransaccion"));
+			double cantidad = Double.parseDouble(request.getParameter("nmbCantidadT"));
 			int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
-			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestinoT"));
 			
 			//Obtención de cuentas
 			CuentaConRetiro cuentaOrigen = (CuentaConRetiro) coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
