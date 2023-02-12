@@ -37,7 +37,7 @@ public class GestionarCuentasController extends HttpServlet {
 
 	private void procesar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String ruta = "listar";
+		String ruta = "listarCuenta";
 
 		if (request.getParameter("ruta") != null)
 			ruta = request.getParameter("ruta");
@@ -70,9 +70,9 @@ public class GestionarCuentasController extends HttpServlet {
 		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCuentas(CuentaDeIngresosYGastos.class);
 
 		// 3.- Llamo a la vista
-		request.setAttribute("cuentas", cuentasDeGastos);
-		request.setAttribute("cuentas", cuentasDeIngresos);
-		request.setAttribute("cuentas", cuentaDeIngresosYGastos);
+		request.setAttribute("cuentasDeIngresos", cuentasDeIngresos);
+		request.setAttribute("cuentasDeGastos", cuentasDeGastos);
+		request.setAttribute("cuentaDeIngresosYGastos", cuentaDeIngresosYGastos);
 
 		request.getRequestDispatcher("jsp/listarCuenta.jsp").forward(request, response);
 	}
