@@ -38,7 +38,7 @@ public class Chaucherita implements Serializable{
 		return cuentas;
 	}
 	
-	public List<Cuenta> getCuentas(Class tipo){
+	public List<Cuenta> getCuentas(Class<?> tipo){
 		List<Cuenta> cuentasPorTipo = new ArrayList<Cuenta>();
 		for(Cuenta c: getCuentas()) {
 			if(c.getClass() == tipo) {

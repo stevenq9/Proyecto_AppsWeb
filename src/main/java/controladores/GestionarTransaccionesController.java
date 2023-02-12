@@ -10,13 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
-import modelo.CuentaConRetiro;
-import modelo.CuentaDeIngresos;
 import modelo.EstadoContable;
-import modelo.EstadoDeCuenta;
 import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
 
