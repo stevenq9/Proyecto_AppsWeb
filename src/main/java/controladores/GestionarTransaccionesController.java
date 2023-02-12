@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
+import modelo.CuentaConRetiro;
 import modelo.EstadoContable;
 import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
@@ -77,7 +78,12 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasConRetiro();
+		List<Cuenta> cuentaDestino = coleccionDeTransacciones.getChaucherita().getCuentas();
+		// Envio de datos hacia la vista
+		request.setAttribute("cuentasOrigen", cuentaOrigen);
+		request.setAttribute("cuentasDestino", cuentaDestino);
+		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
 	}
 
 	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
@@ -138,7 +144,36 @@ public class GestionarTransaccionesController extends HttpServlet {
 			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 		} else {
 			// TRANSACCION
+			double cantidad = Double.parseDouble(request.getParameter("nmbCantidadTransaccion"));
+			int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
+			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+			
+			//Obtención de cuentas
+			CuentaConRetiro cuentaOrigen = (CuentaConRetiro) coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
+			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
+			
+			//Crear transaccion 
+			Transaccion t = new Transaccion(0, null, cuentaOrigen, cuentaDestino, "TRANSACCION", cantidad);
+			
+			//Realizar retiro y deposito
+			try{
+				cuentaOrigen.retirar(t);
+			}catch(Exception e) {
+				request.setAttribute("huboError", true);
+				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+			}
+			try{
+				cuentaDestino.depositar(t);
+			}catch(Exception e) {
+				request.setAttribute("huboError", true);
+				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+			}
 
+			//Agregar transaccion 
+			coleccionDeTransacciones.agregar(t);
+			
+			//Confirmar transaccion
+			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp");
 		}
 	}
 
