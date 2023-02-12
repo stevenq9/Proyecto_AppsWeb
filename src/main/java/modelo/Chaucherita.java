@@ -83,4 +83,12 @@ public class Chaucherita implements Serializable{
 		cuenta.setId(max+1);
 		cuentas.add(cuenta);
 	}
+	
+	public void modificar(int id, String Nombre) {
+		for(Cuenta c: getCuentas()) {
+			if(c.getId()==id) {
+				c.setNombre(Nombre);;
+			}
+		}
+	}
 }

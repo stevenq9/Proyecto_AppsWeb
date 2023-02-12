@@ -23,7 +23,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>
@@ -38,7 +38,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>
@@ -53,7 +53,7 @@
                 <fieldset>
                     <div class="cuenta">
                         <h3>${cuenta.nombre}</h3>
-                        <a href="">Modificar cuenta</a> <a
+                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
                             href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
                             detalles</a>
                     </div>
