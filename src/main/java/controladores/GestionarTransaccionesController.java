@@ -75,12 +75,12 @@ public class GestionarTransaccionesController extends HttpServlet {
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasDestino", c);
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
-
+		
 	}
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasConRetiro();
+		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
 		List<Cuenta> cuentaDestino = coleccionDeTransacciones.getChaucherita().getCuentas();
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasOrigen", cuentaOrigen);
@@ -123,7 +123,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 		/********* Obtención de datos ******/
 	
 		
-		if(Boolean.parseBoolean(request.getParameter("selCuentaOrigen"))==false) {
+		if(request.getParameter("selCuentaOrigen")==null) {
 			// INGRESO/*
 			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));	
 			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
@@ -178,7 +178,8 @@ public class GestionarTransaccionesController extends HttpServlet {
 			coleccionDeTransacciones.agregar(t);
 			
 			//Confirmar transaccion
-			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp");
+			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+			
 		}
 	}
 

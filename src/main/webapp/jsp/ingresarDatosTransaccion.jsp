@@ -30,21 +30,24 @@
 	</form>
 
 	<form method="POST"
-		action="GestionarTransaccionesController?ruta=confirmar">
+		action="GestionarTransaccionesController?ruta=confirmar" id="formTransaccion">
 		<h1>Transaccion</h1>
 
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input
 			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidadT" /><br>
 
 		<label for="cuentasOrigen">Cuenta de origen:</label><br> 
-		<select id="cuentasOrigen" name="selCuentaOrigen" form="formIngreso">
-			<option value="1">Cuenta 1</option>
+		<select id="cuentasOrigen" name="selCuentaOrigen" form="formTransaccion">
+			<c:forEach items="${cuentasOrigen}" var="cuentaO">
+				<option value="${cuentaO.id}">${cuentaO.nombre}</option>
+			</c:forEach>
+			<!--   <option value="1">Cuenta 1</option>
 			<option value="2">Cuenta 2</option>
-			<option value="3">Cuenta 3</option>
+			<option value="3">Cuenta 3</option>-->
 		</select><br>
 		
 		<label for="cuentasDestino">Cuenta de destino:</label><br><select
-			id="cuentasDestino" name="selCuentaDestinoT" form="formIngreso">
+			id="cuentasDestino" name="selCuentaDestinoT" form="formTransaccion">
 			<c:forEach items="${cuentasDestino}" var="cuentaD">
 				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
 			</c:forEach>
