@@ -39,7 +39,7 @@
             </select>
             <br>
             <br>
-            <input type="button" value="Guardar">
+            <input type="submit" value="Guardar">
         </form>
     </div>
 

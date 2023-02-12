@@ -71,8 +71,8 @@ public class GestionarCuentasController extends HttpServlet {
 		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCuentas(CuentaDeIngresosYGastos.class);
 
 		// 3.- Llamo a la vista
-		request.setAttribute("cuentasDeIngresos", cuentasDeIngresos);
 		request.setAttribute("cuentasDeGastos", cuentasDeGastos);
+		request.setAttribute("cuentasDeIngresos", cuentasDeIngresos);
 		request.setAttribute("cuentaDeIngresosYGastos", cuentaDeIngresosYGastos);
 
 		request.getRequestDispatcher("jsp/listarCuenta.jsp").forward(request, response);

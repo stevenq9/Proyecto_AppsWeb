@@ -24,8 +24,7 @@ public class Chaucherita implements Serializable{
 		
 		this.agregar(new CuentaDeGastos(4, "Universidad"));
 		
-		this.agregar(new CuentaDeGastos(5, "Regalos"));
-		
+		this.agregar(new CuentaDeGastos(5, "Regalos"));		
 	}
 	
 	public static Chaucherita getInstancia() {

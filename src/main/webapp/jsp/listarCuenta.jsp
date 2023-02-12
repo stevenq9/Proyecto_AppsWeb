@@ -12,13 +12,12 @@
     <header>
         <h1>Mi chaucherita web</h1>
     </header>
+    <a href="GestionarCuentasController?ruta=crearCuenta">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
+                Nuevo ingreso</a> <br> <br> <br>
     <hr>
     <div class="cuentasContainer">
         <div class="ingresosContainer">
             <h2>Ingresos</h2>
-            <a href="#">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
-                Nuevo ingreso</a> <br> <br> <br>
-
             <c:forEach items="${cuentasDeIngresos}" var="cuenta">
                 <fieldset>
                     <div class="cuenta">
@@ -34,9 +33,6 @@
         <hr>
         <div class="ingresosGastosContainer">
             <h2>Ingresos y Gastos</h2>
-            <a href="#">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
-                Nuevo ingreso</a> <br> <br> <br>
-
             <c:forEach items="${cuentaDeIngresosYGastos}" var="cuenta">
                 <fieldset>
                     <div class="cuenta">
@@ -52,9 +48,6 @@
         <hr>
         <div class="gastosContainer">
             <h2>Gastos</h2>
-            <a href="#">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
-                Nuevo ingreso</a> <br> <br> <br>
-
             <c:forEach items="${cuentasDeGastos}" var="cuenta">
                 <fieldset>
                     <div class="cuenta">
