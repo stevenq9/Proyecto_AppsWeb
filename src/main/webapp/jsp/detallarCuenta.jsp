@@ -12,6 +12,7 @@
 		<h1>Mi Chaucherita Web</h1>
 		<br>
 	</header>
+	
 	<h2>Detalle de Cuenta</h2>
 	<br>
 	<div>Nombre: ${cuenta.nombre}
