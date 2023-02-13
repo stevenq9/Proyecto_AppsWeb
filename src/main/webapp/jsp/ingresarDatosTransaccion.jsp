@@ -23,7 +23,7 @@
 		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
 		
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" /><br>
+			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" required/><br>
 
 		<label for="cuentasOrigen">Cuenta de origen:</label><br> 
 		<select id="cuentasOrigen" name="selCuentaOrigen" form="formTransaccion">

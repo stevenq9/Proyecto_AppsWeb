@@ -49,7 +49,7 @@ public class GestionarCuentasController extends HttpServlet {
 		case "crearCuenta":
 			this.crearCuenta(request, response);
 			break;
-		case "modificar":
+		case "modificarCuenta":
 			this.modificar(request, response);
 			break;
 		case "guardar":
@@ -80,12 +80,15 @@ public class GestionarCuentasController extends HttpServlet {
 
 	private void crearCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/crearCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}
 
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String id = request.getParameter("id");
+		Cuenta cuenta = chaucherita.obtenerCuentaPorId(Integer.parseInt(id));
+		request.setAttribute("cuenta", cuenta);
+		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}
 
 	private void guardar(HttpServletRequest request, HttpServletResponse response)
@@ -111,11 +114,18 @@ public class GestionarCuentasController extends HttpServlet {
 				cuenta = new CuentaDeIngresosYGastos(0, nombre);
 				break;
 			}
+
 			if (cuenta != null) {
 				this.chaucherita.agregar(cuenta);
 			}
+			break;
+		case "modificarCuenta":
+			// Metodo
+			String id = request.getParameter("txtId");
+			chaucherita.modificar(Integer.parseInt(id), nombre);
+			break;
 		}
-		
+
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController?ruta=listarCuenta");
 	}
 

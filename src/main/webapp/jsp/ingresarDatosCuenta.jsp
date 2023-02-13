@@ -7,13 +7,20 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cuenta</title>
+	<c:choose>
+    	<c:when test="${cuenta == null}"><title>Crear cuenta</title></c:when>
+    	<c:otherwise><title>Modificar cuenta</title></c:otherwise>
+    </c:choose>
  
 </head>
 
 
 <body>
-    <h1>Nueva Cuenta</h1>
+    <c:choose>
+    	<c:when test="${cuenta == null}"><h1>Nueva Cuenta</h1></c:when>
+    	<c:otherwise><h1>Modificar cuenta: ${cuenta.nombre}</h1></c:otherwise>
+    </c:choose>
+    
 
     <div>
         <form method="POST" action="GestionarCuentasController?ruta=guardar">
@@ -26,17 +33,19 @@
                 <input type="hidden" name="txtRuta" value="crearCuenta">
             </c:if>
             
-            <label>NOMBRE:</label><br>
+            <label>Nombre:</label><br>
             <div>
-                <input type="text" name="txtNombre">
+                <input type="text" name="txtNombre" value="<c:out>${cuenta.nombre}</c:out>">
             </div>
             <br>
-            <label>TIPO:</label><br>
-            <select name="txtTipo">
-                <option value="modelo.CuentaDeIngresos"> Cuenta de ingreso </option>
-                <option value="modelo.CuentaDeGastos"> Cuenta de gastos </option>
-                <option value="modelo.CuentaDeIngresosYGastos"> Cuenta de ingreso y gastos </option>
-            </select>
+            <c:if test="${cuenta == null}">
+            <label>Tipo:</label><br>
+	            <select name="txtTipo">
+	                <option value="modelo.CuentaDeIngresos"> Cuenta de ingreso </option>
+	                <option value="modelo.CuentaDeGastos"> Cuenta de gastos </option>
+	                <option value="modelo.CuentaDeIngresosYGastos"> Cuenta de ingreso y gastos </option>
+	            </select>
+            </c:if>
             <br>
             <br>
             <input type="submit" value="Guardar">
