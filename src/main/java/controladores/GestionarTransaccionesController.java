@@ -146,6 +146,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
 			} catch (Exception e) {
 				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 			try {
@@ -155,6 +156,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 				coleccionDeTransacciones.agregar(t);
 			} catch (Exception e) {
 				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 		} else {
@@ -165,6 +167,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
 			} catch (Exception e) {
 				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 			// Realizar retiro y deposito
@@ -175,6 +178,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 			} catch (Exception e) {
 				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 			try {
@@ -188,6 +192,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 					((CuentaDeIngresosYGastos) cuentaDeOrigen).setSaldo(rollback);
 				}
 				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 		}
 		//Ir a la pantalla de confirmación
