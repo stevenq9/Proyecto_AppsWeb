@@ -22,7 +22,7 @@
 		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
 		
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" /><br>
+			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" required/><br>
 
 		<c:if test="${ruta eq 'transaccion'}">
 			<label for="cuentasOrigen">Cuenta de origen:</label><br> 
