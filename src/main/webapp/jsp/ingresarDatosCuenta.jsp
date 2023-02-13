@@ -35,7 +35,7 @@
             
             <label>Nombre:</label><br>
             <div>
-                <input type="text" name="txtNombre" value="<c:out>${cuenta.nombre}</c:out>">
+                <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>">
             </div>
             <br>
             <c:if test="${cuenta == null}">
