@@ -14,9 +14,11 @@
 	</header>
 	<h2>Detalle de Cuenta</h2>
 	<br>
+	<div>Nombre: ${cuenta.nombre}
+	</div>
 	<div>Id: ${cuenta.id}
 	</div>
-	<div>Nombre: ${cuenta.nombre}
+	<div>Valor Total:$ ${total}
 	</div>
 	<br>
 	
@@ -29,7 +31,7 @@
 			<label><b>Cuenta de destino: </b></label>
 			<p>${transaccion.cuentaDestino.nombre}</p>
 			<label><b>Monto: </b></label>
-			<p>${transaccion.cantidad}</p>
+			<p>$ ${transaccion.cantidad}</p>
 			<label><b>Descripción: </b></label>
 			<p>${transaccion.descripcion}</p>
 		</fieldset>

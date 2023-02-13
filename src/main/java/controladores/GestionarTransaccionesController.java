@@ -80,8 +80,15 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
+		// Obtención de datos del modelo
+		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresos();
+		List<Cuenta> cuentaIngreyGast = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
 		List<Cuenta> cuentaDestino = coleccionDeTransacciones.getChaucherita().getCuentas();
+		
+		for (Cuenta cuenta : cuentaIngreyGast) {
+			cuentaOrigen.add(cuenta);
+		}
+		
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasOrigen", cuentaOrigen);
 		request.setAttribute("cuentasDestino", cuentaDestino);
@@ -96,8 +103,10 @@ public class GestionarTransaccionesController extends HttpServlet {
 		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
 		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
+		double total = cuentaTemporal.obtenerValorTotal(transaccionesTemp);
 		request.setAttribute("transacciones", transaccionesTemp);
 		request.setAttribute("cuenta", cuentaTemporal);
+		request.setAttribute("total", total);
 		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
 
 	}
