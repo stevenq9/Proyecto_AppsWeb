@@ -21,6 +21,10 @@
 	</div>
 	<div>Valor Total:$ ${total}
 	</div>
+	<c:if test="${saldo ne '-1'}">
+			<div>Saldo:$ ${saldo}</div>
+	</c:if>
+	
 	<br>
 	
 	<c:forEach items="${transacciones}" var="transaccion">

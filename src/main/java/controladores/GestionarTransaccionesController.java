@@ -15,6 +15,9 @@ import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
 import modelo.CuentaConRetiro;
+import modelo.CuentaDeGastos;
+import modelo.CuentaDeIngresos;
+import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
 import modelo.GeneradorEstadoContable;
 import modelo.Transaccion;
@@ -82,13 +85,12 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtención de datos del modelo
-		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresos();
-		List<Cuenta> cuentaIngreyGast = coleccionDeTransacciones.getChaucherita().getCuentasDeIngresosYGastos();
+		List<Cuenta> cuentaOrigen = coleccionDeTransacciones.getChaucherita().getCuentasConRetiro();
 		List<Cuenta> cuentaDestino = coleccionDeTransacciones.getChaucherita().getCuentas();
-		
+		/*
 		for (Cuenta cuenta : cuentaIngreyGast) {
 			cuentaOrigen.add(cuenta);
-		}
+		}*/
 		
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasOrigen", cuentaOrigen);
@@ -106,9 +108,15 @@ public class GestionarTransaccionesController extends HttpServlet {
 		transaccionesTemp = ColeccionDeTransacciones.getTransaccionesByID(id);
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
 		double total = cuentaTemporal.obtenerValorTotal(transaccionesTemp);
+		double saldo = -1;
+		
+		if(!(cuentaTemporal instanceof CuentaDeGastos)) 
+			saldo = ((CuentaConRetiro)cuentaTemporal).getSaldo() ;
+		
 		request.setAttribute("transacciones", transaccionesTemp);
 		request.setAttribute("cuenta", cuentaTemporal);
 		request.setAttribute("total", total);
+		request.setAttribute("saldo", saldo);
 		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
 
 	}

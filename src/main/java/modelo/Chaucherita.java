@@ -48,7 +48,9 @@ public class Chaucherita implements Serializable{
 	}
 	
 	public List<Cuenta> getCuentasConRetiro(){
-		return this.getCuentas(CuentaConRetiro.class);
+		List<Cuenta> cuentas = this.getCuentasDeIngresos();
+		cuentas.addAll(this.getCuentasDeIngresosYGastos());
+		return cuentas;
 	}
 	
 	public List<Cuenta> getCuentasDeIngresos(){
