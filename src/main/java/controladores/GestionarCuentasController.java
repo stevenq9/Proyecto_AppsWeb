@@ -95,7 +95,6 @@ public class GestionarCuentasController extends HttpServlet {
 			throws ServletException, IOException {
 		String ruta = request.getParameter("txtRuta");
 		String nombre = request.getParameter("txtNombre");
-		String id = request.getParameter("id");
 
 		switch (ruta) {
 		case "crearCuenta":
@@ -115,17 +114,18 @@ public class GestionarCuentasController extends HttpServlet {
 				cuenta = new CuentaDeIngresosYGastos(0, nombre);
 				break;
 			}
-			
+
 			if (cuenta != null) {
 				this.chaucherita.agregar(cuenta);
 			}
 			break;
-		case "modificarC":
-			//Metodo
+		case "modificarCuenta":
+			// Metodo
+			String id = request.getParameter("txtId");
 			chaucherita.modificar(Integer.parseInt(id), nombre);
 			break;
 		}
-		
+
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController?ruta=listarCuenta");
 	}
 
