@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,24 +12,19 @@
 </head>
 
 <body>
-	<label>Estado de la estado final de la Transacción: </label>
+	<label>Estado final de la transacción: </label>
 
-	<p id="estadoTransaccion">${huboError}</p>
 	<script>
-		var paragraph = document.getElementById("estadoTransaccion");
-		var text = paragraph.textContent;
-
-		if (text === true) {
-			document.write("ERROR en la transacción");
+		let huboError = "${huboError}";
+		if (huboError === "true") {
+			document.write("<p>ERROR en la transacción</p>");
+			document.write("<p>Error: ${mensajeDeError} </p>");
 		} else {
-			document.write("La transacción ha sido satisfactoria");
+			document.write("<p>La transacción se ha realizado exitosamente</p>");
 		}
 	</script>
-
-	<br>
 	<br>
 	<a href="/MiChaucheritaWebG4/GestionarCuentasController" class="button">Volver</a>
 
 </body>
-
 </html>

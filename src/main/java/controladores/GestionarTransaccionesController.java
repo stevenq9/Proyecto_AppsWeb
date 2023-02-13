@@ -74,6 +74,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasDestino", c);
+		request.setAttribute("ruta", "ingreso");
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
 		
 	}
@@ -92,6 +93,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasOrigen", cuentaOrigen);
 		request.setAttribute("cuentasDestino", cuentaDestino);
+		request.setAttribute("ruta", "transaccion");
 		request.getRequestDispatcher("/jsp/ingresarDatosTransaccion.jsp").forward(request, response);
 	}
 
@@ -101,7 +103,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
-		transaccionesTemp = coleccionDeTransacciones.getTransaccionesByID(id);
+		transaccionesTemp = ColeccionDeTransacciones.getTransaccionesByID(id);
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
 		double total = cuentaTemporal.obtenerValorTotal(transaccionesTemp);
 		request.setAttribute("transacciones", transaccionesTemp);
@@ -131,23 +133,32 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		/********* Obtención de datos ******/
 	
-		if(request.getParameter("selCuentaOrigen").equals("false")) {
+		String ruta = request.getParameter("txtRuta");
+		
+		if(ruta.equals("ingreso")) {
 			// INGRESO/*
 			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));	
 			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+			String descripcion = request.getParameter("txtDescripcion");
 
 			// Obtención cuenta
 			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
 
 			// Crear transaccion
-			Transaccion t = new Transaccion(0, null, null, cuentaDestino, "INGRESO", cantidad);
-
+			Transaccion t = null;
+			try {
+				t = new Transaccion(0, LocalDate.now(), null, cuentaDestino, descripcion, cantidad);
+			} catch(Exception e) {
+				this.enviarPantallaDeError(e, request, response);
+				return;
+			}
+			
 			// Realizar deposito
 			try {
 				cuentaDestino.depositar(t);
 			} catch (Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 			// Agregar transaccion
@@ -157,29 +168,38 @@ public class GestionarTransaccionesController extends HttpServlet {
 			request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 		} else {
 			// TRANSACCION
-			double cantidad = Double.parseDouble(request.getParameter("nmbCantidadT"));
+			double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
 			int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
-			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestinoT"));
+			int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
+			String descripcion = request.getParameter("txtDescripcion");
 			
 			//Obtención de cuentas
 			CuentaConRetiro cuentaOrigen = (CuentaConRetiro) coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
 			Cuenta cuentaDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
 			
 			//Crear transaccion 
-			Transaccion t = new Transaccion(0, null, cuentaOrigen, cuentaDestino, "TRANSACCION", cantidad);
+			Transaccion t = null;
+			try {
+				t = new Transaccion(0, LocalDate.now(), cuentaOrigen, cuentaDestino, descripcion, cantidad);
+			} catch(Exception e) {
+				this.enviarPantallaDeError(e, request, response);
+				return;
+			}
 			
 			//Realizar retiro y deposito
 			try{
 				cuentaOrigen.retirar(t);
 			}catch(Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 			try{
 				cuentaDestino.depositar(t);
 			}catch(Exception e) {
-				request.setAttribute("huboError", true);
-				request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+				double rollback = (cuentaOrigen).getSaldo() + t.getCantidad();
+				cuentaOrigen.setSaldo(rollback);
+				this.enviarPantallaDeError(e, request, response);
+				return;
 			}
 
 			//Agregar transaccion 
@@ -194,5 +214,17 @@ public class GestionarTransaccionesController extends HttpServlet {
 	private void regresar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController");
+	}
+	
+	private void enviarPantallaDeConfirmacion(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
+	}
+	
+	private void enviarPantallaDeError(Exception e, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		request.setAttribute("huboError", true);
+		request.setAttribute("mensajeDeError", e.getMessage());
+		this.enviarPantallaDeConfirmacion(request, response);
 	}
 }

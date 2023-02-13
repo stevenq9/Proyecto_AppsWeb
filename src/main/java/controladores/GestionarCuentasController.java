@@ -80,13 +80,13 @@ public class GestionarCuentasController extends HttpServlet {
 
 	private void crearCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("jsp/crearCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}
 
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		Cuenta cuenta = chaucherita.obtenerCuentaPorId(Integer.parseInt(id));	
+		Cuenta cuenta = chaucherita.obtenerCuentaPorId(Integer.parseInt(id));
 		request.setAttribute("cuenta", cuenta);
 		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}

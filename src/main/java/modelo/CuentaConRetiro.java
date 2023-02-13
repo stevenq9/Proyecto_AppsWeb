@@ -23,15 +23,12 @@ public abstract class CuentaConRetiro extends Cuenta implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public void retirar(Transaccion transaccion) throws Exception {
-		if(transaccion.getCantidad() < 0.01)
-			throw new Exception("La cantidad ingresada no es válida");
-		
+	public void retirar(Transaccion transaccion) throws Exception {		
 		if(saldo < transaccion.getCantidad())
 			throw new Exception("Saldo insuficiente en la cuenta");
 		
-		if(transaccion.getCuentaOrigen() != null && !(transaccion.getCuentaOrigen() instanceof CuentaConRetiro))
-			throw new Exception("Cuenta de origen no válida");
+		if(transaccion.getCuentaOrigen().getId() != this.getId())
+			throw new Exception("Cuenta de origen de la transacción no corresponde con la cuenta escogida.");
 		
 		this.saldo -= transaccion.getCantidad();
 	}

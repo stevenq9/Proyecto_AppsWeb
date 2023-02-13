@@ -36,11 +36,8 @@ public abstract class Cuenta implements Serializable {
 	}
 
 	public void depositar(Transaccion transaccion) throws Exception{
-		if(transaccion.getCantidad() < 0.01)
-			throw new Exception("Se ingresó un valor menor a $0.01");
-		
-		if(transaccion.getCuentaOrigen() != null && !(transaccion.getCuentaOrigen() instanceof CuentaConRetiro))
-			throw new Exception("Cuenta de origen no válida");
+		if(transaccion.getCuentaDestino().getId() != this.getId())
+			throw new Exception("Cuenta de destino de la transacción no corresponde con la cuenta escogida.");
 	}
 
 	public abstract double obtenerValorTotal(List<Transaccion> transacciones);

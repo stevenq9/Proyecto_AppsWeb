@@ -17,11 +17,14 @@ public class ColeccionDeTransacciones implements Serializable{
 		
 		transacciones = new ArrayList<Transaccion>();
 		
+		try {
 		transacciones.add(new Transaccion(0, LocalDate.of(2022, 12, 31), null, chaucherita.getCuentas().get(0), "Ingreso de nómina de mi trabajo", 1000.0));
 		transacciones.add(new Transaccion(1, LocalDate.of(2022, 12, 31), chaucherita.getCuentas().get(0), chaucherita.getCuentas().get(1), "Transferencia de nómina de mi trabajo", 1000.0));
 		transacciones.add(new Transaccion(2, LocalDate.of(2023, 1, 16), chaucherita.getCuentas().get(1), chaucherita.getCuentas().get(3), "Libro “Contabilidad básica”", 100.0));
 		transacciones.add(new Transaccion(3, LocalDate.of(2023, 1, 20), chaucherita.getCuentas().get(1), chaucherita.getCuentas().get(2), "Traspaso entre cuentas", 400.0));
 		transacciones.add(new Transaccion(4, LocalDate.of(2023, 1, 20), chaucherita.getCuentas().get(2), chaucherita.getCuentas().get(4), "Teléfono Celular para mamá", 350.0));
+		}catch (Exception e) {
+		}
 	}
 
 	public static List<Transaccion> getTransacciones() {
@@ -92,6 +95,13 @@ public class ColeccionDeTransacciones implements Serializable{
 	}
 	
 	public void agregar(Transaccion transaccion) {
+		int max=0;
+		for(Transaccion t: getTransacciones()) {
+			if(max < t.getId()) {
+				max=t.getId();
+			}
+		}
+		transaccion.setId(max+1);
 		transacciones.add(transaccion);
 	}
 }
