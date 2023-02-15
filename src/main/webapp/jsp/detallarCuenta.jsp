@@ -12,12 +12,19 @@
 		<h1>Mi Chaucherita Web</h1>
 		<br>
 	</header>
+	
 	<h2>Detalle de Cuenta</h2>
 	<br>
-	<div>Id: ${cuenta.id}
-	</div>
 	<div>Nombre: ${cuenta.nombre}
 	</div>
+	<div>Id: ${cuenta.id}
+	</div>
+	<div>Valor Total:$ ${total}
+	</div>
+	<c:if test="${saldo ne '-1'}">
+			<div>Saldo:$ ${saldo}</div>
+	</c:if>
+	
 	<br>
 	
 	<c:forEach items="${transacciones}" var="transaccion">
@@ -29,7 +36,9 @@
 			<label><b>Cuenta de destino: </b></label>
 			<p>${transaccion.cuentaDestino.nombre}</p>
 			<label><b>Monto: </b></label>
-			<p>${transaccion.cantidad}</p>
+			<p>$ ${transaccion.cantidad}</p>
+			<label><b>Descripción: </b></label>
+			<p>${transaccion.descripcion}</p>
 		</fieldset>
 		<br>
 	</c:forEach>

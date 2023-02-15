@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
+import modelo.CuentaConRetiro;
+import modelo.CuentaDeGastos;
+import modelo.CuentaDeIngresos;
 import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
 import modelo.GeneradorEstadoContable;
@@ -100,8 +103,16 @@ public class GestionarTransaccionesController extends HttpServlet {
 		List<Transaccion> transaccionesTemp = new ArrayList<Transaccion>();
 		transaccionesTemp = ColeccionDeTransacciones.getTransaccionesByID(id);
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
+		double total = cuentaTemporal.obtenerValorTotal(transaccionesTemp);
+		double saldo = -1;
+		
+		if(!(cuentaTemporal instanceof CuentaDeGastos)) 
+			saldo = ((CuentaConRetiro)cuentaTemporal).getSaldo() ;
+		
 		request.setAttribute("transacciones", transaccionesTemp);
 		request.setAttribute("cuenta", cuentaTemporal);
+		request.setAttribute("total", total);
+		request.setAttribute("saldo", saldo);
 		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
 
 	}
@@ -203,7 +214,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController");
 	}
-
+	
 	private void enviarPantallaDeConfirmacion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
