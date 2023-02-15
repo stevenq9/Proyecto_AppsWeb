@@ -22,11 +22,11 @@ public class Transaccion implements Serializable {
 		this.id = id;
 		this.fecha = fecha;
 		
-		if((cuentaOrigen != null && !(cuentaOrigen instanceof CuentaConRetiro)))
+		if(cuentaOrigen == null || (!(cuentaOrigen instanceof CuentaDeIngresos) && !(cuentaOrigen instanceof CuentaDeIngresosYGastos)))
 			throw new Exception("Cuenta de origen no válida");
 		this.cuentaOrigen = cuentaOrigen;
 		
-		if(cuentaDestino == null)
+		if(cuentaDestino == null || (!(cuentaDestino instanceof CuentaDeGastos) && !(cuentaDestino instanceof CuentaDeIngresosYGastos)))
 			throw new Exception("Cuenta de destino no válida");
 		this.cuentaDestino = cuentaDestino;
 		

@@ -7,7 +7,10 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cuenta</title>
+	<c:choose>
+    	<c:when test="${cuenta == null}"><title>Crear cuenta</title></c:when>
+    	<c:otherwise><title>Modificar cuenta</title></c:otherwise>
+    </c:choose>
  
 </head>
 
@@ -30,13 +33,13 @@
                 <input type="hidden" name="txtRuta" value="crearCuenta">
             </c:if>
             
-            <label>NOMBRE:</label><br>
+            <label>Nombre:</label><br>
             <div>
-                <input type="text" name="txtNombre">
+                <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>">
             </div>
             <br>
             <c:if test="${cuenta == null}">
-            <label>TIPO:</label><br>
+            <label>Tipo:</label><br>
 	            <select name="txtTipo">
 	                <option value="modelo.CuentaDeIngresos"> Cuenta de ingreso </option>
 	                <option value="modelo.CuentaDeGastos"> Cuenta de gastos </option>

@@ -35,10 +35,5 @@ public abstract class Cuenta implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public void depositar(Transaccion transaccion) throws Exception{
-		if(transaccion.getCuentaDestino().getId() != this.getId())
-			throw new Exception("Cuenta de destino de la transacción no corresponde con la cuenta escogida.");
-	}
-
 	public abstract double obtenerValorTotal(List<Transaccion> transacciones);
 }
