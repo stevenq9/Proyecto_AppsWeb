@@ -61,7 +61,7 @@ public class Chaucherita implements Serializable{
 	public List<Cuenta> getCuentasDepositables(){
 		List<Cuenta> cuentasPorTipo = new ArrayList<Cuenta>();
 		for(Cuenta c: getCuentas()) {
-			if(c.permiteDesposito()) {
+			if(c.isDepositable()) {
 				cuentasPorTipo.add(c);
 			}
 		}

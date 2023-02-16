@@ -9,11 +9,11 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 	private double saldo;
 
 	public CuentaDeIngresosYGastos() {
-		super(true);
+		super(true, true);
 	}
 
 	public CuentaDeIngresosYGastos(int id, String nombre) {
-		super(id, nombre, true);
+		super(id, nombre, true, true);
 	}
 
 	public double getSaldo() {

@@ -8,28 +8,32 @@ public abstract class Cuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
-	private final boolean PERMITE_DEPOSITO;
+	private final boolean DEPOSITABLE;
+	private final boolean RETIRABLE;
 
 	public Cuenta() {
-		this.PERMITE_DEPOSITO = false;
+		super();
+		this.DEPOSITABLE = false;
+		this.RETIRABLE = false;
 	}
 	
-	public Cuenta(boolean permiteDesposito) {
-		this.PERMITE_DEPOSITO = permiteDesposito;
+	public Cuenta(boolean permiteDesposito, boolean permiteRetiro) {
+		this.DEPOSITABLE = permiteDesposito;
+		this.RETIRABLE = permiteRetiro;
 	}
 	
 	public Cuenta(int id, String nombre) {
-		super();
+		this();
 		this.id = id;
 		this.nombre = nombre;
-		this.PERMITE_DEPOSITO = false;
 	}
 	
-	protected Cuenta(int id, String nombre, boolean permiteDesposito) {
+	protected Cuenta(int id, String nombre, boolean permiteDesposito, boolean permiteRetiro) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.PERMITE_DEPOSITO = permiteDesposito;
+		this.DEPOSITABLE = permiteDesposito;
+		this.RETIRABLE = permiteRetiro;
 	}
 
 	public int getId() {
@@ -48,8 +52,12 @@ public abstract class Cuenta implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public boolean permiteDesposito() {
-		return PERMITE_DEPOSITO;
+	public boolean isDepositable() {
+		return DEPOSITABLE;
+	}
+	
+	public boolean isRetirable() {
+		return RETIRABLE;
 	}
 
 	public abstract double obtenerValorTotal(List<Transaccion> transacciones);

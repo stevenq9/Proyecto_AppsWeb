@@ -35,6 +35,8 @@
 			<p>${transaccion.cuentaDestino.nombre}</p>
 			<label><b>Monto: </b></label>
 			<p>$ ${transaccion.cantidad}</p>
+			<label><b>Fecha: </b></label>
+			<p>${transaccion.fecha}</p>
 			<label><b>Descripción: </b></label>
 			<p>${transaccion.descripcion}</p>
 		</fieldset>
