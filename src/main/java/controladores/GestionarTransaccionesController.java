@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
-import modelo.CuentaConRetiro;
-import modelo.CuentaDeGastos;
-import modelo.CuentaDeIngresos;
 import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
 import modelo.GeneradorEstadoContable;
@@ -105,10 +102,10 @@ public class GestionarTransaccionesController extends HttpServlet {
 		Cuenta cuentaTemporal = Chaucherita.getInstancia().obtenerCuentaPorId(id);
 		double total = cuentaTemporal.obtenerValorTotal(transaccionesTemp);
 		double saldo = -1;
-		
-		if(!(cuentaTemporal instanceof CuentaDeGastos)) 
-			saldo = ((CuentaConRetiro)cuentaTemporal).getSaldo() ;
-		
+
+		if (cuentaTemporal instanceof CuentaDeIngresosYGastos)
+			saldo = ((CuentaDeIngresosYGastos) cuentaTemporal).getSaldo();
+
 		request.setAttribute("transacciones", transaccionesTemp);
 		request.setAttribute("cuenta", cuentaTemporal);
 		request.setAttribute("total", total);
@@ -149,64 +146,41 @@ public class GestionarTransaccionesController extends HttpServlet {
 		Cuenta cuentaDeOrigen = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaOrigen);
 		Cuenta cuentaDeDestino = coleccionDeTransacciones.getChaucherita().obtenerCuentaPorId(idCuentaDestino);
 
-		if (ruta.equals("ingreso")) {
-			// INGRESO/*
-			Transaccion t = null;
-			try {
-				// Crear transaccion
-				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
-			} catch (Exception e) {
-				this.enviarPantallaDeError(e, request, response);
-				return;
-			}
-
-			try {
-				// Realizar depósito
-				((CuentaDeIngresosYGastos)cuentaDeDestino).depositar(t);
-				// Agregar transaccion
-				coleccionDeTransacciones.agregar(t);
-			} catch (Exception e) {
-				this.enviarPantallaDeError(e, request, response);
-				return;
-			}
-
-		} else {
-			// TRANSACCION
-			Transaccion t = null;
-			try {
-				// Crear transaccion
-				t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
-			} catch (Exception e) {
-				this.enviarPantallaDeError(e, request, response);
-				return;
-			}
-
-			// Realizar retiro y deposito
-			try {
-				if (!(cuentaDeOrigen instanceof CuentaDeIngresosYGastos))
-					throw new Exception("Cuenta de origen no válida");
-				((CuentaDeIngresosYGastos) cuentaDeOrigen).retirar(t);
-
-			} catch (Exception e) {
-				this.enviarPantallaDeError(e, request, response);
-				return;
-			}
-
-			try {
-				if (cuentaDeDestino instanceof CuentaDeIngresosYGastos)
-					((CuentaDeIngresosYGastos) cuentaDeDestino).depositar(t);
-				// Agregar transaccion
-				coleccionDeTransacciones.agregar(t);
-			} catch (Exception e) {
-				if (cuentaDeOrigen instanceof CuentaDeIngresosYGastos) {
-					double rollback = ((CuentaDeIngresosYGastos) cuentaDeOrigen).getSaldo() + t.getCantidad();
-					((CuentaDeIngresosYGastos) cuentaDeOrigen).setSaldo(rollback);
-				}
-				this.enviarPantallaDeError(e, request, response);
-				return;
-			}
+		// Momento de la transacción
+		Transaccion t = null;
+		try {
+			// Crear transaccion
+			t = new Transaccion(0, LocalDate.now(), cuentaDeOrigen, cuentaDeDestino, descripcion, cantidad);
+		} catch (Exception e) {
+			this.enviarPantallaDeError(e, request, response);
+			return;
 		}
-		//Ir a la pantalla de confirmación
+
+		// Realizar retiro
+		try {
+			if (ruta.equals("transaccion") && !(cuentaDeOrigen instanceof CuentaDeIngresosYGastos))
+				throw new Exception("Cuenta de origen no válida");
+
+			cuentaDeOrigen.procesarTransaccion(t);
+
+		} catch (Exception e) {
+			this.enviarPantallaDeError(e, request, response);
+			return;
+		}
+
+		// Realizar depósito
+		try {
+			// Realizar depósito
+			cuentaDeDestino.procesarTransaccion(t);
+		} catch (Exception e) {
+			this.enviarPantallaDeError(e, request, response);
+			return;
+		}
+
+		// Agregar transaccion
+		coleccionDeTransacciones.agregar(t);
+
+		// Ir a la pantalla de confirmación
 		this.enviarPantallaDeConfirmacion(request, response);
 	}
 
@@ -214,14 +188,14 @@ public class GestionarTransaccionesController extends HttpServlet {
 			throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController");
 	}
-	
+
 	private void enviarPantallaDeConfirmacion(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/jsp/confirmarTransaccion.jsp").forward(request, response);
 	}
-	
+
 	private void enviarPantallaDeError(Exception e, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException{
+			throws ServletException, IOException {
 		request.setAttribute("huboError", true);
 		request.setAttribute("mensajeDeError", e.getMessage());
 		this.enviarPantallaDeConfirmacion(request, response);

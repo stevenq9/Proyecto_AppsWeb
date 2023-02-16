@@ -39,7 +39,7 @@
 		</select><br>
 		
 		<label for="descripcion">Descripcion:</label><br>	
-		<input type="text" name="txtDescripcion" placeholder="Descripciï¿½n"/>
+		<input type="text" name="txtDescripcion" placeholder="Descripción"/>
 		<br>
 		<br> <input id="descripcion" type="submit" type="submit" value="Guardar">
 	</form>

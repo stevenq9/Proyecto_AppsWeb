@@ -19,8 +19,6 @@
 	</div>
 	<div>Id: ${cuenta.id}
 	</div>
-	<div>Valor Total:$ ${total}
-	</div>
 	<c:if test="${saldo ne '-1'}">
 			<div>Saldo:$ ${saldo}</div>
 	</c:if>

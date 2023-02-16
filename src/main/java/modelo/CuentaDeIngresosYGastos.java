@@ -9,11 +9,11 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 	private double saldo;
 
 	public CuentaDeIngresosYGastos() {
-		super();
+		super(true);
 	}
 
 	public CuentaDeIngresosYGastos(int id, String nombre) {
-		super(id, nombre);
+		super(id, nombre, true);
 	}
 
 	public double getSaldo() {
@@ -32,6 +32,9 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 		if(transaccion == null)
 			throw new Exception("Transacción no válida");
 		
+		if(transaccion.getCuentaOrigen().getId() != this.getId())
+			throw new Exception("La cuenta a retirar no coincide");
+		
 		if(saldo < transaccion.getCantidad())
 			throw new Exception("Saldo insuficiente en la cuenta");
 		
@@ -41,11 +44,25 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 	public void depositar(Transaccion transaccion) throws Exception {
 		if(transaccion == null)
 			throw new Exception("Transacción no válida");
+		
+		if(transaccion.getCuentaDestino().getId() != this.getId())
+			throw new Exception("La cuenta a depositar no coincide");
+		
 		this.saldo += transaccion.getCantidad();
 	}
 
 	@Override
 	public double obtenerValorTotal(List<Transaccion> transacciones) {
 		return this.getSaldo();
+	}
+	
+	public void procesarTransaccion(Transaccion transaccion) throws Exception {
+		super.procesarTransaccion(transaccion);
+		
+		if(transaccion.getCuentaOrigen().getId() == this.getId())
+			this.retirar(transaccion);
+		
+		if(transaccion.getCuentaDestino().getId() == this.getId())
+			this.depositar(transaccion);
 	}
 }

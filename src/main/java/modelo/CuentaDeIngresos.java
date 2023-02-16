@@ -8,11 +8,11 @@ public class CuentaDeIngresos extends Cuenta implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public CuentaDeIngresos() {
-		super();
+		super(false);
 	}
 
 	public CuentaDeIngresos(int id, String nombre) {
-		super(id, nombre);
+		super(id, nombre, false);
 	}
 	
 	@Override

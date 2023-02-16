@@ -6,13 +6,13 @@ import java.util.List;
 public class CuentaDeGastos extends Cuenta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	public CuentaDeGastos() {
-		super();
+		super(true);
 	}
 
 	public CuentaDeGastos(int id, String nombre) {
-		super(id, nombre);
+		super(id, nombre, true);
 	}
 	
 	@Override

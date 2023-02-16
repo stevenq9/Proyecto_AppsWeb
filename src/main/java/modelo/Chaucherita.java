@@ -39,7 +39,7 @@ public class Chaucherita implements Serializable{
 	public List<Cuenta> getCuentas(Class<?> tipo){
 		List<Cuenta> cuentasPorTipo = new ArrayList<Cuenta>();
 		for(Cuenta c: getCuentas()) {
-			if(c.getClass() == tipo) {
+			if(tipo.isInstance(c)) {
 				cuentasPorTipo.add(c);
 			}
 		}
@@ -59,10 +59,13 @@ public class Chaucherita implements Serializable{
 	}
 	
 	public List<Cuenta> getCuentasDepositables(){
-		List<Cuenta> cuentasDepositables = new ArrayList<Cuenta>();
-		cuentasDepositables.addAll(this.getCuentasDeIngresosYGastos());
-		cuentasDepositables.addAll(this.getCuentasDeGastos());
-		return cuentasDepositables;
+		List<Cuenta> cuentasPorTipo = new ArrayList<Cuenta>();
+		for(Cuenta c: getCuentas()) {
+			if(c.permiteDesposito()) {
+				cuentasPorTipo.add(c);
+			}
+		}
+		return cuentasPorTipo;
 	}
 	
 	public Cuenta obtenerCuentaPorId(int id) {

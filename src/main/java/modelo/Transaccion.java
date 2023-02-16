@@ -26,7 +26,7 @@ public class Transaccion implements Serializable {
 			throw new Exception("Cuenta de origen no válida");
 		this.cuentaOrigen = cuentaOrigen;
 		
-		if(cuentaDestino == null || (!(cuentaDestino instanceof CuentaDeGastos) && !(cuentaDestino instanceof CuentaDeIngresosYGastos)))
+		if(cuentaDestino == null || (!cuentaDestino.permiteDesposito()))
 			throw new Exception("Cuenta de destino no válida");
 		this.cuentaDestino = cuentaDestino;
 		
