@@ -23,7 +23,7 @@ import modelo.Transaccion;
 public class GestionarTransaccionesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public ColeccionDeTransacciones coleccionDeTransacciones;
-
+/*
 	public GestionarTransaccionesController() {
 		super();
 		this.coleccionDeTransacciones = ColeccionDeTransacciones.getInstancia();
@@ -135,7 +135,7 @@ public class GestionarTransaccionesController extends HttpServlet {
 
 	private void confirmar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/********* Obtención de datos ******/
+		// Obtención de datos 
 		double cantidad = Double.parseDouble(request.getParameter("nmbCantidad"));
 		int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
 		int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
@@ -200,4 +200,6 @@ public class GestionarTransaccionesController extends HttpServlet {
 		request.setAttribute("mensajeDeError", e.getMessage());
 		this.enviarPantallaDeConfirmacion(request, response);
 	}
+	
+	*/
 }

@@ -19,7 +19,7 @@ import modelo.CuentaDeIngresosYGastos;
 public class GestionarCuentasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Chaucherita chaucherita;
-
+/*
 	public GestionarCuentasController() {
 		super();
 		this.chaucherita = Chaucherita.getInstancia();
@@ -135,4 +135,5 @@ public class GestionarCuentasController extends HttpServlet {
 		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request,
 				response);
 	}
+	*/
 }

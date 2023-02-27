@@ -11,6 +11,7 @@ public class GeneradorEstadoContable implements Serializable{
 	public GeneradorEstadoContable() {
 	}
 	
+	/*
 	public EstadoContable crearEstadoContableDeIngresos(ColeccionDeTransacciones cdt, LocalDate fechaInicio, LocalDate fechaFin) {
 		return crearEstadoContable(cdt, cdt.getChaucherita().getCuentasDeIngresos(), fechaInicio, fechaFin);
 	}
@@ -41,4 +42,5 @@ public class GeneradorEstadoContable implements Serializable{
 		
 		return estadoContable;
 	}
+	*/
 }

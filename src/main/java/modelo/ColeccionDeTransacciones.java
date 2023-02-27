@@ -12,6 +12,7 @@ public class ColeccionDeTransacciones implements Serializable{
 	private static ColeccionDeTransacciones instancia;
 	private static Chaucherita chaucherita;
 	
+	/*
 	private ColeccionDeTransacciones() {
 		chaucherita = Chaucherita.getInstancia();
 		
@@ -91,4 +92,5 @@ public class ColeccionDeTransacciones implements Serializable{
 		transaccion.setId(max+1);
 		transacciones.add(transaccion);
 	}
+	*/
 }
