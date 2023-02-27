@@ -77,6 +77,9 @@ public class EstadoContableController extends HttpServlet{
 	}
 
 	private void  mostrarDetalleCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LocalDate ec =  (LocalDate) request.getAttribute("fechaInicio");
+		System.out.println("Estado " + ec);
+		
 		
 	}
 }

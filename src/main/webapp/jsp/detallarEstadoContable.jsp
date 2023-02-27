@@ -14,6 +14,10 @@
 	
 	<h2>Estado contable entre <c:out value="${estadoContableIngresos.fechaInicio}"/> y <c:out value="${estadoContableIngresos.fechaFin}"/></h2>
 	
+	<!--  -->
+	<c:set var="fechaInicio" value="${requestScope.estadoContableIngresos.fechaInicio}" scope="request"/> 
+	
+	
 	<!-- Cuentas de ingreso -->
 	<div id="ContenedorIngreso">
 		<fieldset>
