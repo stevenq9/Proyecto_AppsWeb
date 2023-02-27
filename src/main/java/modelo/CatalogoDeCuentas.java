@@ -64,12 +64,10 @@ public class CatalogoDeCuentas implements Serializable {
 		cuentas.add(cuenta);
 	}
 
-	public void modificar(int id, String Nombre) {
+	public void modificarCuenta(int id, String Nombre) {
 		for (Cuenta c : getCuentas()) {
-			if (c.getId() == id) {
+			if (c.getId() == id)
 				c.setNombre(Nombre);
-				;
-			}
 		}
 	}
 }

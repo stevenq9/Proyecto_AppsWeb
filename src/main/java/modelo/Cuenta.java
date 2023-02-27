@@ -60,7 +60,7 @@ public abstract class Cuenta implements Serializable {
 		return RETIRABLE;
 	}
 
-	public abstract double obtenerValorTotal(List<Transaccion> transacciones);
+	public abstract double obtenerValorTotal(List<Movimiento> movimientos);
 	
 	public void procesarTransaccion(Transaccion transaccion) throws Exception {
 		if(transaccion.getCuentaOrigen().getId() != this.getId() && transaccion.getCuentaDestino().getId() != this.getId())

@@ -52,7 +52,7 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 	}
 
 	@Override
-	public double obtenerValorTotal(List<Transaccion> transacciones) {
+	public double obtenerValorTotal(List<Movimiento> movimientos) {
 		return this.getSaldo();
 	}
 	

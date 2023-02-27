@@ -24,7 +24,7 @@
 					<c:forEach items="${estadoContableIngresos.estadosDeCuenta}"
 						var="cuentasIngreso">
 						<tr>
-							<td>${cuentasIngreso.cuenta.nombre}:</td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasIngreso.cuenta.id}">${cuentasIngreso.cuenta.nombre}:</a></td>
 							<td>Total:  ${cuentasIngreso.valorTotal}</td>
 						</tr>
 					</c:forEach>
@@ -43,7 +43,7 @@
 					<c:forEach items="${estadoContableIngresosYGastos.estadosDeCuenta}"
 						var="cuentasIngresoSalida">
 						<tr>
-							<td>${cuentasIngresoSalida.cuenta.nombre}:</td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasIngresoSalida.cuenta.id}">${cuentasIngresoSalida.cuenta.nombre}:</a></td>
 							<td>Total: ${cuentasIngresoSalida.valorTotal}</td>
 						</tr>
 					</c:forEach>
@@ -62,7 +62,7 @@
 					<c:forEach items="${estadoContableGastos.estadosDeCuenta}"
 						var="cuentasSalida">
 						<tr>
-							<td>${cuentasSalida.cuenta.nombre}:</td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasSalida.cuenta.id}">${cuentasSalida.cuenta.nombre}:</a></td>
 							<td>Total: ${cuentasSalida.valorTotal}</td>
 						</tr>
 					</c:forEach>

@@ -16,7 +16,7 @@ import modelo.ColeccionDeTransacciones;
 import modelo.Cuenta;
 import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
-import modelo.GeneradorEstadoContable;
+import modelo.EstadoContableFactory;
 import modelo.Transaccion;
 
 @WebServlet("/GestionarTransaccionesController")

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datos.Datos;
+import modelo.CatalogoDeCuentas;
+import modelo.CatalogoDeMovimientos;
 import modelo.Chaucherita;
 import modelo.Cuenta;
 import modelo.CuentaDeGastos;
@@ -19,10 +22,11 @@ import modelo.CuentaDeIngresosYGastos;
 public class GestionarCuentasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Chaucherita chaucherita;
-/*
+
 	public GestionarCuentasController() {
 		super();
-		this.chaucherita = Chaucherita.getInstancia();
+		Datos.getInstancia();
+		this.chaucherita = Datos.getChaucheritas().get(0);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,9 +70,9 @@ public class GestionarCuentasController extends HttpServlet {
 		// 1.- Obtengo datos de la solicitud
 		// Ninguno
 		// 2.- Llamo al modelo
-		List<Cuenta> cuentasDeGastos = chaucherita.getCuentas(CuentaDeGastos.class);
-		List<Cuenta> cuentasDeIngresos = chaucherita.getCuentas(CuentaDeIngresos.class);
-		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCuentas(CuentaDeIngresosYGastos.class);
+		List<Cuenta> cuentasDeGastos = chaucherita.getCatalogoDeCuentas().getCuentasDeGastos();
+		List<Cuenta> cuentasDeIngresos = chaucherita.getCatalogoDeCuentas().getCuentasDeIngresos();
+		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCatalogoDeCuentas().getCuentasDeIngresosYGastos();
 
 		// 3.- Llamo a la vista
 		request.setAttribute("cuentasDeGastos", cuentasDeGastos);
@@ -86,7 +90,7 @@ public class GestionarCuentasController extends HttpServlet {
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		Cuenta cuenta = chaucherita.obtenerCuentaPorId(Integer.parseInt(id));
+		Cuenta cuenta = chaucherita.getCatalogoDeCuentas().obtenerCuentaPorId(Integer.parseInt(id));
 		request.setAttribute("cuenta", cuenta);
 		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}
@@ -116,13 +120,13 @@ public class GestionarCuentasController extends HttpServlet {
 			}
 
 			if (cuenta != null) {
-				this.chaucherita.agregar(cuenta);
+				this.chaucherita.getCatalogoDeCuentas().agregarCuenta(cuenta);
 			}
 			break;
 		case "modificarCuenta":
 			// Metodo
 			String id = request.getParameter("txtId");
-			chaucherita.modificar(Integer.parseInt(id), nombre);
+			chaucherita.getCatalogoDeCuentas().modificarCuenta(Integer.parseInt(id), nombre);
 			break;
 		}
 
@@ -135,5 +139,4 @@ public class GestionarCuentasController extends HttpServlet {
 		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request,
 				response);
 	}
-	*/
 }

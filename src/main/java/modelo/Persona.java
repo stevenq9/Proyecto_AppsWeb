@@ -11,7 +11,7 @@ public class Persona implements Serializable{
 	private String nombre;
 	private String nombreUsuario;
 	private String clave;
-	private static Chaucherita chaucherita;
+	private Chaucherita chaucherita;
 	
 	public Persona() {
 		super();
@@ -61,13 +61,7 @@ public class Persona implements Serializable{
 		this.clave = clave;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setChaucherita(Chaucherita chaucherita) {
+		this.chaucherita = chaucherita;
 	}
-
-	public static void setChaucherita(Chaucherita chaucherita) {
-		Persona.chaucherita = chaucherita;
-	}
-	
-	
 }
