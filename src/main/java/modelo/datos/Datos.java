@@ -1,4 +1,4 @@
-package datos;
+package modelo.datos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

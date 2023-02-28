@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Datos;
 import modelo.Chaucherita;
 import modelo.EstadoContable;
 import modelo.EstadoContableFactory;
+import modelo.datos.Datos;
 
 @WebServlet("/EstadoContableController")
 public class EstadoContableController extends HttpServlet{
