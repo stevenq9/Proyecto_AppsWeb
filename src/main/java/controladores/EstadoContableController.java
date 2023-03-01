@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import datos.Datos;
 import modelo.Chaucherita;
@@ -38,6 +39,9 @@ public class EstadoContableController extends HttpServlet{
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+
+		
 		procesar(request, response);
 	}
 	
@@ -70,9 +74,13 @@ public class EstadoContableController extends HttpServlet{
 		EstadoContable estadoContableGastos = ecf.crearEstadoContableDeGastos(this.chaucherita, fechaInicio,
 				fechaFin);
 
-		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
-		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
-		request.setAttribute("estadoContableGastos", estadoContableGastos);
+		HttpSession session = request.getSession();
+
+
+		
+		session.setAttribute("estadoContableIngresos", estadoContableIngresos);
+		session.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
+		session.setAttribute("estadoContableGastos", estadoContableGastos);
 		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
 	}
 
