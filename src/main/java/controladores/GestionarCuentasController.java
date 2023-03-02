@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.Datos;
 import modelo.CatalogoDeCuentas;
 import modelo.CatalogoDeMovimientos;
 import modelo.Chaucherita;
@@ -17,6 +16,7 @@ import modelo.Cuenta;
 import modelo.CuentaDeGastos;
 import modelo.CuentaDeIngresos;
 import modelo.CuentaDeIngresosYGastos;
+import modelo.datos.Datos;
 
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {

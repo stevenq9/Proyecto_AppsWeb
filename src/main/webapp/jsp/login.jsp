@@ -11,20 +11,20 @@
 	<h1 class="title txt-shadow">Chaucherita Web</h1>
 	<div class="container" id="container">
 		<div class="form-container register-container">
-			<form action="#" method="">
+			<form action="LoginController?ruta=registro" method="POST">
 				<h1>Registrar</h1>
-				<input type="text" placeholder="Nombre"> <input type="text"
-					placeholder="Apellido"> <input type="text"
-					placeholder="Usuario"> <input type="email"
-					placeholder="Clave">
+				<input type="text" name="txtNombreRegistro" placeholder="Nombre">
+				<input type="text" name="txtApellidoRegistro" placeholder="Apellido">
+				<input type="text" name="txtUsuarioRegistro" placeholder="Usuario">
+				<input type="email" name="txtClaveRegistro" placeholder="Clave">
 				<button type="submit">Registrar</button>
 			</form>
 		</div>
 		<div class="form-container login-container">
-			<form action="" method="">
+			<form action="LoginController?ruta=login" method="POST">
 				<h1>Login</h1>
-				<input type="text" placeholder="Usuario"> <input
-					type="password" placeholder="Clave">
+				<input type="text" name="txtUsuarioLogin" placeholder="Usuario">
+				<input type="password" name="txtClaveLogin" placeholder="Clave">
 				<button type="submit">Login</button>
 			</form>
 		</div>
