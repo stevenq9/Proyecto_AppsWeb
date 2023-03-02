@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,33 +12,30 @@
 		<h1>Mi Chaucherita Web</h1>
 		<br>
 	</header>
-	
+
 	<h2>Detalle de Cuenta</h2>
 	<br>
-	<div>Nombre: ${cuenta.nombre}
-	</div>
-	<div>Id: ${cuenta.id}
-	</div>
-	<c:if test="${saldo ne '-1'}">
-			<div>Saldo:$ ${saldo}</div>
-	</c:if>
-	
+	<div>Nombre: ${estadocuenta.cuenta.nombre}</div>
+	<div>Id: ${estadocuenta.cuenta.id}</div>
+	<div>Valor total: ${estadocuenta.valorTotal}</div>
+
+
 	<br>
-	
-	<c:forEach items="${transacciones}" var="transaccion">
+
+	<c:forEach items="${estadocuenta.movimientos}" var="movimiento">
 		<fieldset>
-			<label><b>Id de transacción: </b></label>
-			<p>${transaccion.id}</p>
+			<label><b>Id de movimiento: </b></label>
+			<p>${movimiento.id}</p>
 			<label><b>Cuenta de origen:</b></label>
-			<p>${transaccion.cuentaOrigen.nombre}</p>
+			<p>${movimiento.cuentaOrigen.nombre}</p>
 			<label><b>Cuenta de destino: </b></label>
-			<p>${transaccion.cuentaDestino.nombre}</p>
+			<p>${movimiento.cuentaDestino.nombre}</p>
 			<label><b>Monto: </b></label>
-			<p>$ ${transaccion.cantidad}</p>
+			<p>$ ${movimiento.cantidad}</p>
 			<label><b>Fecha: </b></label>
-			<p>${transaccion.fecha}</p>
+			<p>${movimiento.fecha}</p>
 			<label><b>Descripción: </b></label>
-			<p>${transaccion.descripcion}</p>
+			<p>${movimiento.descripcion}</p>
 		</fieldset>
 		<br>
 	</c:forEach>

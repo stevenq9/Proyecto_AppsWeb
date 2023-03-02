@@ -13,11 +13,7 @@
 	</header>
 	
 	<h2>Estado contable entre <c:out value="${estadoContableIngresos.fechaInicio}"/> y <c:out value="${estadoContableIngresos.fechaFin}"/></h2>
-	
-	<!--  -->
-	<c:set var="fechaInicio" value="${estadoContableIngresos.fechaInicio}" scope="request"/> 
-	
-	
+		
 	<!-- Cuentas de ingreso -->
 	<div id="ContenedorIngreso">
 		<fieldset>
@@ -26,9 +22,9 @@
 			<div>
 				<table>
 					<c:forEach items="${estadoContableIngresos.estadosDeCuenta}"
-						var="cuentasIngreso">
+						var="cuentasIngreso" varStatus="bandera">
 						<tr>
-							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasIngreso.cuenta.id}">${cuentasIngreso.cuenta.nombre}:</a></td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableIngresos">${cuentasIngreso.cuenta.nombre}:</a></td>
 							<td>Total:  ${cuentasIngreso.valorTotal}</td>
 						</tr>
 					</c:forEach>
@@ -45,9 +41,9 @@
 			<div>
 				<table>
 					<c:forEach items="${estadoContableIngresosYGastos.estadosDeCuenta}"
-						var="cuentasIngresoSalida">
+						var="cuentasIngresoSalida" varStatus="bandera">
 						<tr>
-							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasIngresoSalida.cuenta.id}">${cuentasIngresoSalida.cuenta.nombre}:</a></td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableIngresosYGastos">${cuentasIngresoSalida.cuenta.nombre}:</a></td>
 							<td>Total: ${cuentasIngresoSalida.valorTotal}</td>
 						</tr>
 					</c:forEach>
@@ -64,9 +60,9 @@
 			<div>
 				<table>
 					<c:forEach items="${estadoContableGastos.estadosDeCuenta}"
-						var="cuentasSalida">
+						var="cuentasSalida" varStatus="bandera">
 						<tr>
-							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&id=${cuentasSalida.cuenta.id}">${cuentasSalida.cuenta.nombre}:</a></td>
+							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableGastos">${cuentasSalida.cuenta.nombre}:</a></td>
 							<td>Total: ${cuentasSalida.valorTotal}</td>
 						</tr>
 					</c:forEach>
