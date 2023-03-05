@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Chaucherita;
 import modelo.ColeccionDeTransacciones;
-import modelo.Cuenta;
-import modelo.CuentaDeIngresosYGastos;
 import modelo.EstadoContable;
 import modelo.EstadoContableFactory;
 import modelo.Transaccion;
+import modelo.entidades.Cuenta;
+import modelo.entidades.CuentaDeIngresosYGastos;
 
 @WebServlet("/GestionarTransaccionesController")
 public class GestionarTransaccionesController extends HttpServlet {

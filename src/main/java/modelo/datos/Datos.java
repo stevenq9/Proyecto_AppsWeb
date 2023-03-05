@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.*;
+import modelo.entidades.Cuenta;
+import modelo.entidades.CuentaDeGastos;
+import modelo.entidades.CuentaDeIngresos;
+import modelo.entidades.CuentaDeIngresosYGastos;
+import modelo.entidades.Movimiento;
+import modelo.entidades.Persona;
 
 public class Datos {
 	private static List<Persona> personas;

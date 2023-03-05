@@ -3,6 +3,7 @@ package modelo;
 import java.util.List;
 
 import modelo.datos.Datos;
+import modelo.entidades.Persona;
 
 public class Login {
 	private static List<Persona> personas;

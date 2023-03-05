@@ -1,7 +1,9 @@
-package modelo;
+package modelo.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+
+import modelo.Transaccion;
 
 public abstract class Cuenta implements Serializable {
 

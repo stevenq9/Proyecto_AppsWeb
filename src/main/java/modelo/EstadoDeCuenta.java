@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.entidades.Cuenta;
+import modelo.entidades.Movimiento;
+
 public class EstadoDeCuenta implements Serializable{
 
 	private static final long serialVersionUID = 1L;

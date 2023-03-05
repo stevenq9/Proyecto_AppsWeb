@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.entidades.Cuenta;
+import modelo.entidades.CuentaDeGastos;
+import modelo.entidades.CuentaDeIngresos;
+import modelo.entidades.CuentaDeIngresosYGastos;
+
 public class CatalogoDeCuentas implements Serializable {
 
 	private static final long serialVersionUID = 1L;

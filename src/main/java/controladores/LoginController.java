@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Login;
-import modelo.Persona;
+import modelo.entidades.Persona;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {

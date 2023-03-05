@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.CatalogoDeCuentas;
 import modelo.CatalogoDeMovimientos;
 import modelo.Chaucherita;
-import modelo.Cuenta;
-import modelo.CuentaDeGastos;
-import modelo.CuentaDeIngresos;
-import modelo.CuentaDeIngresosYGastos;
 import modelo.datos.Datos;
+import modelo.entidades.Cuenta;
+import modelo.entidades.CuentaDeGastos;
+import modelo.entidades.CuentaDeIngresos;
+import modelo.entidades.CuentaDeIngresosYGastos;
 
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {

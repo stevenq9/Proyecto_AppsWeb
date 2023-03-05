@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.entidades.CuentaDeGastos;
+import modelo.entidades.CuentaDeIngresos;
+import modelo.entidades.CuentaDeIngresosYGastos;
+import modelo.entidades.Movimiento;
+import modelo.entidades.Tipo;
+
 public class CatalogoDeMovimientos implements Serializable {
 
 	private static final long serialVersionUID = 1L;

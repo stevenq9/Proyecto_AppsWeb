@@ -1,6 +1,8 @@
-package modelo;
+package modelo.entidades;
 
 import java.io.Serializable;
+
+import modelo.Chaucherita;
 
 public class Persona implements Serializable{
 
