@@ -29,25 +29,6 @@ public class EstadoDeCuenta implements Serializable{
 	public List<Movimiento> getMovimientos() {
 		return movimientos;
 	}
-	
-	public void clasificarMovimientos(List<Movimiento> listaMovimientos) {
-	
-		if(fechaInicio == null || fechaFin == null)
-			return;
-		
-		if(fechaInicio.isAfter(fechaFin))
-			return;
-	 
-		for (Movimiento m : listaMovimientos) {
-			if ((m.getFecha().isAfter(fechaInicio) || m.getFecha().isEqual(fechaInicio))
-					&& (m.getFecha().isBefore(fechaFin) || m.getFecha().isEqual(fechaFin))
-					&& (m.getCuentaOrigen().getId() == this.cuenta.getId()
-							|| m.getCuentaDestino().getId() == this.cuenta.getId())) {
-				this.movimientos.add(m);
-			}
-		}
-
-	}
 
 	public double getValorTotal() {
 		return valorTotal;

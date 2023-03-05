@@ -41,7 +41,7 @@ public class CatalogoDeMovimientos implements Serializable {
 	}
 
 	private void agregarMovimiento(Movimiento movimiento) {
-		movimientos.add(movimiento);
+		
 		int max = 0;
 
 		for (Movimiento m : getMovimientos()) {
@@ -71,4 +71,22 @@ public class CatalogoDeMovimientos implements Serializable {
 		this.movimientos = movimientos;
 	}
 
+	public List<Movimiento> getMovimientosByIDCuentaYFechas(int id, LocalDate fechaInicio, LocalDate fechaFin) {
+
+		if (fechaInicio == null || fechaFin == null)
+			return null;
+
+		if (fechaInicio.isAfter(fechaFin))
+			return null;
+
+		List<Movimiento> listaMovimientos = new ArrayList<>();
+		for (Movimiento m : this.movimientos) {
+			if ((m.getFecha().isAfter(fechaInicio) || m.getFecha().isEqual(fechaInicio))
+					&& (m.getFecha().isBefore(fechaFin) || m.getFecha().isEqual(fechaFin))
+					&& (m.getCuentaOrigen().getId() == id || m.getCuentaDestino().getId() == id)) {
+				listaMovimientos.add(m);
+			}
+		}
+		return listaMovimientos;
+	}
 }
