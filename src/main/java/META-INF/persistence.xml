@@ -6,10 +6,16 @@
 	
 	<persistence-unit name="proyectoG4" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>modelo.entidades.Persona</class>
+		<class>modelo.entidades.Cuenta</class>
+		<class>modelo.entidades.Movimiento</class>
+		<class>modelo.entidades.CuentaDeGastos</class>
+		<class>modelo.entidades.CuentaDeIngresos</class>
+		<class>modelo.entidades.CuentaDeIngresosYGastos</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/chaucheradbtest"/>
 			<property name="javax.persistence.jdbc.user" value="chauchi_root"/>
-			<property name="javax.persistence.jdbc.password" value="W69fP7zqW!F"/>
+			<property name="javax.persistence.jdbc.password" value="83e969b5"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="eclipselink.ddl-generation" value="create-tables"/>
 			<!-- property name="eclipselink.ddl-generation" value="create-tables" /-->
