@@ -12,18 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.CatalogoDeCuentas;
 import modelo.CatalogoDeMovimientos;
 import modelo.Chaucherita;
+import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
 import modelo.entidades.CuentaDeGastos;
 import modelo.entidades.CuentaDeIngresos;
 import modelo.entidades.CuentaDeIngresosYGastos;
+import modelo.entidades.Persona;
 
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Chaucherita chaucherita;
+	private Persona persona;
 
 	public GestionarCuentasController() {
 		super();
+		persona = DAOFactory.getFactory().getPersonaDAO().getById(1);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -67,9 +70,9 @@ public class GestionarCuentasController extends HttpServlet {
 		// 1.- Obtengo datos de la solicitud
 		// Ninguno
 		// 2.- Llamo al modelo
-		List<Cuenta> cuentasDeGastos = chaucherita.getCatalogoDeCuentas().getCuentasDeGastos();
-		List<Cuenta> cuentasDeIngresos = chaucherita.getCatalogoDeCuentas().getCuentasDeIngresos();
-		List<Cuenta> cuentaDeIngresosYGastos = chaucherita.getCatalogoDeCuentas().getCuentasDeIngresosYGastos();
+		List<Cuenta> cuentasDeGastos = DAOFactory.getFactory().getCuentaDAO().getCuentasGastosPorPersona(persona);
+		List<Cuenta> cuentasDeIngresos = DAOFactory.getFactory().getCuentaDAO().getCuentasIngresosPorPersona(persona);
+		List<Cuenta> cuentaDeIngresosYGastos = DAOFactory.getFactory().getCuentaDAO().getCuentasIngresosYGastosPorPersona(persona);
 
 		// 3.- Llamo a la vista
 		request.setAttribute("cuentasDeGastos", cuentasDeGastos);
@@ -87,7 +90,7 @@ public class GestionarCuentasController extends HttpServlet {
 	private void modificar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		Cuenta cuenta = chaucherita.getCatalogoDeCuentas().obtenerCuentaPorId(Integer.parseInt(id));
+		Cuenta cuenta = DAOFactory.getFactory().getCuentaDAO().getById(Integer.parseInt(id));
 		request.setAttribute("cuenta", cuenta);
 		request.getRequestDispatcher("jsp/ingresarDatosCuenta.jsp").forward(request, response);
 	}
@@ -104,26 +107,29 @@ public class GestionarCuentasController extends HttpServlet {
 
 			switch (tipo) {
 			case "modelo.CuentaDeIngresos":
-				cuenta = new CuentaDeIngresos(nombre, null);
+				cuenta = new CuentaDeIngresos(nombre, persona);
 				break;
 
 			case "modelo.CuentaDeGastos":
-				cuenta = new CuentaDeGastos(nombre, null);
+				cuenta = new CuentaDeGastos(nombre, persona);
 				break;
 
 			case "modelo.CuentaDeIngresosYGastos":
-				cuenta = new CuentaDeIngresosYGastos(nombre, null);
+				cuenta = new CuentaDeIngresosYGastos(nombre, persona);
 				break;
 			}
 
 			if (cuenta != null) {
-				this.chaucherita.getCatalogoDeCuentas().agregarCuenta(cuenta);
+				DAOFactory.getFactory().getCuentaDAO().create(cuenta);
 			}
 			break;
 		case "modificarCuenta":
 			// Metodo
 			String id = request.getParameter("txtId");
-			chaucherita.getCatalogoDeCuentas().modificarCuenta(Integer.parseInt(id), nombre);
+			
+			Cuenta cuentaAModificar = DAOFactory.getFactory().getCuentaDAO().getById(Integer.parseInt(id));
+			cuentaAModificar.setNombre(nombre);
+			DAOFactory.getFactory().getPersonaDAO().update(persona);
 			break;
 		}
 

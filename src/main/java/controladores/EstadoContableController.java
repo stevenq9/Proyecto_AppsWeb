@@ -55,7 +55,7 @@ public class EstadoContableController extends HttpServlet {
 
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
+		/*LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
 		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
 
 		EstadoContableFactory ecf = new EstadoContableFactory();
@@ -70,7 +70,7 @@ public class EstadoContableController extends HttpServlet {
 		session.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		session.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
 		session.setAttribute("estadoContableGastos", estadoContableGastos);
-		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);*/
 	}
 
 	private void mostrarDetalleCuenta(HttpServletRequest request, HttpServletResponse response)

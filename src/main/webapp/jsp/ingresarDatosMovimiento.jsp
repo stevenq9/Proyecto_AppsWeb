@@ -11,12 +11,12 @@
 </head>
 <body>
 	<form method="POST"
-		action="GestionarTransaccionesController?ruta=confirmar" id="formTransaccion">
-		<c:if test="${ruta eq 'ingreso'}">
+		action="${ruta}" id="formTransaccion">
+		<c:if test="${ruta eq 'DepositarController?ruta=confirmar'}">
 			<h1>Ingreso</h1>
 		</c:if>
-		<c:if test="${ruta eq 'transaccion'}">
-			<h1>Transaccion</h1>
+		<c:if test="${ruta eq 'RetirarController?ruta=confirmar'}">
+			<h1>Retiro</h1>
 		</c:if>
 		
 		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
