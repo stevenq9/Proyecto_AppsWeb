@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.CatalogoDeCuentas;
 import modelo.CatalogoDeMovimientos;
 import modelo.Chaucherita;
-import modelo.datos.Datos;
 import modelo.entidades.Cuenta;
 import modelo.entidades.CuentaDeGastos;
 import modelo.entidades.CuentaDeIngresos;
@@ -25,8 +24,6 @@ public class GestionarCuentasController extends HttpServlet {
 
 	public GestionarCuentasController() {
 		super();
-		Datos.getInstancia();
-		this.chaucherita = Datos.getChaucheritas().get(0);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -107,15 +104,15 @@ public class GestionarCuentasController extends HttpServlet {
 
 			switch (tipo) {
 			case "modelo.CuentaDeIngresos":
-				cuenta = new CuentaDeIngresos(0, nombre);
+				cuenta = new CuentaDeIngresos(nombre, null);
 				break;
 
 			case "modelo.CuentaDeGastos":
-				cuenta = new CuentaDeGastos(0, nombre);
+				cuenta = new CuentaDeGastos(nombre, null);
 				break;
 
 			case "modelo.CuentaDeIngresosYGastos":
-				cuenta = new CuentaDeIngresosYGastos(0, nombre);
+				cuenta = new CuentaDeIngresosYGastos(nombre, null);
 				break;
 			}
 

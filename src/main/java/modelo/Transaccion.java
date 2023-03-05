@@ -24,7 +24,7 @@ public class Transaccion implements Serializable {
 		this.id = id;
 		this.fecha = fecha;
 		
-		if(cuentaOrigen == null || (!cuentaOrigen.isRetirable()))
+		/*if(cuentaOrigen == null || (!cuentaOrigen.isRetirable()))
 			throw new Exception("Cuenta de origen no válida");
 		this.cuentaOrigen = cuentaOrigen;
 		
@@ -36,7 +36,7 @@ public class Transaccion implements Serializable {
 		
 		if(cantidad < 0.01)
 			throw new Exception("Se ingresó un valor menor a $0.01");
-		this.cantidad = cantidad;
+		this.cantidad = cantidad;*/
 	}
 
 	public int getId() {

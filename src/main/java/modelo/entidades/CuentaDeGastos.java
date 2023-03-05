@@ -3,16 +3,19 @@ package modelo.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class CuentaDeGastos extends Cuenta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	public CuentaDeGastos() {
-		super(true, false);
+		super();
 	}
 
-	public CuentaDeGastos(int id, String nombre) {
-		super(id, nombre, true, false);
+	public CuentaDeGastos(String nombre, Persona propietario) {
+		super(nombre, propietario);
 	}
 	
 	@Override

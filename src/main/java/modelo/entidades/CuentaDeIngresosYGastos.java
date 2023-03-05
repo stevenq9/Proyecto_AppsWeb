@@ -3,19 +3,26 @@ package modelo.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+import excepciones.SaldoInsuficienteException;
 import modelo.Transaccion;
 
+@Entity
 public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "saldo")
 	private double saldo;
 
 	public CuentaDeIngresosYGastos() {
-		super(true, true);
+		super();
 	}
 
-	public CuentaDeIngresosYGastos(int id, String nombre) {
-		super(id, nombre, true, true);
+	public CuentaDeIngresosYGastos(String nombre, Persona propietario) {
+		super(nombre, propietario);
 	}
 
 	public double getSaldo() {
@@ -30,27 +37,27 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 		return serialVersionUID;
 	}
 
-	public void retirar(Transaccion transaccion) throws Exception {		
-		if(transaccion == null)
+	public void retirar(Movimiento movimiento) throws Exception {		
+		if(movimiento == null)
 			throw new Exception("Transacción no válida");
 		
-		if(transaccion.getCuentaOrigen().getId() != this.getId())
+		if(movimiento.getCuentaOrigen().getId() != this.getId())
 			throw new Exception("La cuenta a retirar no coincide");
 		
-		if(saldo < transaccion.getCantidad())
-			throw new Exception("Saldo insuficiente en la cuenta");
+		if(saldo < movimiento.getCantidad())
+			throw new SaldoInsuficienteException();
 		
-		this.saldo -= transaccion.getCantidad();
+		this.saldo -= movimiento.getCantidad();
 	}
 
-	public void depositar(Transaccion transaccion) throws Exception {
-		if(transaccion == null)
+	public void depositar(Movimiento movimiento) throws Exception {
+		if(movimiento == null)
 			throw new Exception("Transacción no válida");
 		
-		if(transaccion.getCuentaDestino().getId() != this.getId())
+		if(movimiento.getCuentaDestino().getId() != this.getId())
 			throw new Exception("La cuenta a depositar no coincide");
 		
-		this.saldo += transaccion.getCantidad();
+		this.saldo += movimiento.getCantidad();
 	}
 
 	@Override
@@ -58,7 +65,7 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 		return this.getSaldo();
 	}
 	
-	public void procesarTransaccion(Transaccion transaccion) throws Exception {
+	/*public void procesarTransaccion(Transaccion transaccion) throws Exception {
 		super.procesarTransaccion(transaccion);
 		
 		if(transaccion.getCuentaOrigen().getId() == this.getId())
@@ -66,5 +73,5 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 		
 		if(transaccion.getCuentaDestino().getId() == this.getId())
 			this.depositar(transaccion);
-	}
+	}*/
 }

@@ -12,26 +12,7 @@ public class EstadoContableFactory implements Serializable {
 	public EstadoContableFactory() {
 	}
 
-	public EstadoContable crearEstadoContableDeIngresos(Chaucherita chaucherita, LocalDate fechaInicio,
-			LocalDate fechaFin) {
-		return crearEstadoContable(chaucherita, chaucherita.getCatalogoDeCuentas().getCuentasDeIngresos(), fechaInicio,
-				fechaFin);
-	}
-
-	public EstadoContable crearEstadoContableDeIngresosYGastos(Chaucherita chaucherita, LocalDate fechaInicio,
-			LocalDate fechaFin) {
-		return crearEstadoContable(chaucherita, chaucherita.getCatalogoDeCuentas().getCuentasDeIngresosYGastos(),
-				fechaInicio, fechaFin);
-	}
-
-	public EstadoContable crearEstadoContableDeGastos(Chaucherita chaucherita, LocalDate fechaInicio,
-			LocalDate fechaFin) {
-		return crearEstadoContable(chaucherita, chaucherita.getCatalogoDeCuentas().getCuentasDeGastos(), fechaInicio,
-				fechaFin);
-	}
-
-	private EstadoContable crearEstadoContable(Chaucherita chaucherita, List<Cuenta> cuentas, LocalDate fechaInicio,
-			LocalDate fechaFin) {
+	public EstadoContable crearEstadoContable(List<Cuenta> cuentas, List<Movimiento> movimiento) {
 		
 		if (fechaInicio == null || fechaFin == null)
 			return null;
@@ -53,5 +34,6 @@ public class EstadoContableFactory implements Serializable {
 		}
 
 		return estadoContable;
+		return null;
 	}
 }

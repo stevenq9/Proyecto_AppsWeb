@@ -23,26 +23,26 @@ public class CatalogoDeMovimientos implements Serializable {
 
 	public void agregarIngreso(LocalDate fecha, CuentaDeIngresos cuentaOrigen, CuentaDeIngresosYGastos cuentaDestino,
 			String descripcion, double cantidad) {
-		Movimiento ingreso = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad, Tipo.INGRESO);
-		this.agregarMovimiento(ingreso);
+		/*Movimiento ingreso = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad, Tipo.INGRESO);
+		this.agregarMovimiento(ingreso);*/
 	}
 
 	public void agregarGasto(LocalDate fecha, CuentaDeIngresosYGastos cuentaOrigen, CuentaDeGastos cuentaDestino,
 			String descripcion, double cantidad) {
-		Movimiento gasto = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad, Tipo.GASTO);
-		this.agregarMovimiento(gasto);
+		/*Movimiento gasto = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad, Tipo.GASTO);
+		this.agregarMovimiento(gasto);*/
 	}
 
 	public void agregarTransferencia(LocalDate fecha, CuentaDeIngresosYGastos cuentaOrigen,
 			CuentaDeIngresosYGastos cuentaDestino, String descripcion, double cantidad) {
-		Movimiento transferencia = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad,
+		/*Movimiento transferencia = new Movimiento(fecha, cuentaOrigen, cuentaDestino, descripcion, cantidad,
 				Tipo.TRANSFERENCIA);
-		this.agregarMovimiento(transferencia);
+		this.agregarMovimiento(transferencia);*/
 	}
 
 	private void agregarMovimiento(Movimiento movimiento) {
 		
-		int max = 0;
+		/*int max = 0;
 
 		for (Movimiento m : getMovimientos()) {
 			if (max < m.getId()) {
@@ -50,30 +50,31 @@ public class CatalogoDeMovimientos implements Serializable {
 			}
 		}
 		movimiento.setId(max + 1);
-		movimientos.add(movimiento);
+		movimientos.add(movimiento);*/
 	}
 
 	public List<Movimiento> getMovimientos() {
-		return movimientos;
+		return null;
 	}
 
 	public List<Movimiento> getMovimientosByIDCuenta(int idCuenta) {
-		List<Movimiento> temp = new ArrayList<>();
+		/*List<Movimiento> temp = new ArrayList<>();
 		for (Movimiento movimiento : this.movimientos) {
 			if (idCuenta == movimiento.getCuentaOrigen().getId() || idCuenta == movimiento.getCuentaDestino().getId()) {
 				temp.add(movimiento);
 			}
 		}
-		return temp;
+		return temp;*/
+		return null;
 	}
 
 	public void setMovimientos(List<Movimiento> movimientos) {
-		this.movimientos = movimientos;
+		/*this.movimientos = movimientos;*/
 	}
 
 	public List<Movimiento> getMovimientosByIDCuentaYFechas(int id, LocalDate fechaInicio, LocalDate fechaFin) {
 
-		if (fechaInicio == null || fechaFin == null)
+		/*if (fechaInicio == null || fechaFin == null)
 			return null;
 
 		if (fechaInicio.isAfter(fechaFin))
@@ -87,6 +88,7 @@ public class CatalogoDeMovimientos implements Serializable {
 				listaMovimientos.add(m);
 			}
 		}
-		return listaMovimientos;
+		return listaMovimientos;*/
+		return null;
 	}
 }
