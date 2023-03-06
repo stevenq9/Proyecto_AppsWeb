@@ -13,7 +13,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import modelo.dao.DAOFactory;
+import modelo.dto.CuentaDTO;
 import modelo.entidades.Cuenta;
+import modelo.entidades.CuentaDeIngresosYGastos;
 import modelo.entidades.Persona;
 
 @Path("/cuentas")
@@ -73,8 +75,14 @@ public class RecursoCuenta {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean actualizar(Cuenta cuenta) {
+	public boolean actualizar(CuentaDTO cuentaDTO) {
 		try {
+			Cuenta cuenta = DAOFactory.getFactory().getCuentaDAO().getById(cuentaDTO.getId());
+			
+			cuenta.setNombre(cuentaDTO.getNombre());
+			if(cuenta instanceof CuentaDeIngresosYGastos)
+				((CuentaDeIngresosYGastos)cuenta).setSaldo(cuentaDTO.getSaldo());
+			
 			DAOFactory.getFactory().getCuentaDAO().update(cuenta);
 		}catch (Exception e) {
 			return false;
