@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 				<input type="text" name="txtNombreRegistro" placeholder="Nombre">
 				<input type="text" name="txtApellidoRegistro" placeholder="Apellido">
 				<input type="text" name="txtUsuarioRegistro" placeholder="Usuario">
-				<input type="email" name="txtClaveRegistro" placeholder="Clave">
+				<input type="password" name="txtClaveRegistro" placeholder="Clave">
 				<button type="submit">Registrar</button>
 			</form>
 		</div>
@@ -46,6 +47,7 @@
 				</div>
 			</div>
 		</div>
+		<p><c:out value='${mensaje}'/></p>
 	</div>
 
 	<script type="text/javascript" src="../js/app.js"></script>

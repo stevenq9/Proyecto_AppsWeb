@@ -12,7 +12,7 @@
 		<h1>Mi Chaucherita Web</h1>
 		<br>
 	</header>
-
+	<a href="LoginController?ruta=salir">Cerrar sesión</a>
 	<h2>Detalle de Cuenta</h2>
 	<br>
 	<div>Nombre: ${estadocuenta.cuenta.nombre}</div>

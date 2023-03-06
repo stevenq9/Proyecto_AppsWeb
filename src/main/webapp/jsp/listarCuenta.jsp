@@ -14,9 +14,10 @@
     </header>
     <a href="GestionarCuentasController?ruta=crearCuenta">Nueva cuenta</a> |
     <a href="DepositarController?ruta=registrarIngreso">Nuevo ingreso</a> |
-    <a href="RetirarController?ruta=registrarGasto">Nuevo gasto</a>
+    <a href="RetirarController?ruta=registrarGasto">Nuevo gasto</a> |
     <a href="TransferirController?ruta=registrarTransferencia">Nueva transferencia</a>
     <br> <br> <br>
+    <a href="LoginController?ruta=salir">Cerrar sesión</a>
     <hr>
     <div class="cuentasContainer">
         <div class="ingresosContainer">

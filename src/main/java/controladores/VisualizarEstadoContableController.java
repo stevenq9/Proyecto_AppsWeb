@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import modelo.EstadoContable;
 import modelo.EstadoDeCuenta;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Persona;
@@ -25,7 +23,6 @@ public class VisualizarEstadoContableController extends HttpServlet {
 
 	public VisualizarEstadoContableController() {
 		super();
-		persona = DAOFactory.getFactory().getPersonaDAO().getById(1);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +38,13 @@ public class VisualizarEstadoContableController extends HttpServlet {
 
 	private void procesar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		persona = (Persona) request.getSession().getAttribute(LoginController.USER_SESSION_NAME);
+
+		if (persona == null) {
+			LoginController.redirectMe(request, response);
+			return;
+		}
+
 		String ruta = "mostrarEstado";
 
 		if (request.getParameter("ruta") != null)
@@ -67,20 +71,18 @@ public class VisualizarEstadoContableController extends HttpServlet {
 		List<EstadoDeCuenta> estadoContableGastos = DAOFactory.getFactory().getMovimientoDAO()
 				.getEstadoContableDeGastos(persona, fechaInicio, fechaFin);
 
-		HttpSession session = request.getSession();
-
-		session.setAttribute("fechaInicial", fechaInicio);
-		session.setAttribute("fechaFinal", fechaFin);
-		session.setAttribute("estadoContableIngresos", estadoContableIngresos);
-		session.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
-		session.setAttribute("estadoContableGastos", estadoContableGastos);
+		request.setAttribute("fechaInicial", fechaInicio);
+		request.setAttribute("fechaFinal", fechaFin);
+		request.setAttribute("estadoContableIngresos", estadoContableIngresos);
+		request.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
+		request.setAttribute("estadoContableGastos", estadoContableGastos);
 		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
 	}
 
 	private void mostrarDetalleCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String tipo = request.getParameter("tipo");
+		/*String tipo = request.getParameter("tipo");
 
 		EstadoContable ec = (EstadoContable) request.getSession().getAttribute(tipo);
 
@@ -89,15 +91,6 @@ public class VisualizarEstadoContableController extends HttpServlet {
 		EstadoDeCuenta estadocuenta = ec.getEstadosDeCuenta().get(index);
 		request.setAttribute("estadocuenta", estadocuenta);
 
-		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);*/
 	}
-
-	public static void removeEstadoContableSession(HttpSession session) {
-		session.removeAttribute("fechaInicial");
-		session.removeAttribute("fechaFinal");
-		session.removeAttribute("estadoContableIngresos");
-		session.removeAttribute("estadoContableIngresosYGastos");
-		session.removeAttribute("estadoContableGastos");
-	}
-
 }

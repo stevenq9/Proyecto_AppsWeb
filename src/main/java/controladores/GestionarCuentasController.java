@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.CatalogoDeCuentas;
-import modelo.CatalogoDeMovimientos;
-import modelo.Chaucherita;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
 import modelo.entidades.CuentaDeGastos;
@@ -26,7 +23,6 @@ public class GestionarCuentasController extends HttpServlet {
 
 	public GestionarCuentasController() {
 		super();
-		persona = DAOFactory.getFactory().getPersonaDAO().getById(1);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,8 +37,15 @@ public class GestionarCuentasController extends HttpServlet {
 
 	private void procesar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String ruta = "listarCuenta";
+		persona = (Persona) request.getSession().getAttribute(LoginController.USER_SESSION_NAME);
 
+		if (persona == null) {
+			LoginController.redirectMe(request, response);
+			return;
+		}
+		
+		String ruta = "listarCuenta";
+		
 		if (request.getParameter("ruta") != null)
 			ruta = request.getParameter("ruta");
 

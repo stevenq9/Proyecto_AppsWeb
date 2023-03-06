@@ -11,6 +11,7 @@
 	<header>
 		<h1>Mi Chaucherita Web</h1>
 	</header>
+	<a href="LoginController?ruta=salir">Cerrar sesión</a>
 	
 	<h2>Estado contable entre <c:out value="${fechaInicial}"/> y <c:out value="${fechaFinal}"/></h2>
 		
