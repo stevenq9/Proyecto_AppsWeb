@@ -1,7 +1,6 @@
 package modelo.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +13,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import modelo.Transaccion;
 
 @Entity
 @Table(name = "Cuenta")
@@ -34,9 +31,6 @@ public abstract class Cuenta implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "propietario_id_fk")
 	private Persona propietario;
-	
-	@Column(insertable = false, updatable = false)
-	private String dtype;
 
 	public Cuenta() {
 		super();
@@ -76,16 +70,6 @@ public abstract class Cuenta implements Serializable {
 	public void setPropietario(Persona propietario) {
 		this.propietario = propietario;
 	}
-
-	public String getDtype() {
-		return dtype;
-	}
-
-	public void setDtype(String dtype) {
-		this.dtype = dtype;
-	}
-
-	public abstract double obtenerValorTotal(List<Movimiento> movimientos);
 
 	public void procesarTransaccion(Movimiento movimiento) throws Exception {
 		if (movimiento.getCuentaOrigen().getId() != this.getId()

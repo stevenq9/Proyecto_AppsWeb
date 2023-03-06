@@ -1,33 +1,31 @@
 package modelo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.Date;
 import modelo.entidades.Cuenta;
-import modelo.entidades.Movimiento;
 
-public class EstadoDeCuenta implements Serializable{
+public class EstadoDeCuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Cuenta cuenta;
-	private List<Movimiento> movimientos;
 	private double valorTotal;
-	private LocalDate fechaInicio;
-	private LocalDate fechaFin;
+	private Date fechaInicio;
+	private Date fechaFin;
 
 	public EstadoDeCuenta() {
-		this.movimientos = new ArrayList<Movimiento>();
 		this.valorTotal = 0;
 	}
-	
+
+	public EstadoDeCuenta(Cuenta cuenta, double valorTotal, Date fechaInicio, Date fechaFin) {
+		super();
+		this.cuenta = cuenta;
+		this.valorTotal = valorTotal;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+	}
+
 	public Cuenta getCuenta() {
 		return cuenta;
-	}
-	
-	public List<Movimiento> getMovimientos() {
-		return movimientos;
 	}
 
 	public double getValorTotal() {
@@ -38,19 +36,19 @@ public class EstadoDeCuenta implements Serializable{
 		this.valorTotal = valorTotal;
 	}
 
-	public LocalDate getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(LocalDate fechaInicio) {
+	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public LocalDate getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(LocalDate fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
@@ -58,8 +56,4 @@ public class EstadoDeCuenta implements Serializable{
 		this.cuenta = cuenta;
 	}
 
-	public void setMovimientos(List<Movimiento> movimientos) {
-		this.movimientos = movimientos;
-	}
-	
 }

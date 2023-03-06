@@ -59,9 +59,6 @@ public class GestionarCuentasController extends HttpServlet {
 		case "guardar":
 			this.guardar(request, response);
 			break;
-		case "detallarCuenta":
-			this.detallarCuenta(request, response);
-			break;
 		}
 	}
 
@@ -129,17 +126,10 @@ public class GestionarCuentasController extends HttpServlet {
 			
 			Cuenta cuentaAModificar = DAOFactory.getFactory().getCuentaDAO().getById(Integer.parseInt(id));
 			cuentaAModificar.setNombre(nombre);
-			DAOFactory.getFactory().getPersonaDAO().update(persona);
+			DAOFactory.getFactory().getCuentaDAO().update(cuentaAModificar);
 			break;
 		}
 
 		response.sendRedirect(request.getContextPath() + "/GestionarCuentasController?ruta=listarCuenta");
-	}
-
-	private void detallarCuenta(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		request.getRequestDispatcher("/GestionarTransaccionesController?ruta=detallarCuenta&id=" + id).forward(request,
-				response);
 	}
 }

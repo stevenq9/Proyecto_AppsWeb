@@ -1,7 +1,9 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Chaucherita;
 import modelo.EstadoContable;
-import modelo.EstadoContableFactory;
 import modelo.EstadoDeCuenta;
+import modelo.dao.DAOFactory;
+import modelo.entidades.Persona;
 
-@WebServlet("/EstadoContableController")
-public class EstadoContableController extends HttpServlet {
+@WebServlet("/VisualizarEstadoContableController")
+public class VisualizarEstadoContableController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private Persona persona;
 
-	private Chaucherita chaucherita;
-
-	public EstadoContableController() {
+	public VisualizarEstadoContableController() {
 		super();
+		persona = DAOFactory.getFactory().getPersonaDAO().getById(1);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,22 +57,24 @@ public class EstadoContableController extends HttpServlet {
 
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*LocalDate fechaInicio = LocalDate.parse(request.getParameter("fechaInicial"));
-		LocalDate fechaFin = LocalDate.parse(request.getParameter("fechaFinal"));
+		Date fechaInicio = Date.valueOf(LocalDate.parse(request.getParameter("fechaInicial")));
+		Date fechaFin = Date.valueOf(LocalDate.parse(request.getParameter("fechaFinal")));
 
-		EstadoContableFactory ecf = new EstadoContableFactory();
-		EstadoContable estadoContableIngresos = ecf.crearEstadoContableDeIngresos(this.chaucherita, fechaInicio,
-				fechaFin);
-		EstadoContable estadoContableIngresosYGastos = ecf.crearEstadoContableDeIngresosYGastos(this.chaucherita,
-				fechaInicio, fechaFin);
-		EstadoContable estadoContableGastos = ecf.crearEstadoContableDeGastos(this.chaucherita, fechaInicio, fechaFin);
+		List<EstadoDeCuenta> estadoContableIngresos = DAOFactory.getFactory().getMovimientoDAO()
+				.getEstadoContableDeIngresos(persona, fechaInicio, fechaFin);
+		List<EstadoDeCuenta> estadoContableIngresosYGastos = DAOFactory.getFactory().getMovimientoDAO()
+				.getEstadoContableDeIngresosYGastos(persona, fechaInicio, fechaFin);
+		List<EstadoDeCuenta> estadoContableGastos = DAOFactory.getFactory().getMovimientoDAO()
+				.getEstadoContableDeGastos(persona, fechaInicio, fechaFin);
 
 		HttpSession session = request.getSession();
 
+		session.setAttribute("fechaInicial", fechaInicio);
+		session.setAttribute("fechaFinal", fechaFin);
 		session.setAttribute("estadoContableIngresos", estadoContableIngresos);
 		session.setAttribute("estadoContableIngresosYGastos", estadoContableIngresosYGastos);
 		session.setAttribute("estadoContableGastos", estadoContableGastos);
-		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);*/
+		request.getRequestDispatcher("/jsp/detallarEstadoContable.jsp").forward(request, response);
 	}
 
 	private void mostrarDetalleCuenta(HttpServletRequest request, HttpServletResponse response)
@@ -81,11 +85,19 @@ public class EstadoContableController extends HttpServlet {
 		EstadoContable ec = (EstadoContable) request.getSession().getAttribute(tipo);
 
 		int index = Integer.parseInt(request.getParameter("index"));
-		
+
 		EstadoDeCuenta estadocuenta = ec.getEstadosDeCuenta().get(index);
 		request.setAttribute("estadocuenta", estadocuenta);
-	
+
 		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
+	}
+
+	public static void removeEstadoContableSession(HttpSession session) {
+		session.removeAttribute("fechaInicial");
+		session.removeAttribute("fechaFinal");
+		session.removeAttribute("estadoContableIngresos");
+		session.removeAttribute("estadoContableIngresosYGastos");
+		session.removeAttribute("estadoContableGastos");
 	}
 
 }

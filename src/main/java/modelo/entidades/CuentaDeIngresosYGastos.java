@@ -1,13 +1,11 @@
 package modelo.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import excepciones.SaldoInsuficienteException;
-import modelo.Transaccion;
 
 @Entity
 public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
@@ -58,11 +56,6 @@ public class CuentaDeIngresosYGastos extends Cuenta implements Serializable {
 			throw new Exception("La cuenta a depositar no coincide");
 		
 		this.saldo += movimiento.getCantidad();
-	}
-
-	@Override
-	public double obtenerValorTotal(List<Movimiento> movimientos) {
-		return this.getSaldo();
 	}
 	
 	/*public void procesarTransaccion(Transaccion transaccion) throws Exception {

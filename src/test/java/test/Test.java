@@ -2,7 +2,9 @@ package test;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
+import modelo.EstadoDeCuenta;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
 import modelo.entidades.CuentaDeGastos;
@@ -106,6 +108,32 @@ public class Test {
 		DAOFactory.getFactory().getCuentaDAO().update(banco);
 		
 		DAOFactory.getFactory().getMovimientoDAO().create(m);*/
+		/*CuentaDeIngresosYGastos banco = (CuentaDeIngresosYGastos) DAOFactory.getFactory().getCuentaDAO().getById(2);
+		
+		CuentaDeIngresos nomina = (CuentaDeIngresos) DAOFactory.getFactory().getCuentaDAO().getById(1);
+		
+		List<EstadoDeCuenta> ec = DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeIngresos(carlos, Date.valueOf(LocalDate.of(2022, 3, 3)), Date.valueOf(LocalDate.of(2023, 02, 02)));
+		
+		for(EstadoDeCuenta e: ec) {
+			System.out.println(e.getCuenta());
+			System.out.println(e.getValorTotal());
+			System.out.println(e.getFechaInicio());
+			System.out.println(e.getFechaFin());
+		}
+		
+		for(EstadoDeCuenta e: DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeGastos(carlos, Date.valueOf(LocalDate.of(2022, 3, 3)), Date.valueOf(LocalDate.of(2023, 02, 02)))) {
+			System.out.println(e.getCuenta());
+			System.out.println(e.getValorTotal());
+			System.out.println(e.getFechaInicio());
+			System.out.println(e.getFechaFin());
+		}
+		
+		for(EstadoDeCuenta e: DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeIngresosYGastos(carlos, Date.valueOf(LocalDate.of(2022, 3, 3)), Date.valueOf(LocalDate.of(2023, 02, 02)))) {
+			System.out.println(e.getCuenta());
+			System.out.println(e.getValorTotal());
+			System.out.println(e.getFechaInicio());
+			System.out.println(e.getFechaFin());
+		}*/
 	}
 
 }

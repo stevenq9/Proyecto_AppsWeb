@@ -160,6 +160,6 @@ public class Movimiento implements Serializable {
 	@Override
 	public String toString() {
 		return "De: " + this.cuentaOrigen.getNombre() + " A: " + this.cuentaDestino.getNombre() + " Monto: $"
-				+ this.cantidad + "Descripción: " + this.descripcion;
+				+ this.cantidad + " Descripción: " + this.descripcion;
 	}
 }

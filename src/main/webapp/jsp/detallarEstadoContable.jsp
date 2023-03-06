@@ -12,7 +12,7 @@
 		<h1>Mi Chaucherita Web</h1>
 	</header>
 	
-	<h2>Estado contable entre <c:out value="${estadoContableIngresos.fechaInicio}"/> y <c:out value="${estadoContableIngresos.fechaFin}"/></h2>
+	<h2>Estado contable entre <c:out value="${fechaInicial}"/> y <c:out value="${fechaFinal}"/></h2>
 		
 	<!-- Cuentas de ingreso -->
 	<div id="ContenedorIngreso">
@@ -21,7 +21,7 @@
 			(El cálculo es entre fechas)
 			<div>
 				<table>
-					<c:forEach items="${estadoContableIngresos.estadosDeCuenta}"
+					<c:forEach items="${estadoContableIngresos}"
 						var="cuentasIngreso" varStatus="bandera">
 						<tr>
 							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableIngresos">${cuentasIngreso.cuenta.nombre}:</a></td>
@@ -40,7 +40,7 @@
 			(Considera todos los movimientos)
 			<div>
 				<table>
-					<c:forEach items="${estadoContableIngresosYGastos.estadosDeCuenta}"
+					<c:forEach items="${estadoContableIngresosYGastos}"
 						var="cuentasIngresoSalida" varStatus="bandera">
 						<tr>
 							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableIngresosYGastos">${cuentasIngresoSalida.cuenta.nombre}:</a></td>
@@ -59,7 +59,7 @@
 			(El cálculo es entre fechas)
 			<div>
 				<table>
-					<c:forEach items="${estadoContableGastos.estadosDeCuenta}"
+					<c:forEach items="${estadoContableGastos}"
 						var="cuentasSalida" varStatus="bandera">
 						<tr>
 							<td><a href="EstadoContableController?ruta=mostrarDetalleCuenta&index=${bandera.index}&tipo=estadoContableGastos">${cuentasSalida.cuenta.nombre}:</a></td>
