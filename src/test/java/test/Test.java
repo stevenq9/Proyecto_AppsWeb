@@ -134,6 +134,13 @@ public class Test {
 			System.out.println(e.getFechaInicio());
 			System.out.println(e.getFechaFin());
 		}*/
+		
+		EstadoDeCuenta ec = DAOFactory.getFactory().getCuentaDAO().getEstadoDeCuentaPorIdCuenta(1, Date.valueOf("2022-3-1"), Date.valueOf("2023-3-30"));
+		
+		System.out.println(ec.getCuenta());
+		System.out.println(ec.getValorTotal());
+		System.out.println(ec.getFechaInicio());
+		System.out.println(ec.getFechaFin());
 	}
 
 }

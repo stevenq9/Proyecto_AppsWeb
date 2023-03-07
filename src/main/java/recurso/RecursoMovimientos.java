@@ -12,11 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import modelo.EstadoDeCuenta;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
 import modelo.entidades.Movimiento;
-import modelo.entidades.Persona;
 
 @Path("/movimientos")
 public class RecursoMovimientos {
@@ -63,35 +61,5 @@ public class RecursoMovimientos {
 		Date fechaInicioDate = Date.valueOf(fechaInicio);
 		Date fechaFinDate = Date.valueOf(fechaFin);
 		return DAOFactory.getFactory().getMovimientoDAO().getMovimientosPorCuentaYFechas(cuenta, fechaInicioDate, fechaFinDate);
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/obtenerEstadoContableIngresos")
-	public List<EstadoDeCuenta> listarCuentasDeIngresos(@QueryParam("idUsuario") int idUsuario, @QueryParam("fechaInicio") String fechaInicio, @QueryParam("fechaFin") String fechaFin) {
-		Persona persona = DAOFactory.getFactory().getPersonaDAO().getById(idUsuario);
-		Date fechaInicioDate = Date.valueOf(fechaInicio);
-		Date fechaFinDate = Date.valueOf(fechaFin);
-		return DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeIngresos(persona, fechaInicioDate, fechaFinDate);
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/obtenerEstadoContableIngresosYGastos")
-	public List<EstadoDeCuenta> listarCuentasDeIngresosYGastos(@QueryParam("idUsuario") int idUsuario, @QueryParam("fechaInicio") String fechaInicio, @QueryParam("fechaFin") String fechaFin) {
-		Persona persona = DAOFactory.getFactory().getPersonaDAO().getById(idUsuario);
-		Date fechaInicioDate = Date.valueOf(fechaInicio);
-		Date fechaFinDate = Date.valueOf(fechaFin);
-		return DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeIngresosYGastos(persona, fechaInicioDate, fechaFinDate);
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/obtenerEstadoContableGastos")
-	public List<EstadoDeCuenta> listarCuentasDeGastos(@QueryParam("idUsuario") int idUsuario, @QueryParam("fechaInicio") String fechaInicio, @QueryParam("fechaFin") String fechaFin) {
-		Persona persona = DAOFactory.getFactory().getPersonaDAO().getById(idUsuario);
-		Date fechaInicioDate = Date.valueOf(fechaInicio);
-		Date fechaFinDate = Date.valueOf(fechaFin);
-		return DAOFactory.getFactory().getMovimientoDAO().getEstadoContableDeGastos(persona, fechaInicioDate, fechaFinDate);
 	}
 }

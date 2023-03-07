@@ -1,15 +1,15 @@
 package modelo.dto;
 
-public class CuentaDTO {
+public class CuentaRestDTO {
 	
 	private Integer id;
 	private String nombre;
 	private double saldo;
 	
-	public CuentaDTO() {
+	public CuentaRestDTO() {
 	}
 
-	public CuentaDTO(Integer id, String nombre, double saldo) {
+	public CuentaRestDTO(Integer id, String nombre, double saldo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.saldo = saldo;

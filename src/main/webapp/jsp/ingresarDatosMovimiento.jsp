@@ -41,6 +41,9 @@
 		<label for="descripcion">Descripcion:</label><br>	
 		<input type="text" name="txtDescripcion" placeholder="Descripción"/>
 		<br>
+		<label for="fecha">Fecha:</label><br>	
+		<input id="fecha" type="date" name="dateFecha" required/>
+		<br>
 		<br> <input id="descripcion" type="submit" type="submit" value="Guardar">
 	</form>
 </body>

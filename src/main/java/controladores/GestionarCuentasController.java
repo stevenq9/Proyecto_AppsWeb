@@ -1,6 +1,8 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.EstadoDeCuenta;
 import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
 import modelo.entidades.CuentaDeGastos;
@@ -68,11 +71,30 @@ public class GestionarCuentasController extends HttpServlet {
 	private void listarCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1.- Obtengo datos de la solicitud
-		// Ninguno
+		String fechaInicial = request.getParameter("fechaInicial");
+		String fechaFinal = request.getParameter("fechaFinal");
+		
+		Date fechaInicialDate;
+		Date fechaFinalDate;
+		
+		if(fechaInicial == null || fechaFinal == null) {
+			fechaInicialDate = Date.valueOf(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1));
+			fechaFinalDate = Date.valueOf(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), (LocalDate.now().isLeapYear())?LocalDate.now().getMonth().maxLength():LocalDate.now().getMonth().minLength()));
+		}else if(LocalDate.parse(fechaInicial).isAfter(LocalDate.parse(fechaFinal))){
+			fechaInicialDate = Date.valueOf(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1));
+			fechaFinalDate = Date.valueOf(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), (LocalDate.now().isLeapYear())?LocalDate.now().getMonth().maxLength():LocalDate.now().getMonth().minLength()));
+		}else {
+			fechaInicialDate = Date.valueOf(fechaInicial);
+			fechaFinalDate = Date.valueOf(fechaFinal);
+		}
+		
+		request.getSession().setAttribute("fechaInicio", fechaInicialDate);
+		request.getSession().setAttribute("fechaFin", fechaFinalDate);
+		
 		// 2.- Llamo al modelo
-		List<Cuenta> cuentasDeGastos = DAOFactory.getFactory().getCuentaDAO().getCuentasGastosPorPersona(persona);
-		List<Cuenta> cuentasDeIngresos = DAOFactory.getFactory().getCuentaDAO().getCuentasIngresosPorPersona(persona);
-		List<Cuenta> cuentaDeIngresosYGastos = DAOFactory.getFactory().getCuentaDAO().getCuentasIngresosYGastosPorPersona(persona);
+		List<EstadoDeCuenta> cuentasDeGastos = DAOFactory.getFactory().getCuentaDAO().getEstadoContableDeGastos(persona, fechaInicialDate, fechaFinalDate);
+		List<EstadoDeCuenta> cuentasDeIngresos = DAOFactory.getFactory().getCuentaDAO().getEstadoContableDeIngresos(persona, fechaInicialDate, fechaFinalDate);
+		List<EstadoDeCuenta> cuentaDeIngresosYGastos = DAOFactory.getFactory().getCuentaDAO().getEstadoContableDeIngresosYGastos(persona, fechaInicialDate, fechaFinalDate);
 
 		// 3.- Llamo a la vista
 		request.setAttribute("cuentasDeGastos", cuentasDeGastos);

@@ -1,7 +1,6 @@
 package controladores;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.sql.Date;
 import java.util.List;
 
@@ -82,13 +81,14 @@ public class DepositarController extends HttpServlet {
 		int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
 		int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
 		String descripcion = request.getParameter("txtDescripcion");
+		Date fecha = Date.valueOf(request.getParameter("dateFecha"));
 
 		CuentaDeIngresos cuentaDeOrigen = (CuentaDeIngresos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaOrigen);
 		CuentaDeIngresosYGastos cuentaDeDestino = (CuentaDeIngresosYGastos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaDestino);
 
-		Movimiento m = new Movimiento(Date.valueOf(LocalDate.now()), descripcion, cantidad);
+		Movimiento m = new Movimiento(fecha, descripcion, cantidad);
 		m.configurarComoIngreso(cuentaDeOrigen, cuentaDeDestino);
 
 		try {

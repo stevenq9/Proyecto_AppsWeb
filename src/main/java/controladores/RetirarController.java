@@ -2,7 +2,6 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -82,13 +81,14 @@ public class RetirarController extends HttpServlet {
 		int idCuentaOrigen = Integer.parseInt(request.getParameter("selCuentaOrigen"));
 		int idCuentaDestino = Integer.parseInt(request.getParameter("selCuentaDestino"));
 		String descripcion = request.getParameter("txtDescripcion");
+		Date fecha = Date.valueOf(request.getParameter("dateFecha"));
 
 		CuentaDeIngresosYGastos cuentaDeOrigen = (CuentaDeIngresosYGastos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaOrigen);
 		CuentaDeGastos cuentaDeDestino = (CuentaDeGastos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaDestino);
 
-		Movimiento m = new Movimiento(Date.valueOf(LocalDate.now()), descripcion, cantidad);
+		Movimiento m = new Movimiento(fecha, descripcion, cantidad);
 		m.configurarComoGasto(cuentaDeOrigen, cuentaDeDestino);
 
 		try {
