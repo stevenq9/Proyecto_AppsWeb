@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +17,13 @@
 	<a href="LoginController?ruta=salir">Cerrar sesión</a>
 	<h2>Detalle de Cuenta</h2>
 	<br>
-	<div>Nombre: ${estadocuenta.cuenta.nombre}</div>
-	<div>Id: ${estadocuenta.cuenta.id}</div>
-	<div>Valor total: ${estadocuenta.valorTotal}</div>
-
+	<div>Nombre: ${estadoDeCuenta.cuenta.nombre}</div>
+	<div>Id: ${estadoDeCuenta.cuenta.id}</div>
+	<div>Valor total: ${estadoDeCuenta.valorTotal}</div>
 
 	<br>
 
-	<c:forEach items="${estadocuenta.movimientos}" var="movimiento">
+	<c:forEach items="${movimientos}" var="movimiento">
 		<fieldset>
 			<label><b>Id de movimiento: </b></label>
 			<p>${movimiento.id}</p>
@@ -33,7 +34,9 @@
 			<label><b>Monto: </b></label>
 			<p>$ ${movimiento.cantidad}</p>
 			<label><b>Fecha: </b></label>
-			<p>${movimiento.fecha}</p>
+			<p>
+				<fmt:formatDate value="${movimiento.fecha}" pattern="dd-MM-yyyy" />
+			</p>
 			<label><b>Descripción: </b></label>
 			<p>${movimiento.descripcion}</p>
 		</fieldset>

@@ -1,6 +1,8 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.EstadoDeCuenta;
+import modelo.dao.DAOFactory;
+import modelo.entidades.Movimiento;
 import modelo.entidades.Persona;
 
-@WebServlet("/VisualizarEstadoContableController")
+@WebServlet("/DetallarCuentaController")
 public class DetallarCuentaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -54,15 +59,19 @@ public class DetallarCuentaController extends HttpServlet {
 	private void mostrarDetalleCuenta(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*String tipo = request.getParameter("tipo");
+		int id = Integer.parseInt(request.getParameter("id"));
+		Date fechaInicio = (Date) request.getSession().getAttribute("fechaInicio");
+		Date fechaFin = (Date) request.getSession().getAttribute("fechaFin");
 
-		EstadoContable ec = (EstadoContable) request.getSession().getAttribute(tipo);
+		EstadoDeCuenta estadoDeCuenta = DAOFactory.getFactory().getCuentaDAO().getEstadoDeCuentaPorIdCuenta(id,
+				fechaInicio, fechaFin);
+		List<Movimiento> movimientos = DAOFactory.getFactory().getMovimientoDAO().getMovimientosPorCuentaYFechas(
+				DAOFactory.getFactory().getCuentaDAO().getById(id), fechaInicio, fechaFin);
 
-		int index = Integer.parseInt(request.getParameter("index"));
+		request.setAttribute("estadoDeCuenta", estadoDeCuenta);
+		request.setAttribute("movimientos", movimientos);
+		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);
 
-		EstadoDeCuenta estadocuenta = ec.getEstadosDeCuenta().get(index);
-		request.setAttribute("estadocuenta", estadocuenta);
-
-		request.getRequestDispatcher("/jsp/detallarCuenta.jsp").forward(request, response);*/
 	}
+
 }
