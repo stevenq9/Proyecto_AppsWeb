@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingreso de datos de deposito/transaccion</title>
+<link rel="stylesheet" type="text/css" href="./css/inputsStyle.css">
 </head>
 <body>
 	<form method="POST"
@@ -40,8 +41,7 @@
 		
 		<label for="descripcion">Descripcion:</label><br>	
 		<input type="text" name="txtDescripcion" placeholder="Descripción"/>
-		<br>
-		<br> <input id="descripcion" type="submit" type="submit" value="Guardar">
+		<input id="descripcion" type="submit" value="Guardar" class="btnSubmit ghost">
 	</form>
 </body>
 </html>

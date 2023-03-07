@@ -6,76 +6,126 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Mi chaucherita web</title>
+<link rel="stylesheet" type="text/css" href="./css/listarStyle.css">
 </head>
 
 <body>
-    <header>
-        <h1>Mi chaucherita web</h1>
-    </header>
-    <a href="GestionarCuentasController?ruta=crearCuenta">Nueva cuenta</a> | <a href="GestionarTransaccionesController?ruta=registrarIngreso">
-                Nuevo ingreso</a> | <a href="GestionarTransaccionesController?ruta=registrarTransaccion">
-                Transaccion</a> <br> <br> <br>
-    <hr>
-    <div class="cuentasContainer">
-        <div class="ingresosContainer">
-            <h2>Ingresos</h2>
-            <c:forEach items="${cuentasDeIngresos}" var="cuenta">
-                <fieldset>
-                    <div class="cuenta">
-                        <h3>${cuenta.nombre}</h3>
-                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
-                            href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
-                            detalles</a>
-                    </div>
-                </fieldset>
-            </c:forEach>
+	<header>
+		<h1>Mi chaucherita web</h1>
+	</header>
+	<nav>
+		<a href="GestionarCuentasController?ruta=crearCuenta"
+			class="ghost header">Nueva cuenta</a> <a
+			href="GestionarTransaccionesController?ruta=registrarIngreso"
+			class="ghost header"> Nuevo ingreso</a><a
+			href="GestionarTransaccionesController?ruta=registrarTransaccion"
+			class="ghost header"> Transaccion</a>
+	</nav>
+	<div class="cuentasContainer">
+		<div class="ingresosContainer">
+			<h2>Ingresos</h2>
+			<c:forEach items="${cuentasDeIngresos}" var="cuenta">
+				<div class="container">
+					<div class="line">
+						<h3>${cuenta.nombre}</h3>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+					</div>
+					<a
+						href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}"
+						class="reduce">Modificar cuenta</a> <a
+						href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}"
+						class="ghost reduce">Mostrar detalles</a>
+					<div class="cover">
+						<h3>${cuenta.nombre}</h3>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div class="ingresosGastosContainer">
+			<h2>Ingresos y Gastos</h2>
+			<c:forEach items="${cuentaDeIngresosYGastos}" var="cuenta">
+				<div class="container">
+					<div class="line">
+						<h3>${cuenta.nombre}</h3>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+					</div>
+					<a
+						href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}"
+						class="reduce">Modificar cuenta</a> <a
+						href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}"
+						class="ghost reduce">Mostrar detalles</a>
+					<div class="cover">
+						<h3>${cuenta.nombre}</h3>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 
-        </div>
-        <hr>
-        <div class="ingresosGastosContainer">
-            <h2>Ingresos y Gastos</h2>
-            <c:forEach items="${cuentaDeIngresosYGastos}" var="cuenta">
-                <fieldset>
-                    <div class="cuenta">
-                        <h3>${cuenta.nombre}</h3>
-                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
-                            href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
-                            detalles</a>
-                    </div>
-                </fieldset>
-            </c:forEach>
 
-        </div>
-        <hr>
-        <div class="gastosContainer">
-            <h2>Gastos</h2>
-            <c:forEach items="${cuentasDeGastos}" var="cuenta">
-                <fieldset>
-                    <div class="cuenta">
-                        <h3>${cuenta.nombre}</h3>
-                        <a href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}">Modificar cuenta</a> <a
-                            href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}">Mostrar
-                            detalles</a>
-                    </div>
-                </fieldset>
-            </c:forEach>
+		<div class="gastosContainer">
+			<h2>Gastos</h2>
+			<c:forEach items="${cuentasDeGastos}" var="cuenta">
+				<div class="container">
+					<div class="line">
+						<h3>${cuenta.nombre}</h3>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
+					</div>
+					<a
+						href="GestionarCuentasController?ruta=modificarCuenta&id=${cuenta.id}"
+						class="reduce">Modificar cuenta</a> <a
+						href="GestionarTransaccionesController?ruta=detallarCuenta&id=${cuenta.id}"
+						class="ghost reduce">Mostrar detalles</a>
+					<div class="cover">
+						<h3>${cuenta.nombre}</h3>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 
-        </div>
-    </div>
-
-    <hr>
-    <div>
-        <h2>Obtener estado contable</h2>
-        <fieldset>
-            <form action="GestionarTransaccionesController?ruta=mostrarEstado" method="POST">
-                <label>Fecha inicial: </label><input type="date" name="fechaInicial" required><br>
-                <br> <label>Fecha final: </label><input type="date" name="fechaFinal" required><br> <br> <input
-                    type="submit" value="Filtrar movimientos">
-            </form>
-        </fieldset>
-    </div>
-    <hr>
-
+	<div class="estadoContable">
+		<h2>Obtener estado contable</h2>
+			<form action="GestionarTransaccionesController?ruta=mostrarEstado"
+				method="POST">
+				<label>Fecha inicial: </label><input type="date" name="fechaInicial"
+					required><br> <br> <label>Fecha final: </label><input
+					type="date" name="fechaFinal" required><br> <br>
+				<input type="submit" value="Filtrar movimientos" class="filtrarMovimientos ghost">
+			</form>
+	</div>
 </body>
 
 </html>
