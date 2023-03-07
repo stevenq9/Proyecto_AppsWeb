@@ -54,8 +54,6 @@
 						<hr>
 						<hr>
 						<hr>
-						<hr>
-						<hr>
 					</div>
 					<a
 						href="GestionarCuentasController?ruta=modificarCuenta&id=${estadoCuenta.cuenta.id}"
@@ -78,8 +76,6 @@
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
 						<h3>$ ${estadoCuenta.valorTotal}</h3>
-						<hr>
-						<hr>
 						<hr>
 						<hr>
 						<hr>
@@ -113,8 +109,6 @@
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
 						<h3 style="color: red;">$- ${estadoCuenta.valorTotal}</h3>
-						<hr>
-						<hr>
 						<hr>
 						<hr>
 						<hr>
