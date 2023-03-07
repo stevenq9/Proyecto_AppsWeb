@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Mi chaucherita web</title>
 <link rel="stylesheet" type="text/css" href="./css/listarStyle.css">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 
@@ -45,7 +46,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
-						<h3>$ ${estadoCuenta.valorTotal}</h3>
+						<h3><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${estadoCuenta.valorTotal}"/></h3>
 						<hr>
 						<hr>
 						<hr>
@@ -75,7 +76,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
-						<h3>$ ${estadoCuenta.valorTotal}</h3>
+						<h3><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${estadoCuenta.valorTotal}"/></h3>
 						<hr>
 						<hr>
 						<hr>
@@ -108,7 +109,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
-						<h3 style="color: red;">$- ${estadoCuenta.valorTotal}</h3>
+						<h3 style="color: red;"><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${estadoCuenta.valorTotal}"/></h3>
 						<hr>
 						<hr>
 						<hr>
