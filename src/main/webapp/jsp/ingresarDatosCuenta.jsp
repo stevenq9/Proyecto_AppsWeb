@@ -33,12 +33,12 @@
                 <input type="hidden" name="txtRuta" value="crearCuenta">
             </c:if>
             
-            <label>Nombre:</label><br>
+            <label>Nombre:</label>
             <div>
                 <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>" class="input">
             </div>
             <c:if test="${cuenta == null}">
-            <label>Tipo:</label><br>
+            <label>Tipo:</label>
 	            <select name="txtTipo">
 	                <option value="modelo.CuentaDeIngresos"> Cuenta de ingreso </option>
 	                <option value="modelo.CuentaDeGastos"> Cuenta de gastos </option>

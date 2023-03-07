@@ -8,7 +8,7 @@
 
 body {
 	min-height: 100vh;
-	background: #132424;
+	background: #fff;
 }
 
 header {
@@ -18,6 +18,7 @@ header {
 	justify-content: center;
 	align-items: center;
 	color: white;
+	background: #132424;
 }
 
 nav {
@@ -25,9 +26,9 @@ nav {
 	height: 100px;
 	background: #47C47F;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
-	column-gap: 10%;
+	column-gap: 10px;
 }
 
 .cuentasContainer {
@@ -36,7 +37,6 @@ nav {
 	justify-content: center;
 	column-gap: 120px;
 	padding: 20px 0px;
-
 }
 
 .ingresosContainer, .ingresosGastosContainer, .gastosContainer {
@@ -78,9 +78,11 @@ h3 {
 	cursor: pointer;
 	transition: all 0.5s;
 	transform-origin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display: block;
+}
+
+.cover h3 {
+	margin-top: 100px;
 }
 
 .container:hover .cover {
@@ -102,15 +104,14 @@ hr {
 	color: white;
 }
 
-.estadoContable h2{
+.estadoContable h2 {
 	padding: 10px;
 }
 
 form {
 	background: #47C47F;
-	color: white; 
-	height : 50px;
-	border: 2px solid #132424;
+	color: white;
+	height: 50px;
 	font-size: 20px;
 	display: flex;
 	justify-content: center;

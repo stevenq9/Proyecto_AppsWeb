@@ -21,33 +21,53 @@
 		<h1>Mi Chaucherita Web</h1>
 		<br>
 	</header>
-	<a href="LoginController?ruta=salir">Cerrar sesión</a>
-	<h2>Detalle de Cuenta</h2>
-	<br>
-	<div>Nombre: ${estadoDeCuenta.cuenta.nombre}</div>
-	<div>Id: ${estadoDeCuenta.cuenta.id}</div>
-	<div>Valor total: ${estadoDeCuenta.valorTotal}</div>
 
-	<br>
+	<div class="informacionCuenta row">
+		<div class="col-8">
+			<h2>Detalle de Cuenta ${estadoDeCuenta.cuenta.nombre}</h2>
+			<div>
+				<b>Id: </b> ${cuenta.id}
+			</div>
+			<c:if test="${saldo ne '-1'}">
+				<div>
+					<b>Saldo: </b> $ ${estadoDeCuenta.valorTotal}
+				</div>
+			</c:if>
+		</div>
+		<div class="col-4">
+			<nav class=" d-flex justify-content-center">
+				<a href="GestionarCuentasController" class="ghost header"> Menú
+					principal</a>
+			</nav>
+		</div>
+	</div>
 
-	<c:forEach items="${movimientos}" var="movimiento">
-		<fieldset>
-			<label><b>Id de movimiento: </b></label>
-			<p>${movimiento.id}</p>
-			<label><b>Cuenta de origen:</b></label>
-			<p>${movimiento.cuentaOrigen.nombre}</p>
-			<label><b>Cuenta de destino: </b></label>
-			<p>${movimiento.cuentaDestino.nombre}</p>
-			<label><b>Monto: </b></label>
-			<p>$ ${movimiento.cantidad}</p>
-			<label><b>Fecha: </b></label>
-			<p>
-				<fmt:formatDate value="${movimiento.fecha}" pattern="dd-MM-yyyy" />
-			</p>
-			<label><b>Descripción: </b></label>
-			<p>${movimiento.descripcion}</p>
-		</fieldset>
-		<br>
-	</c:forEach>
+	<h2>Resumen de movimientos:</h2>
+
+	<div class="container-fluid">
+		<div id="grilla" class="row">
+			<c:forEach items="${movimientos}" var="movimiento">
+				<fieldset id="movimiento" class="col-6">
+					<label><b>Id de movimiento: </b></label>
+					<p>${movimiento.id}</p>
+					<label><b>Cuenta de origen:</b></label>
+					<p>${movimiento.cuentaOrigen.nombre}</p>
+					<label><b>Cuenta de destino: </b></label>
+					<p>${movimiento.cuentaDestino.nombre}</p>
+					<label><b>Monto: </b></label>
+					<p>$ ${movimiento.cantidad}</p>
+					<label><b>Fecha: </b></label>
+					<p>
+						<fmt:formatDate value="${movimiento.fecha}" pattern="dd-MM-yyyy" />
+					</p>
+					<label><b>Descripción: </b></label>
+					<p>${movimiento.descripcion}</p>
+				</fieldset>
+				<br>
+				<br>
+				<br>
+			</c:forEach>
+		</div>
+	</div>
 </body>
 </html>

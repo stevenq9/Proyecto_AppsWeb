@@ -23,16 +23,19 @@ form{
 	background:  #47C47F;
 	font-size: 30px;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	flex-direction: column;
 	width: 400px;
 	min-height: 500px;
 }
 
+label{}
+
 .input, select{
-	height: 30px;
+	height: 40px;
 	width: 300px;
+	border-radius: 5px;
 }
 
 .btnSubmit {
@@ -44,6 +47,7 @@ form{
 	font-size: 15px;
 	font-weight: 700;
 	letter-spacing: 1px;
+	margin-top: 10px;
 	text-transform: capitalize;
 	transition: 0.3s ease-in-out;
 	text-decoration: none;
