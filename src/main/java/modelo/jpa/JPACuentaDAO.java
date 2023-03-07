@@ -99,7 +99,7 @@ public class JPACuentaDAO extends JPAGenericDAO<Cuenta, Integer> implements Cuen
 			JPQL = "SELECT new modelo.EstadoDeCuenta(m.cuentaDestino, SUM(m.cantidad), CAST(:fechaInicio AS DATE), CAST(:fechaFin AS DATE)) FROM Movimiento m "
 					+ "WHERE m.cuentaDestino = :cuenta "
 					+ "AND m.fecha >= :fechaInicio AND m.fecha <= :fechaFin "
-					+ "AND TYPE(m.cuentaDestino) = CuentaDeGastos"  + "GROUP BY m.cuentaDestino";
+					+ "AND TYPE(m.cuentaDestino) = CuentaDeGastos "  + "GROUP BY m.cuentaDestino";
 			break;
 		case "CuentaDeIngresosYGastos":
 			JPQL = "SELECT new modelo.EstadoDeCuenta(c, c.saldo, CAST(:fechaInicio AS DATE), CAST(:fechaFin AS DATE)) FROM CuentaDeIngresosYGastos c "

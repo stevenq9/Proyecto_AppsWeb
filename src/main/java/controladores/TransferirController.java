@@ -12,17 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.DAOFactory;
 import modelo.entidades.Cuenta;
-import modelo.entidades.CuentaDeGastos;
 import modelo.entidades.CuentaDeIngresosYGastos;
 import modelo.entidades.Movimiento;
 import modelo.entidades.Persona;
 
-@WebServlet("/RetirarController")
-public class RetirarController extends HttpServlet {
+@WebServlet("/TransferirController")
+public class TransferirController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Persona persona;
 
-	public RetirarController() {
+	public TransferirController() {
 		super();
 	}
 
@@ -45,14 +44,14 @@ public class RetirarController extends HttpServlet {
 			return;
 		}
 
-		String ruta = "registrarGasto";
+		String ruta = "registrarTransferencia";
 
 		if (request.getParameter("ruta") != null)
 			ruta = request.getParameter("ruta");
 
 		switch (ruta) {
-		case "registrarGasto":
-			this.registrarGasto(request, response);
+		case "registrarTransferencia":
+			this.registrarTransferencia(request, response);
 			break;
 		case "confirmar":
 			this.confirmar(request, response);
@@ -60,18 +59,18 @@ public class RetirarController extends HttpServlet {
 		}
 	}
 
-	private void registrarGasto(HttpServletRequest request, HttpServletResponse response)
+	private void registrarTransferencia(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtención de datos del modelo
 
 		List<Cuenta> cuentasOrigen = DAOFactory.getFactory().getCuentaDAO()
 				.getCuentasIngresosYGastosPorPersona(persona);
-		List<Cuenta> cuentasDestino = DAOFactory.getFactory().getCuentaDAO().getCuentasGastosPorPersona(persona);
+		List<Cuenta> cuentasDestino = DAOFactory.getFactory().getCuentaDAO().getCuentasIngresosYGastosPorPersona(persona);
 
 		// Envio de datos hacia la vista
 		request.setAttribute("cuentasOrigen", cuentasOrigen);
 		request.setAttribute("cuentasDestino", cuentasDestino);
-		request.setAttribute("ruta", "RetirarController?ruta=confirmar");
+		request.setAttribute("ruta", "TransferirController?ruta=confirmar");
 		request.getRequestDispatcher("/jsp/ingresarDatosMovimiento.jsp").forward(request, response);
 	}
 
@@ -85,20 +84,22 @@ public class RetirarController extends HttpServlet {
 
 		CuentaDeIngresosYGastos cuentaDeOrigen = (CuentaDeIngresosYGastos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaOrigen);
-		CuentaDeGastos cuentaDeDestino = (CuentaDeGastos) DAOFactory.getFactory().getCuentaDAO()
+		CuentaDeIngresosYGastos cuentaDeDestino = (CuentaDeIngresosYGastos) DAOFactory.getFactory().getCuentaDAO()
 				.getById(idCuentaDestino);
 
 		Movimiento m = new Movimiento(fecha, descripcion, cantidad);
-		m.configurarComoGasto(cuentaDeOrigen, cuentaDeDestino);
+		m.configurarComoTransferencia(cuentaDeOrigen, cuentaDeDestino);
 
 		try {
 			cuentaDeOrigen.retirar(m);
+			cuentaDeDestino.depositar(m);
 		} catch (Exception e) {
 			enviarPantallaDeError(e, request, response);
 			return;
 		}
 
 		DAOFactory.getFactory().getCuentaDAO().update(cuentaDeOrigen);
+		DAOFactory.getFactory().getCuentaDAO().update(cuentaDeDestino);
 
 		DAOFactory.getFactory().getMovimientoDAO().create(m);
 

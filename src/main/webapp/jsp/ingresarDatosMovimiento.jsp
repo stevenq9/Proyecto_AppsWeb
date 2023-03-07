@@ -19,6 +19,10 @@
 			<h1>Retiro</h1>
 		</c:if>
 		
+		<c:if test="${ruta eq 'TransferirController?ruta=confirmar'}">
+			<h1>Transferencia entre cuentas</h1>
+		</c:if>
+		
 		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
 		
 		<label for="cantidad">Cantidad a ingresar:</label><br> <input

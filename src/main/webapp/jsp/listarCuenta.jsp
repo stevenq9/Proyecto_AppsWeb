@@ -22,7 +22,7 @@
     <div>
         <p>Consultar por fechas: </p>
         <fieldset>
-            <form action="GestionarCuentasController?ruta=listar" method="POST">
+            <form action="GestionarCuentasController?ruta=listarCuenta" method="POST">
                <label>Fecha inicial: </label><input type="date" name="fechaInicial" value="${fechaInicio}" required>
                <label>Fecha final: </label><input type="date" name="fechaFinal" value="${fechaFin}" required>
                <input type="submit" value="Filtrar movimientos">
