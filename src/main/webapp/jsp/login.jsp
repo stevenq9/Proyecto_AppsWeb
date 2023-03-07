@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Inicia Sesión</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
 	<h1 class="title">Chaucherita Web</h1>
@@ -14,18 +14,18 @@
 		<div class="form-container register-container">
 			<form action="LoginController?ruta=registro" method="POST">
 				<h1>Registrar</h1>
-				<input type="text" name="txtNombreRegistro" placeholder="Nombre">
-				<input type="text" name="txtApellidoRegistro" placeholder="Apellido">
-				<input type="text" name="txtUsuarioRegistro" placeholder="Usuario">
-				<input type="password" name="txtClaveRegistro" placeholder="Clave">
+				<input type="text" name="txtNombreRegistro" placeholder="Nombre" required>
+				<input type="text" name="txtApellidoRegistro" placeholder="Apellido" required>
+				<input type="text" name="txtUsuarioRegistro" placeholder="Usuario" required>
+				<input type="password" name="txtClaveRegistro" placeholder="Clave" required>
 				<button type="submit">Registrar</button>
 			</form>
 		</div>
 		<div class="form-container login-container">
 			<form action="LoginController?ruta=login" method="POST">
 				<h1>Login</h1>
-				<input type="text" name="txtUsuarioLogin" placeholder="Usuario">
-				<input type="password" name="txtClaveLogin" placeholder="Clave">
+				<input type="text" name="txtUsuarioLogin" placeholder="Usuario" required>
+				<input type="password" name="txtClaveLogin" placeholder="Clave" required>
 				<button type="submit">Login</button>
 			</form>
 		</div>
@@ -52,7 +52,7 @@
 		<p><c:out value='${mensaje}'/></p>
 	</div>
 
-	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>
 
 </body>
 </html>

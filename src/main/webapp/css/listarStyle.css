@@ -27,7 +27,7 @@ nav {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	column-gap: 10%;
+	column-gap: 5%;
 }
 
 .cuentasContainer {
@@ -125,12 +125,13 @@ a.header, a, .filtrarMovimientos {
 	border: 1px solid #4bb6b7;
 	background-color: #4bb6b7;
 	color: #fff;
-	padding: 12px 80px;
+	padding: 12px 32px;
 	font-size: 15px;
 	font-weight: 700;
 	letter-spacing: 1px;
 	text-transform: capitalize;
 	transition: 0.3s ease-in-out;
+	text-align: center;
 	text-decoration: none;
 }
 
