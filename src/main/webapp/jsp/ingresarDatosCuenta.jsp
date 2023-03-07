@@ -12,6 +12,7 @@
     	<c:otherwise><title>Modificar cuenta</title></c:otherwise>
     </c:choose>
  	<link rel="stylesheet" type="text/css" href="./css/inputsStyle.css">
+ 	<link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 
 

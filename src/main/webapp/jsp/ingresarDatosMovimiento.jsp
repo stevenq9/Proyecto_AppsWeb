@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingreso de datos de deposito/transaccion</title>
+<link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 <body>
 	<form method="POST"

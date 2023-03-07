@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Inicia Sesión</title>
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 <body>
 	<h1 class="title">Chaucherita Web</h1>

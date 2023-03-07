@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Mi chaucherita web</title>
 <link rel="stylesheet" type="text/css" href="./css/listarStyle.css">
+<link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 
 <body>
@@ -17,9 +18,8 @@
 	<nav>
 		<a href="GestionarCuentasController?ruta=crearCuenta"
 			class="ghost header">Nueva cuenta</a> <a
-			href="DepositarController?ruta=registrarIngreso"
-			class="ghost header"> Nuevo ingreso</a><a
-			href="RetirarController?ruta=registrarGasto"
+			href="DepositarController?ruta=registrarIngreso" class="ghost header">
+			Nuevo ingreso</a><a href="RetirarController?ruta=registrarGasto"
 			class="ghost header"> Nuevo gasto</a><a
 			href="TransferirController?ruta=registrarTransferencia"
 			class="ghost header"> Transaccion</a> <a
@@ -45,6 +45,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
+						<h3>$ ${estadoCuenta.valorTotal}</h3>
 						<hr>
 						<hr>
 						<hr>
@@ -65,7 +66,7 @@
 						<h3>${estadoCuenta.cuenta.nombre}
 							<br>
 						</h3>
-						<h3>$ ${estadoCuenta.valorTotal}</h3>
+
 					</div>
 				</div>
 			</c:forEach>
@@ -76,6 +77,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
+						<h3>$ ${estadoCuenta.valorTotal}</h3>
 						<hr>
 						<hr>
 						<hr>
@@ -97,7 +99,7 @@
 						<h3>${estadoCuenta.cuenta.nombre}
 							<br>
 						</h3>
-						<h3>$ ${estadoCuenta.valorTotal}</h3>
+
 					</div>
 				</div>
 			</c:forEach>
@@ -110,6 +112,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
+						<h3 style="color: red;">$- ${estadoCuenta.valorTotal}</h3>
 						<hr>
 						<hr>
 						<hr>
@@ -131,7 +134,7 @@
 						<h3>${estadoCuenta.cuenta.nombre}
 							<br>
 						</h3>
-						<h3>$- ${estadoCuenta.valorTotal}</h3>
+
 					</div>
 				</div>
 			</c:forEach>

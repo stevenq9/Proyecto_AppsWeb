@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingreso de datos de deposito/transaccion</title>
 <link rel="stylesheet" type="text/css" href="./css/inputsStyle.css">
+<link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 <body>
 	<form method="POST"
