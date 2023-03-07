@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #fff;
+}
+
+header {
+	width: 100%;
+	height: 100px;;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	background: #132424;
+}
+
+nav {
+	width: 100%;
+	height: 100px;
+	background: #47C47F;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.cuentasContainer {
+	display: flex;
+	background-color: white;
+	justify-content: center;
+	column-gap: 120px;
+	padding: 20px 0px;
+}
+
+.ingresosContainer, .ingresosGastosContainer, .gastosContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+h3 {
+	margin-bottom: 20px;
+}
+
+.container {
+	margin: 20px;
+	position: relative;
+	border-radius: 10px;
+	width: 220px;
+	height: 300px;
+	background-color: #E1E1DD;
+	box-shadow: 1px 1px 12px #000;
+	transform: preserve-3d;
+	perspective: 2000px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 10px;
+	color: #000;
+}
+
+.cover {
+	top: 0;
+	position: absolute;
+	background-color: #4cce98;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.5s;
+	transform-origin: 0;
+	display: block;
+}
+
+.cover h3 {
+	margin-top: 100px;
+}
+
+.container:hover .cover {
+	transition: all 0.5s;
+	transform: rotatey(-80deg);
+}
+
+hr {
+	width: 90%;
+	margin: 5px;
+}
+
+.line {
+	width: 100%;
+}
+
+.estadoContable {
+	text-align: center;
+	color: white;
+}
+
+.estadoContable h2 {
+	padding: 10px;
+}
+
+form {
+	background: #47C47F;
+	color: white;
+	height: 50px;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 20px;
+	height: 50px;
+	padding: 15px;
+}
+
+a.header, a, .filtrarMovimientos {
+	border-radius: 20px;
+	border: 1px solid #4bb6b7;
+	background-color: #4bb6b7;
+	color: #fff;
+	padding: 12px 80px;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: capitalize;
+	transition: 0.3s ease-in-out;
+	text-decoration: none;
+}
+
+a:hover, .filtrarMovimientos:hover {
+	letter-spacing: 3px;
+}
+
+a.header:active, .filtrarMovimientos:active {
+	transform: scale(0.95);
+}
+
+a:active {
+	transform: scale(0.55);
+}
+
+a.reduce {
+	transform: scale(0.60);
+}
+
+a:focus, .filtrarMovimientos:focus {
+	outline: none;
+}
+
+a.ghost, .ghost {
+	background-color: rgba(225, 225, 225, 0.2);
+	border: 2px solid #fff;
+	color: #fff;
+}
+
+a.reduce {
+	background-color: rgba(225, 225, 225, 0.2);
+	border: 2px solid #000;
+	color: #000;
+}
