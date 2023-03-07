@@ -22,7 +22,7 @@
 			Nuevo ingreso</a><a href="RetirarController?ruta=registrarGasto"
 			class="ghost header"> Nuevo gasto</a><a
 			href="TransferirController?ruta=registrarTransferencia"
-			class="ghost header"> Transaccion</a> <a
+			class="ghost header"> Transacción</a> <a
 			href="LoginController?ruta=salir" class="ghost header">Cerrar
 			sesión</a>
 	</nav>

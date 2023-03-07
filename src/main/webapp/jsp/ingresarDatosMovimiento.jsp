@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingreso de datos de deposito/transaccion</title>
+<link rel="stylesheet" type="text/css" href="./css/inputsStyle.css">
 <link rel="shortcut icon" type="image/png" href="./images/favicon.png"/>
 </head>
 <body>
@@ -26,30 +27,30 @@
 		
 		<input type="hidden" name="txtRuta" value='<c:out value="${ruta}"></c:out>'/>
 		
-		<label for="cantidad">Cantidad a ingresar:</label><br> <input
-			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" required/><br>
+		<label for="cantidad">Cantidad a ingresar:</label> <input
+			id="cantidad" type="number" min="0.01" step="0.01" name="nmbCantidad" required class="input"/><br>
 
-		<label for="cuentasOrigen">Cuenta de origen:</label><br> 
+		<label for="cuentasOrigen">Cuenta de origen:</label> 
 		<select id="cuentasOrigen" name="selCuentaOrigen" form="formTransaccion">
 			<c:forEach items="${cuentasOrigen}" var="cuentaO">
 				<option value="${cuentaO.id}">${cuentaO.nombre}</option>
 			</c:forEach>
 		</select><br>
 		
-		<label for="cuentasDestino">Cuenta de destino:</label><br><select
-			id="cuentasDestino" name="selCuentaDestino" form="formTransaccion">
+		<label for="cuentasDestino">Cuenta de destino:</label>
+		<select id="cuentasDestino" name="selCuentaDestino" form="formTransaccion">
 			<c:forEach items="${cuentasDestino}" var="cuentaD">
 				<option value="${cuentaD.id}">${cuentaD.nombre}</option>
 			</c:forEach>
 		</select><br>
 		
-		<label for="descripcion">Descripcion:</label><br>	
-		<input type="text" name="txtDescripcion" placeholder="Descripción"/>
+		<label for="descripcion">Descripción:</label>	
+		<input type="text" name="txtDescripcion" placeholder="Descripción" class="input"/>
 		<br>
-		<label for="fecha">Fecha:</label><br>	
+		<label for="fecha">Fecha:</label>
 		<input id="fecha" type="date" name="dateFecha" required/>
-		<br>
-		<br> <input id="descripcion" type="submit" type="submit" value="Guardar">
+
+		<br> <input id="descripcion" type="submit" value="Guardar" class="btnSubmit ghost">
 	</form>
 </body>
 </html>

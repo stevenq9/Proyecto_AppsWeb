@@ -38,6 +38,7 @@
             <div>
                 <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>" class="input">
             </div>
+            <br>
             <c:if test="${cuenta == null}">
             <label>Tipo:</label>
 	            <select name="txtTipo">
