@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-	<h1 class="title txt-shadow">Chaucherita Web</h1>
+	<h1 class="title">Chaucherita Web</h1>
 	<div class="container" id="container">
 		<div class="form-container register-container">
 			<form action="LoginController?ruta=registro" method="POST">
@@ -32,17 +32,19 @@
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-left">
-					<h1 class="title">
-						¿ Ya eres parte ?
-					</h1>
-					<p>¿Ya tienes una chaucherita? <br> Inicia sesión aquí</p>
+					<h1 class="title">¿ Ya eres parte ?</h1>
+					<p>
+						¿Ya tienes una chaucherita? <br> Inicia sesión aquí
+					</p>
 					<button class="ghost" id="login">Login</button>
 				</div>
 				<div class="overlay-panel overlay-right">
 					<h1 class="title">
 						Empieza<br> ahora
 					</h1>
-					<p>Si no tienes una chaucherita aún, <br> únete e inicia hoy!</p>
+					<p>
+						Si no tienes una chaucherita aún, <br> únete e inicia hoy!
+					</p>
 					<button class="ghost" id="register">Registrarse</button>
 				</div>
 			</div>

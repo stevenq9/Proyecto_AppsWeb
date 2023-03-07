@@ -11,7 +11,7 @@
     	<c:when test="${cuenta == null}"><title>Crear cuenta</title></c:when>
     	<c:otherwise><title>Modificar cuenta</title></c:otherwise>
     </c:choose>
- 
+ 	<link rel="stylesheet" type="text/css" href="./css/inputsStyle.css">
 </head>
 
 
@@ -35,9 +35,8 @@
             
             <label>Nombre:</label><br>
             <div>
-                <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>">
+                <input type="text" name="txtNombre" value="<c:out value='${cuenta.nombre}'></c:out>" class="input">
             </div>
-            <br>
             <c:if test="${cuenta == null}">
             <label>Tipo:</label><br>
 	            <select name="txtTipo">
@@ -46,9 +45,7 @@
 	                <option value="modelo.CuentaDeIngresosYGastos"> Cuenta de ingreso y gastos </option>
 	            </select>
             </c:if>
-            <br>
-            <br>
-            <input type="submit" value="Guardar">
+            <input type="submit" value="Guardar" class="btnSubmit ghost">
         </form>
     </div>
 
