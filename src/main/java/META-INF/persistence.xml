@@ -13,14 +13,12 @@
 		<class>modelo.entidades.CuentaDeIngresos</class>
 		<class>modelo.entidades.CuentaDeIngresosYGastos</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/chaucheradbtest"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://michaucheritawebg4.mysql.database.azure.com/chaucherita_db"/>
+			<property name="javax.persistence.jdbc.useSSL" value="true"/>
 			<property name="javax.persistence.jdbc.user" value="chauchi_root"/>
-			<property name="javax.persistence.jdbc.password" value="83e969b5"/>
+			<property name="javax.persistence.jdbc.password" value="r'`f^7Yy^j#9Z,7."/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="eclipselink.ddl-generation" value="create-tables"/>
-			<!-- property name="eclipselink.ddl-generation" value="create-tables" /-->
-			<!-- property name="eclipselink.ddl-generation" value="drop-and-create-tables" /-->
-			<!--<property name="eclipselink.ddl-generation" value="none" />-->
+			<property name="eclipselink.ddl-generation" value="none"/>
 		</properties>
 	</persistence-unit>
 </persistence>
