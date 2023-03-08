@@ -29,15 +29,13 @@
 			<div>
 				<b>Id: </b> ${cuenta.id}
 			</div>
-			<c:if test="${saldo ne '-1'}">
-				<div>
-					<b>Saldo: </b> $ ${estadoDeCuenta.valorTotal}
-				</div>
-			</c:if>
+			<div>
+				<b>Saldo: </b><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${estadoCuenta.valorTotal}"/>
+			</div>
 		</div>
 		<div class="col-4">
 			<nav class=" d-flex justify-content-center">
-				<a href="GestionarCuentasController" class="ghost header"> Menú
+				<a href="GestionarCuentasController" class="ghost header"> MenÃº
 					principal</a>
 			</nav>
 		</div>
@@ -56,12 +54,12 @@
 					<label><b>Cuenta de destino: </b></label>
 					<p>${movimiento.cuentaDestino.nombre}</p>
 					<label><b>Monto: </b></label>
-					<p>$ ${movimiento.cantidad}</p>
+					<p><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${movimiento.cantidad}"/></p>
 					<label><b>Fecha: </b></label>
 					<p>
 						<fmt:formatDate value="${movimiento.fecha}" pattern="dd-MM-yyyy" />
 					</p>
-					<label><b>Descripción: </b></label>
+					<label><b>DescripciÃ³n: </b></label>
 					<p>${movimiento.descripcion}</p>
 				</fieldset>
 				<br>
