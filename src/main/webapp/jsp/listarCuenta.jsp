@@ -109,7 +109,7 @@
 				<div class="container">
 					<div class="line">
 						<h3>${estadoCuenta.cuenta.nombre}</h3>
-						<h3 style="color: red;"><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="${estadoCuenta.valorTotal}"/></h3>
+						<h3 style="color: red;"><fmt:setLocale value = "en_US"/><fmt:formatNumber type="currency" minFractionDigits="2" maxFractionDigits="2" value="-${estadoCuenta.valorTotal}"/></h3>
 						<hr>
 						<hr>
 						<hr>
